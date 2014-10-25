@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DBE7FC53-12F5-46C5-979E-E17B033F107B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test.Framework.Ioc</RootNamespace>
+    <AssemblyName>Test.Framework.Ioc</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LightInject">
+      <HintPath>..\packages\LightInject.3.0.2.0\lib\net45\LightInject.dll</HintPath>
+    </Reference>
+    <Reference Include="Munq.IocContainer">
+      <HintPath>..\packages\Munq.IocContainer.3.1.6\Lib\Munq.IocContainer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChildContainer\ChildContainer.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="ChildContainer\IChildContainer.cs" />
+    <Compile Include="ITypeResolver.cs" />
+    <Compile Include="LightInject\Lifetime\PerCachedLifetime.cs" />
+    <Compile Include="LightInject\Lifetime\PerSessionLifetime.cs" />
+    <Compile Include="LightInject\Lifetime\PerThreadLifetime.cs" />
+    <Compile Include="LightInject\LightInjectTypeResolver.cs" />
+    <Compile Include="Munq\MunqTypeResolver.cs" />
+    <Compile Include="ObjectLifeSpans.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Test.Framework.Cache\Test.Framework.Cache.csproj">
+      <Project>{85d4d448-e681-448f-bd2c-6660294dd7b4}</Project>
+      <Name>Test.Framework.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Framework.Log.NLog\Test.Framework.Log.NLog.csproj">
+      <Project>{97bca35e-99ff-4b69-8ea5-ec2ff65b1b28}</Project>
+      <Name>Test.Framework.Log.NLog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Framework.Log\Test.Framework.Log.csproj">
+      <Project>{80dccae2-6180-449c-b129-1554eb2ba1dc}</Project>
+      <Name>Test.Framework.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Framework.Session\Test.Framework.Session.csproj">
+      <Project>{ba4426c4-e5b5-4354-83ff-0b789dc521d7}</Project>
+      <Name>Test.Framework.Session</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Framework\Test.Framework.csproj">
+      <Project>{79372128-4c5d-41f8-bb08-1feb564e21ed}</Project>
+      <Name>Test.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
