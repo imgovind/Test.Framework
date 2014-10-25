@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Framework
+namespace Test.Framework.Extensions
 {
     /// <summary>
     /// Extension methods for <see cref="System.Type"/>.

@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InProcCacher.cs" />
-    <Compile Include="InProcRegister.cs" />
+    <Compile Include="content\App_Start\InProcRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

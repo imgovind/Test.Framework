@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <system.web>
+    <sessionState mode="Custom" customProvider="RedisSessionStateProvider">
+      <providers>
+        <clear/>
+        <add name="RedisSessionStateProvider" type="Harbour.RedisSessionStateStore.RedisSessionStateStoreProvider"/>
+      </providers>
+    </sessionState>
+  </system.web>
+</configuration>

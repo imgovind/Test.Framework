@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Framework
+namespace Test.Framework.Extensions
 {
     public static class DateTimeExtensions
     {

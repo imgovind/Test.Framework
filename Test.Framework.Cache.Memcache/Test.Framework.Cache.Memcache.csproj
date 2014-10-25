@@ -59,7 +59,7 @@
     <Compile Include="DefaultBucketActivator.cs" />
     <Compile Include="ICouchbaseClientFactory.cs" />
     <Compile Include="MemcacheCacher.cs" />
-    <Compile Include="MemcacheRegister.cs" />
+    <Compile Include="content\App_Start\MemcacheRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,7 +73,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="content\web.config.transform" />
+    <None Include="content\app.config.transform" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

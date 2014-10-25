@@ -17,8 +17,8 @@ namespace Test.Framework
 
         public static void Cache()
         { 
-            InProcCacher.InitializeWith(Container.Resolve<ICacher>(FrameworkSettings.ContainerKeys.InProcCacherKey));
-            OutProcCacher.InitializeWith(Container.Resolve<ICacher>(FrameworkSettings.ContainerKeys.OutProcCacherKey));
+            InProcCacher.InitializeWith(Container.Resolve<ICacher>(FrameworkSettings.IocKeys.InProcCacherKey));
+            OutProcCacher.InitializeWith(Container.Resolve<ICacher>(FrameworkSettings.IocKeys.OutProcCacherKey));
         }
     }
 }

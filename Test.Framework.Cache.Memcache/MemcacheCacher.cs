@@ -41,7 +41,7 @@ namespace Test.Framework.Cache.Memcache
 
         public void Set<T>(string key, T value)
         {
-            cache.Store(StoreMode.Set, key, value, new TimeSpan(0, 0, Convert.ToInt32(FrameworkSettings.CachingIntervalInMinutes), 0, 0));
+            cache.Store(StoreMode.Set, key, value, new TimeSpan(0, 0, Convert.ToInt32(FrameworkSettings.Cache.CachingIntervalInMinutes), 0, 0));
         }
 
         public void Set<T>(string key, T value, DateTime absoluteExpiration)

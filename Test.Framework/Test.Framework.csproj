@@ -62,8 +62,10 @@
     <Compile Include="Common\DateTimeWithZone.cs" />
     <Compile Include="Common\Disposable.cs" />
     <Compile Include="Common\Equatable.cs" />
+    <Compile Include="Extensions\ComparerExtensions.cs" />
+    <Compile Include="Extensions\ReaderWriterLockSlimExtensions.cs" />
     <Compile Include="FrameworkSettings.cs" />
-    <Compile Include="Core.cs" />
+    <Compile Include="Initialize.cs" />
     <Compile Include="Attribute\CustomDescriptionAttribute.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />

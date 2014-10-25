@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <configuration>
+  <configSections>
+    <section name="redis" type="Test.Framework.Configuration.RedisConfigSection, Test.Framework"/>
+  </configSections>
+  <redis>
+    <cacheStrings>
+      <add name="Test" server="199.58.87.20" port="6379" password="TiPikun22a"/>
+    </cacheStrings>
+  </redis>
   <runtime>
     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
       <dependentAssembly>

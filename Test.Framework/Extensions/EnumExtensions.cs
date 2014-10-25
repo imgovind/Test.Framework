@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Framework
+namespace Test.Framework.Extensions
 {
     public static class EnumExtensions
     {

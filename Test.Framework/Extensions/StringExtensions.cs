@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Test.Framework
+namespace Test.Framework.Extensions
 {
     /// <summary>
     /// Extensions for <see cref="System.String"/>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Framework.Common
+namespace Test.Framework
 {
     /// <summary>
     /// Represents an instance in time, for a specific time zone

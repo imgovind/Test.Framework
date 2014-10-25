@@ -11,8 +11,8 @@ namespace Test.Framework.Cache.Memcache
         public static void Initialize()
         {
             Container.Register<ICouchbaseClientFactory, CouchbaseClientFactory>();
-            FrameworkSettings.ContainerKeys.OutProcCacherKey = FrameworkSettings.ContainerKeys.MemcacheCacherKey;
-            Container.Register<ICacher, MemcacheCacher>(FrameworkSettings.ContainerKeys.OutProcCacherKey);
+            FrameworkSettings.IocKeys.OutProcCacherKey = FrameworkSettings.IocKeys.MemcacheCacherKey;
+            Container.Register<ICacher, MemcacheCacher>(FrameworkSettings.IocKeys.OutProcCacherKey);
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Test.Framework
+namespace Test.Framework.Extensions
 {
     /// <summary>
     /// Extension methods for classes in the <see cref="System.Xml"/> namespace.

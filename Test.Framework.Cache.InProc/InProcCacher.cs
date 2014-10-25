@@ -65,7 +65,7 @@ namespace Test.Framework.Cache.InProc
 
         public void Set<T>(string key, T value)
         {
-            cache.Insert(key, value, null, DateTime.Now.AddMinutes(FrameworkSettings.CachingIntervalInMinutes), System.Web.Caching.Cache.NoSlidingExpiration);
+            cache.Insert(key, value, null, DateTime.Now.AddMinutes(FrameworkSettings.Cache.CachingIntervalInMinutes), System.Web.Caching.Cache.NoSlidingExpiration);
         }
 
         public void Set<T>(string key, T value, DateTime absoluteExpiration)
@@ -75,7 +75,7 @@ namespace Test.Framework.Cache.InProc
 
         public void Set<T>(string key, T value, TimeSpan slidingExpiration)
         {
-            cache.Insert(key, value, null, DateTime.Now.AddMinutes(FrameworkSettings.CachingIntervalInMinutes), slidingExpiration);
+            cache.Insert(key, value, null, DateTime.Now.AddMinutes(FrameworkSettings.Cache.CachingIntervalInMinutes), slidingExpiration);
         }
 
         public bool TryGet<T>(string key, out T value)
