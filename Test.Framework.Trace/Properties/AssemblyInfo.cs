@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Test.Framework.Trace")]
-[assembly: AssemblyDescription("Nuget package for tracing the output for development purposes")]
+[assembly: AssemblyDescription("Contains all the components for enabling tracing in the target application")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Govindarajan Panneerselvam")]
 [assembly: AssemblyProduct("Test.Framework.Trace")]

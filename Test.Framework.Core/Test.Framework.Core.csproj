@@ -118,15 +118,15 @@
   <ItemGroup>
     <ProjectReference Include="..\Test.Framework.Cache.Core\Test.Framework.Cache.Core.csproj">
       <Project>{85d4d448-e681-448f-bd2c-6660294dd7b4}</Project>
-      <Name>Test.Framework.Cache</Name>
+      <Name>Test.Framework.Cache.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test.Framework.Log.Core\Test.Framework.Log.Core.csproj">
       <Project>{80dccae2-6180-449c-b129-1554eb2ba1dc}</Project>
-      <Name>Test.Framework.Log</Name>
+      <Name>Test.Framework.Log.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test.Framework.Session.Core\Test.Framework.Session.Core.csproj">
       <Project>{ba4426c4-e5b5-4354-83ff-0b789dc521d7}</Project>
-      <Name>Test.Framework.Session</Name>
+      <Name>Test.Framework.Session.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
