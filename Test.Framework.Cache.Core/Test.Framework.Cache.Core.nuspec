@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Cache.Core</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Cache.Core/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Cache.Core/index</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Cache.Core/Test.Framework.Cache.Core.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Release Notes for Test.Framework.Cache.Core -- Initial Release -- 10-26-2014 01:28:36 PM</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Framework Test.Framework.Cache.Core</tags>
+  </metadata>
+<files>
+<file src="content/**/*.*" target="content" />
+<file src="content/*.*" target="content" />
+</files>
+</package>
