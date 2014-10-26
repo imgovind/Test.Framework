@@ -59,7 +59,7 @@
     <Compile Include="DefaultBucketActivator.cs" />
     <Compile Include="ICouchbaseClientFactory.cs" />
     <Compile Include="MemcacheCacher.cs" />
-    <Compile Include="Content\App_Start\MemcacheRegister.cs" />
+    <None Include="Content\App_Start\MemcacheCache.cs.pp" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
