@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Framework.Caching.Redis
+namespace Test.Framework.Cache.Redis
 {
     public interface IRedisFactory
     {

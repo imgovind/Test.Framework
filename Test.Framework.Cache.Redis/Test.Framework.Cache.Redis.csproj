@@ -7,7 +7,7 @@
     <ProjectGuid>{0F190715-D9FE-4351-A0A7-5FBEBFFDB1B5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test.Framework.Caching.Redis</RootNamespace>
+    <RootNamespace>Test.Framework.Cache.Redis</RootNamespace>
     <AssemblyName>Test.Framework.Cache.Redis</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -55,16 +55,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\App_Start\RedisCache.cs.pp" />
     <Compile Include="DefaultRedisActivator.cs" />
     <Compile Include="IRedisFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedisCacher.cs" />
     <Compile Include="RedisFactory.cs" />
-    <Compile Include="Content\App_Start\RedisRegister.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\web.config.transform" />
-    <None Include="Content\app.config.transform" />
+    <None Include="Content\Web.config.transform" />
+    <None Include="Content\App.config.transform" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
