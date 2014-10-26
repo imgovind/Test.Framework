@@ -18,7 +18,7 @@ namespace Test.Framework.Api
         {
             AppInitializer.Initialize();
 
-            ConfigureAuth(app);
+            //ConfigureAuth(app);
 
             var config = new HttpConfiguration();
 

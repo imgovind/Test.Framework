@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Test.Framework.Trace")]
-[assembly: AssemblyDescription("Nuget package for tracing the output for development purposes")]
+[assembly: AssemblyTitle("Test.Framework.DataAccess")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Govindarajan Panneerselvam")]
-[assembly: AssemblyProduct("Test.Framework.Trace")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Test.Framework.DataAccess")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c7c75ba0-6e4f-4ba1-a7e6-92dfc1859e96")]
+[assembly: Guid("a8cddae4-13a5-48a3-8a09-508189c8bba0")]
 
 // Version information for an assembly consists of the following four values:
 //

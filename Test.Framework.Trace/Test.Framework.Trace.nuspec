@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Trace</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Trace/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Trace/index</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Trace/Test.Framework.Trace.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Release Notes for Test.Framework.Trace -- Initial Release -- 10-26-2014 03:12:47 AM</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Framework Test.Framework.Trace</tags>
+  </metadata>
+  <files>
+    <file src="content/**/*.*" target="content" />
+    <file src="content/*.*" target="content" />
+  </files>
+</package>

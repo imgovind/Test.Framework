@@ -11,9 +11,9 @@ namespace Test.Framework.Api
         public static void Initialize()
         {
             Initalize.Base();
-            DataAccessLayer.Initialize();
-            TestIdentityProvider.Initialize();
-            Container.Register<ISigningCredentialsProvider, SigningCredentialsProvider>();
+            //DataAccessLayer.Initialize();
+            //TestIdentityProvider.Initialize();
+            //Container.Register<ISigningCredentialsProvider, SigningCredentialsProvider>();
         }
     }
 }
