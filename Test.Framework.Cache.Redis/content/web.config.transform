@@ -5,7 +5,7 @@
   </configSections>
   <redis>
     <cacheStrings>
-      <add name="Test" server="199.58.87.20" port="6379" password="TiPikun22a"/>
+      <add name="Test" server="server" port="6379" password="password"/>
     </cacheStrings>
   </redis>
   <runtime>

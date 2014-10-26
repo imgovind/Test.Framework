@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Cache.Redis</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Cache.Redis/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Cache.Redis/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Cache.Redis/Test.Framework.Cache.Redis.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+		Release Notes for Cache 
+		Initial Release -- 10-26-2014 06:28:33 PM
+	</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Cache Redis</tags>
+  </metadata>
+  <files>
+	<file src="Content\*.*" target="Content" />
+	<file src="Content\App_Start\*.*" target="Content\App_Start" />
+  </files>
+</package>

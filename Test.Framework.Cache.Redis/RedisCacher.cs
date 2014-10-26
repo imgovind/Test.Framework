@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Test.Framework.Cache;
 
-namespace Test.Framework.Caching.Redis
+namespace Test.Framework.Cache.Redis
 {
     public sealed class RedisCacher : ICacher
     {
