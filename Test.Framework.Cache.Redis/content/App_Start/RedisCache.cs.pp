@@ -16,7 +16,6 @@ namespace $rootnamespace$
             public static void Register()
             {
                 Container.Register<IRedisFactory, RedisFactory>();
-                FrameworkSettings.IocKeys.OutProcCacherKey = FrameworkSettings.IocKeys.RedisCacherKey;
                 Container.Register<ICacher, RedisCacher>(FrameworkSettings.IocKeys.RedisCacherKey);
             }
 
