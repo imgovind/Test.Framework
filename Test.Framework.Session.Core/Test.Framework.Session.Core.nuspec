@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Session.Core</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Session.Core/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Session.Core/index</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Session.Core/Test.Framework.Session.Core.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Release Notes for Test.Framework.Session.Core -- Initial Release -- 10-26-2014 02:01:37 PM</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Framework Test.Framework.Session.Core</tags>
+  </metadata>
+<files>
+<file src="content/**/*.*" target="content" />
+<file src="content/*.*" target="content" />
+</files>
+</package>
