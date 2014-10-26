@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Log.Core</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Log.Core/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Log.Core/index</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Log.Core/Test.Framework.Log.Core.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Release Notes for Test.Framework.Log.Core -- Initial Release -- 10-26-2014 01:59:41 PM</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Framework Test.Framework.Log.Core</tags>
+  </metadata>
+<files>
+<file src="content/**/*.*" target="content" />
+<file src="content/*.*" target="content" />
+</files>
+</package>
