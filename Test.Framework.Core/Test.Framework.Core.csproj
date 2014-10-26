@@ -55,8 +55,6 @@
   <ItemGroup>
     <Compile Include="Configuration\Redis\CacheString.cs" />
     <Compile Include="Configuration\Redis\CacheStrings.cs" />
-    <Compile Include="Cache\InProcCacher.cs" />
-    <Compile Include="Cache\OutProcCacher.cs" />
     <Compile Include="Common\Base36.cs" />
     <Compile Include="Common\Base64Url.cs" />
     <Compile Include="Common\DateTimeWithZone.cs" />
