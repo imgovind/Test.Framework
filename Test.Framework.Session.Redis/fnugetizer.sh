@@ -1,16 +1,11 @@
 PROJECT=$(basename $PWD);
-NOW=$(date +"%m-%d-%Y %r");
-nuget spec -f;
-
-
-
-CSPROJ = $PROJECT + ".csproj";
-nuget pack $CSPROJ;
-mv *.nupkg /c/.nuget/MyPackageSource;
-
-PROJECT=$(basename $PWD);
+ARR=(${PROJECT//./ })
 NOW=$(date +"%m-%d-%Y %r");
 NUSPEC="$PROJECT.nuspec";
+COMPANY=${ARR[0]};
+ASSEMBLY=${ARR[1]};
+PROJECTNAME=${ARR[2]};
+TECH=${ARR[3]};
 
 echo ""
 echo "----- Nuget Package Creation Process Started-----"
@@ -35,16 +30,15 @@ else
 	sed -i "s|LICENSE_URL_HERE_OR_DELETE_THIS_LINE|govind.io/opensource/$PROJECT/license.md|g" *.nuspec
 	sed -i "s|PROJECT_URL_HERE_OR_DELETE_THIS_LINE|govind.io/opensource/$PROJECT/index|g" *.nuspec
 	sed -i "s|ICON_URL_HERE_OR_DELETE_THIS_LINE|govind.io/opensource/$PROJECT/$PROJECT.ico|g" *.nuspec
-	sed -i "s|RdescriptionR|Nuget Package for $PROJECT|g" *.nuspec
-	sed -i "s|Summary of changes made in this release of the package.|Release Notes for $PROJECT -- Initial Release -- $NOW|g" *.nuspec
-	sed -i "s|Tag1 Tag2|Framework $PROJECT|g" *.nuspec
+	sed -i "s|RdescriptionR|Nuget Package for $PROJECTNAME purposes|g" *.nuspec
+	sed -i "s|Summary of changes made in this release of the package.|Release Notes for $PROJECTNAME \n Initial Release -- $NOW|g" *.nuspec
+	sed -i "s|Tag1 Tag2|$COMPANY $ASSEMBLY $PROJECTNAME $TECH|g" *.nuspec
 
 	echo ""
 	echo "Transformed '$NUSPEC' successfully"
 
 	sed -i '/<\/package>/i <files>' *.nuspec
 	sed -i '/<\/package>/i <file src=\"content/\**/\*.*\" target=\"content\" \/>' *.nuspec
-	sed -i '/<\/package>/i <file src=\"content/\*.*\" target=\"content\" \/>' *.nuspec
 	sed -i '/<\/package>/i <\/files>' *.nuspec
 
 	echo ""

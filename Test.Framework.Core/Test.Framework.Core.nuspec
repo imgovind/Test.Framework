@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Core</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Core/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Core/index</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Core/Test.Framework.Core.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Release Notes for Core 
+ Initial Release -- 10-26-2014 01:06:22 PM</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Core </tags>
+  </metadata>
+<files>
+<file src="content/**/*.*" target="content" />
+</files>
+</package>
