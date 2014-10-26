@@ -65,7 +65,7 @@
     <Compile Include="Extensions\ComparerExtensions.cs" />
     <Compile Include="Extensions\ReaderWriterLockSlimExtensions.cs" />
     <Compile Include="FrameworkSettings.cs" />
-    <Compile Include="Initialize.cs" />
+    <None Include="Content\App_Start\Core.cs.pp" />
     <Compile Include="Attribute\CustomDescriptionAttribute.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />

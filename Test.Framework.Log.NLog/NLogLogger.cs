@@ -12,11 +12,16 @@ namespace Test.Framework.Log.NLog
     {
         private readonly Logger logger;
 
-        public NLogLogger(Type loggerType)
+        public NLogLogger()
         {
-            Ensure.Argument.IsNotNull(loggerType, "loggerType");
-            logger = LogManager.GetLogger(loggerType.FullName);
+            logger = LogManager.GetCurrentClassLogger();
         }
+
+        //public NLogLogger(Type loggerType)
+        //{
+        //    Ensure.Argument.IsNotNull(loggerType, "loggerType");
+        //    logger = LogManager.GetLogger(loggerType.FullName);
+        //}
 
         public void Trace(string message)
         {

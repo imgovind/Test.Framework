@@ -12,11 +12,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Release Notes for Core 
- Initial Release -- 10-26-2014 01:06:22 PM</releaseNotes>
+ Initial Release -- 10-26-2014 03:50:50 PM</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Test Framework Core </tags>
   </metadata>
 <files>
-<file src="content/**/*.*" target="content" />
+<file src="Content\*.*" target="Content" />
+<file src="Content\App_Start\*.*" target="Content\App_Start" />
 </files>
 </package>

@@ -10,7 +10,7 @@ namespace Test.Framework.Api
     {
         public static void Initialize()
         {
-            Initalize.Base();
+            //Initalize.Base();
             //DataAccessLayer.Initialize();
             //TestIdentityProvider.Initialize();
             //Container.Register<ISigningCredentialsProvider, SigningCredentialsProvider>();

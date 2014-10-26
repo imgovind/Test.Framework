@@ -39,13 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="content\Web.config.transform" />
-    <None Include="content\generalTrace.svclog" />
-    <None Include="content\Tracing.cs.pp" />
+    <None Include="Content\Web.config.transform" />
+    <None Include="Content\generalTrace.svclog" />
+    <None Include="Content\Tracing.cs.pp" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="content\App.config.transform" />
+    <None Include="Content\App.config.transform" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\App_Start\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

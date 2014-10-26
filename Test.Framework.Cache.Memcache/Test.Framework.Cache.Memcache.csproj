@@ -59,12 +59,12 @@
     <Compile Include="DefaultBucketActivator.cs" />
     <Compile Include="ICouchbaseClientFactory.cs" />
     <Compile Include="MemcacheCacher.cs" />
-    <Compile Include="content\App_Start\MemcacheRegister.cs" />
+    <Compile Include="Content\App_Start\MemcacheRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="content\web.config.transform" />
-    <None Include="content\app.config.transform" />
+    <None Include="Content\web.config.transform" />
+    <None Include="Content\app.config.transform" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
