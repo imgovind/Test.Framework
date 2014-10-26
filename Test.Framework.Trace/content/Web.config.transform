@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <system.diagnostics>
+    <trace autoflush="true" />
+    <sources>
+      <source name="GeneralTrace" 
+              switchValue="Verbose,ActivityTracing">
+        <listeners>
+          <clear/>
+          <add name="GeneralTraceXmlListener" />
+        </listeners>
+      </source>
+    </sources>
+    <!-- worker process account needs write access to the configured tracing directories -->
+    <sharedListeners>
+      <!--<add name="GeneralTraceXmlListener" 
+           type="System.Diagnostics.XmlWriterTraceListener, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" 
+           initializeData="~/generalTrace.svclog" 
+           traceOutputOptions="Callstack">
+        <filter type="" />
+      </add>-->
+      <add name="GeneralTraceDelimitedListener"
+           type="System.Diagnostics.DelimitedListTraceListener"
+           initializeData="~\generalTrace.csv.txt"
+           traceOutputOptions="ProcessId, DateTime, Callstack">
+        <filter type="" />
+      </add>
+      <add name="GeneralTraceTextwriterListener"
+           type="System.Diagnostics.TextWriterTraceListener"
+           initializeData="~\generalTrace.txt"
+           traceOutputOptions="ProcessId, DateTime, Callstack">
+        <filter type="" />
+      </add>
+      <add name="GeneralTraceXmlListener"
+           type="System.Diagnostics.XmlWriterTraceListener"
+           initializeData="~\generalTrace.xml"
+           traceOutputOptions="ProcessId, DateTime, Callstack">
+        <filter type="" />
+      </add>
+    </sharedListeners>
+  </system.diagnostics>
+</configuration>

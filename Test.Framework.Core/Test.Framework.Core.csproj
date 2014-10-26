@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Test.Framework</RootNamespace>
-    <AssemblyName>Test.Framework</AssemblyName>
+    <AssemblyName>Test.Framework.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -116,15 +116,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Test.Framework.Cache\Test.Framework.Cache.csproj">
+    <ProjectReference Include="..\Test.Framework.Cache.Core\Test.Framework.Cache.Core.csproj">
       <Project>{85d4d448-e681-448f-bd2c-6660294dd7b4}</Project>
       <Name>Test.Framework.Cache</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Test.Framework.Log\Test.Framework.Log.csproj">
+    <ProjectReference Include="..\Test.Framework.Log.Core\Test.Framework.Log.Core.csproj">
       <Project>{80dccae2-6180-449c-b129-1554eb2ba1dc}</Project>
       <Name>Test.Framework.Log</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Test.Framework.Session\Test.Framework.Session.csproj">
+    <ProjectReference Include="..\Test.Framework.Session.Core\Test.Framework.Session.Core.csproj">
       <Project>{ba4426c4-e5b5-4354-83ff-0b789dc521d7}</Project>
       <Name>Test.Framework.Session</Name>
     </ProjectReference>

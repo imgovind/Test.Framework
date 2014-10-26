@@ -62,18 +62,20 @@
     <Compile Include="RedisTransactionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Test.Framework.Session\Test.Framework.Session.csproj">
-      <Project>{ba4426c4-e5b5-4354-83ff-0b789dc521d7}</Project>
-      <Name>Test.Framework.Session</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test.Framework\Test.Framework.csproj">
-      <Project>{79372128-4c5d-41f8-bb08-1feb564e21ed}</Project>
-      <Name>Test.Framework</Name>
-    </ProjectReference>
+    <None Include="content\Web.config.transform">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="content\web.config.transform" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Test.Framework.Core\Test.Framework.Core.csproj">
+      <Project>{79372128-4c5d-41f8-bb08-1feb564e21ed}</Project>
+      <Name>Test.Framework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Framework.Session.Core\Test.Framework.Session.Core.csproj">
+      <Project>{ba4426c4-e5b5-4354-83ff-0b789dc521d7}</Project>
+      <Name>Test.Framework.Session.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -50,13 +50,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Test.Framework.Log\Test.Framework.Log.csproj">
-      <Project>{80dccae2-6180-449c-b129-1554eb2ba1dc}</Project>
-      <Name>Test.Framework.Log</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test.Framework\Test.Framework.csproj">
+    <ProjectReference Include="..\Test.Framework.Core\Test.Framework.Core.csproj">
       <Project>{79372128-4c5d-41f8-bb08-1feb564e21ed}</Project>
-      <Name>Test.Framework</Name>
+      <Name>Test.Framework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Framework.Log.Core\Test.Framework.Log.Core.csproj">
+      <Project>{80dccae2-6180-449c-b129-1554eb2ba1dc}</Project>
+      <Name>Test.Framework.Log.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
