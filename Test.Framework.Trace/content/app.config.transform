@@ -3,15 +3,38 @@
   <system.diagnostics>
     <trace autoflush="true" />
     <sources>
-      <source name="GeneralTrace" switchValue="Verbose,ActivityTracing">
+      <source name="GeneralTrace" 
+              switchValue="Verbose,ActivityTracing">
         <listeners>
-          <add name="GeneralTraceListener" />
+          <clear/>
+          <add name="GeneralTraceXmlListener" />
         </listeners>
       </source>
     </sources>
     <!-- worker process account needs write access to the configured tracing directories -->
     <sharedListeners>
-      <add name="GeneralTraceListener" type="System.Diagnostics.XmlWriterTraceListener, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" initializeData="C:\Users\Govind\Developer\Company\Theranos\Test\Tracing\generalTrace.svclog" traceOutputOptions="Callstack">
+      <!--<add name="GeneralTraceXmlListener" 
+           type="System.Diagnostics.XmlWriterTraceListener, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" 
+           initializeData="~/generalTrace.svclog" 
+           traceOutputOptions="Callstack">
+        <filter type="" />
+      </add>-->
+      <add name="GeneralTraceDelimitedListener"
+           type="System.Diagnostics.DelimitedListTraceListener"
+           initializeData="~\generalTrace.csv.txt"
+           traceOutputOptions="ProcessId, DateTime, Callstack">
+        <filter type="" />
+      </add>
+      <add name="GeneralTraceTextwriterListener"
+           type="System.Diagnostics.TextWriterTraceListener"
+           initializeData="~\generalTrace.txt"
+           traceOutputOptions="ProcessId, DateTime, Callstack">
+        <filter type="" />
+      </add>
+      <add name="GeneralTraceXmlListener"
+           type="System.Diagnostics.XmlWriterTraceListener"
+           initializeData="~\generalTrace.xml"
+           traceOutputOptions="ProcessId, DateTime, Callstack">
         <filter type="" />
       </add>
     </sharedListeners>
