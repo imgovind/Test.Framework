@@ -61,6 +61,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Test.Framework.Cache.Core, Version=1.0.5412.29641, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Test.Framework.Cache.Core.1.0.5412.29641\lib\net45\Test.Framework.Cache.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Test.Framework.Core, Version=1.0.5412.31202, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Test.Framework.Core.1.0.5412.31202\lib\net45\Test.Framework.Core.dll</HintPath>
@@ -80,12 +84,6 @@
     <None Include="Content\web.config.transform" />
     <None Include="Content\app.config.transform" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Test.Framework.Cache.Core\Test.Framework.Cache.Core.csproj">
-      <Project>{85d4d448-e681-448f-bd2c-6660294dd7b4}</Project>
-      <Name>Test.Framework.Cache.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
