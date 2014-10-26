@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Cache.InProc</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Cache.InProc/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Cache.InProc/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Cache.InProc/Test.Framework.Cache.InProc.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+		Release Notes for Cache 
+		Initial Release -- 10-26-2014 06:37:46 PM
+	</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Cache InProc</tags>
+  </metadata>
+  <files>
+	<file src="Content\*.*" target="Content" />
+	<file src="Content\App_Start\*.*" target="Content\App_Start" />
+  </files>
+</package>
