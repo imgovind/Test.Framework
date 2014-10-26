@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Test.Framework.Cache.Memcache")]
-[assembly: AssemblyDescription("Concrete implementation using Memcache Framework's Cache comonents alongside Framework Core's components.")]
+[assembly: AssemblyDescription("Concrete implementation for Memcache using Framework's Cache components alongside Framework Core's components.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Govindarajan Panneerselvam")]
 [assembly: AssemblyProduct("Test.Framework.Cache.Memcache")]
