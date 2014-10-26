@@ -45,17 +45,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Test.Framework.Cache\Test.Framework.Cache.csproj">
-      <Project>{85d4d448-e681-448f-bd2c-6660294dd7b4}</Project>
-      <Name>Test.Framework.Cache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test.Framework\Test.Framework.csproj">
-      <Project>{79372128-4c5d-41f8-bb08-1feb564e21ed}</Project>
-      <Name>Test.Framework</Name>
-    </ProjectReference>
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <ProjectReference Include="..\Test.Framework.Cache.Core\Test.Framework.Cache.Core.csproj">
+      <Project>{85d4d448-e681-448f-bd2c-6660294dd7b4}</Project>
+      <Name>Test.Framework.Cache.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Framework.Core\Test.Framework.Core.csproj">
+      <Project>{79372128-4c5d-41f8-bb08-1feb564e21ed}</Project>
+      <Name>Test.Framework.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

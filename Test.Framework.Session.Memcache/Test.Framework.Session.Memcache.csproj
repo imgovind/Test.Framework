@@ -71,13 +71,13 @@
       <Project>{d1c7aa46-bc63-4b41-9c80-2db50e9dabb6}</Project>
       <Name>Test.Framework.Cache.Memcache</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Test.Framework.Cache\Test.Framework.Cache.csproj">
-      <Project>{85d4d448-e681-448f-bd2c-6660294dd7b4}</Project>
-      <Name>Test.Framework.Cache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test.Framework\Test.Framework.csproj">
+    <ProjectReference Include="..\Test.Framework.Core\Test.Framework.Core.csproj">
       <Project>{79372128-4c5d-41f8-bb08-1feb564e21ed}</Project>
-      <Name>Test.Framework</Name>
+      <Name>Test.Framework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Framework.Session.Core\Test.Framework.Session.Core.csproj">
+      <Project>{ba4426c4-e5b5-4354-83ff-0b789dc521d7}</Project>
+      <Name>Test.Framework.Session.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BA4426C4-E5B5-4354-83FF-0B789DC521D7}</ProjectGuid>
+    <ProjectGuid>{80DCCAE2-6180-449C-B129-1554EB2BA1DC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test.Framework.Session</RootNamespace>
-    <AssemblyName>Test.Framework.Session</AssemblyName>
+    <RootNamespace>Test.Framework.Log</RootNamespace>
+    <AssemblyName>Test.Framework.Log.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,8 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISessionStore.cs" />
-    <Compile Include="NullSessionStore.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="NullLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
