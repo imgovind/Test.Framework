@@ -49,7 +49,6 @@ namespace Test.Framework
             public static string InProcCacherKey { get { return "Container_CacherKey_InProc"; } }
             public static string RedisCacherKey { get { return "Container_CacherKey_Redis"; } }
             public static string MemcacheCacherKey { get { return "Container_CacherKey_Memcache"; } }
-            public static string OutProcCacherKey { get; set; }
         }
     }
 }
