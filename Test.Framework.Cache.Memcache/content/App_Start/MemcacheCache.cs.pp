@@ -16,7 +16,6 @@ namespace $rootnamespace$
             public static void Register()
             {
                 Container.Register<ICouchbaseClientFactory, CouchbaseClientFactory>();
-                FrameworkSettings.IocKeys.OutProcCacherKey = FrameworkSettings.IocKeys.MemcacheCacherKey;
                 Container.Register<ICacher, MemcacheCacher>(FrameworkSettings.IocKeys.MemcacheCacherKey);
             }
 
