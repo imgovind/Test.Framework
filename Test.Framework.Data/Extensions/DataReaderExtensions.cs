@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Collections.Generic;
-using Test.Framework.DataAccess;
+using Test.Framework.Data;
 using System.Reflection.Emit;
 using System.Data.Common;
 

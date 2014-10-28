@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Log.Core", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Session.Core", "Test.Framework.Session.Core\Test.Framework.Session.Core.csproj", "{BA4426C4-E5B5-4354-83FF-0B789DC521D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Data", "Test.Framework.Data\Test.Framework.Data.csproj", "{59E1B167-36E7-480E-8037-DD6DB5BE1128}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{BA4426C4-E5B5-4354-83FF-0B789DC521D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA4426C4-E5B5-4354-83FF-0B789DC521D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA4426C4-E5B5-4354-83FF-0B789DC521D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59E1B167-36E7-480E-8037-DD6DB5BE1128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E1B167-36E7-480E-8037-DD6DB5BE1128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E1B167-36E7-480E-8037-DD6DB5BE1128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E1B167-36E7-480E-8037-DD6DB5BE1128}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

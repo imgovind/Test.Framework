@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using Test.Framework.Extensions;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public static class DynamicQuery
     {

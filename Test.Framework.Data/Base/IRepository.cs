@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public interface IRepository
     {

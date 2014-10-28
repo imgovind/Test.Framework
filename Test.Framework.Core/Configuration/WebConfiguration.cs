@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Test.Framework.Extensions;
 
 namespace Test.Framework
 {
@@ -31,6 +32,30 @@ namespace Test.Framework
             foreach (ConnectionStringSettings item in connectionStrings)
             {
                 if (item.Name.ToLower().Contains("connectionstring")) yield return item.Name;
+            }
+        }
+
+        public IEnumerable<string> GetConnectionStringNames(string dbType)
+        {
+            var connectionStrings = ConfigurationManager.ConnectionStrings;
+            foreach (ConnectionStringSettings connectionString in connectionStrings)
+            {
+                if(connectionString.Name.IsNullOrEmpty())
+                    continue;
+
+                if(!connectionString.Name.ToLower().Contains("connectionstring"))
+                    continue;
+
+                var nameArray = connectionString.Name.Split(new string[]{":"}, StringSplitOptions.RemoveEmptyEntries);
+
+                if (nameArray.IsNullOrEmpty())
+                    continue;
+
+                if (nameArray.Length < 2)
+                    continue;
+
+                if (nameArray[0].ToLowerInvariant().Equals(dbType.ToLowerInvariant()))
+                    yield return connectionString.Name;
             }
         }
 

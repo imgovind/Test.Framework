@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public static class DbTypes
     {

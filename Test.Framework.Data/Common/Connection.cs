@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Test.Framework.Extensions;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public class Connection 
         : Disposable

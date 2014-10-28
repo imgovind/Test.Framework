@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Test.Framework.Extensions;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public class DataReader : IEnumerable
     {

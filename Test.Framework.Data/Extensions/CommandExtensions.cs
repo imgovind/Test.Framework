@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using Test.Framework.DataAccess;
+using Test.Framework.Data;
 
 namespace Test.Framework.Extensions
 {
