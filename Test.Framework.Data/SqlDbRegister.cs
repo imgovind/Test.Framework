@@ -42,7 +42,7 @@ namespace Test.Framework.Data
         {
             connectionNames.ToList().ForEach(connectionName =>
             {
-                var container = (ServiceContainer)Container.resolver.GetUnderlyingContainer();
+                var container = (ServiceContainer)Container.IocContainer.GetUnderlyingContainer();
                 container.Register<IDatabase>(factory => 
                     new Database(
                         Container.Resolve<IDbConnection>(connectionName), 

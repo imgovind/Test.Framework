@@ -36,7 +36,7 @@ namespace Test.Framework.Data
         {
             var configuration = Container.Resolve<IWebConfiguration>();
             connectionNames.ToList().ForEach(connectionName => {
-                var container = (ServiceContainer)Container.resolver.GetUnderlyingContainer();
+                var container = (ServiceContainer)Container.IocContainer.GetUnderlyingContainer();
                 container.Register<IDbConnection>(factory => 
                     new SqlConnection(configuration.ConnectionStrings(connectionName)), 
                     connectionName);
@@ -59,7 +59,7 @@ namespace Test.Framework.Data
             var configuration = Container.Resolve<IWebConfiguration>();
             connectionNames.ToList().ForEach(connectionName =>
             {
-                var container = (ServiceContainer)Container.resolver.GetUnderlyingContainer();
+                var container = (ServiceContainer)Container.IocContainer.GetUnderlyingContainer();
                 container.Register<IDbConnection>(factory => 
                     new MySqlConnection(configuration.ConnectionStrings(connectionName)), 
                     connectionName);

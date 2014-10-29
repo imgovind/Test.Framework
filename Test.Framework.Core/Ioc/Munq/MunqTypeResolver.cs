@@ -122,6 +122,47 @@ namespace Test.Framework
             }
         }
 
+        public void RegisterInstance<I, T>(T instance)
+            where I : class
+            where T : class, I
+        {
+            container.RegisterInstance(typeof(I), instance).AsAlwaysNew();
+        }
+
+        public void RegisterInstance<I, T>(string name, T instance)
+            where I : class
+            where T : class, I
+        {
+            container.RegisterInstance(name, typeof(I), instance).AsAlwaysNew();
+        }
+
+        public void RegisterInstance<I, T>(T instance, ObjectLifeSpans lifeSpan)
+            where I : class
+            where T : class, I
+        {
+            switch (lifeSpan)
+            {
+                case ObjectLifeSpans.Thread:
+                    container.RegisterInstance(typeof(I), instance).AsThreadSingleton();
+                    break;
+                case ObjectLifeSpans.WebRequest:
+                    container.RegisterInstance(typeof(I), instance).AsRequestSingleton();
+                    break;
+                case ObjectLifeSpans.Singleton:
+                    container.RegisterInstance(typeof(I), instance).AsContainerSingleton();
+                    break;
+                case ObjectLifeSpans.Session:
+                    container.RegisterInstance(typeof(I), instance).AsSessionSingleton();
+                    break;
+                case ObjectLifeSpans.Cached:
+                    container.RegisterInstance(typeof(I), instance).AsCached();
+                    break;
+                default:
+                    container.RegisterInstance(typeof(I), instance).AsAlwaysNew();
+                    break;
+            }
+        }
+
         public void RegisterInstance<I, T>(string name, T instance, ObjectLifeSpans lifeSpan)
             where I : class
             where T : class, I
@@ -129,22 +170,22 @@ namespace Test.Framework
             switch (lifeSpan)
             {
                 case ObjectLifeSpans.Thread:
-                    container.RegisterInstance(name, typeof(T), instance).AsThreadSingleton();
+                    container.RegisterInstance(name, typeof(I), instance).AsThreadSingleton();
                     break;
                 case ObjectLifeSpans.WebRequest:
-                    container.RegisterInstance(name, typeof(T), instance).AsRequestSingleton();
+                    container.RegisterInstance(name, typeof(I), instance).AsRequestSingleton();
                     break;
                 case ObjectLifeSpans.Singleton:
-                    container.RegisterInstance(name, typeof(T), instance).AsContainerSingleton();
+                    container.RegisterInstance(name, typeof(I), instance).AsContainerSingleton();
                     break;
                 case ObjectLifeSpans.Session:
-                    container.RegisterInstance(name, typeof(T), instance).AsSessionSingleton();
+                    container.RegisterInstance(name, typeof(I), instance).AsSessionSingleton();
                     break;
                 case ObjectLifeSpans.Cached:
-                    container.RegisterInstance(name, typeof(T), instance).AsCached();
+                    container.RegisterInstance(name, typeof(I), instance).AsCached();
                     break;
                 default:
-                    container.RegisterInstance(name, typeof(T), instance).AsAlwaysNew();
+                    container.RegisterInstance(name, typeof(I), instance).AsAlwaysNew();
                     break;
             }
         }

@@ -9,17 +9,19 @@ namespace Test.Framework
 {
     public static class Container
     {
-        public static ITypeResolver resolver;
+        #region Members and Constructor
+        private static ITypeResolver resolver;
 
         public static void InitializeWith(ITypeResolver resolver)
         {
             Ensure.Argument.IsNotNull(resolver, "resolver");
-
             Container.resolver = resolver;
-        }
+        } 
 
         public static ITypeResolver IocContainer { get { return resolver; } }
+        #endregion
 
+        #region Register Methods
         public static void Register<I, T>()
             where I : class
             where T : class, I
@@ -48,7 +50,6 @@ namespace Test.Framework
             resolver.Register<I, T>(name, lifeSpan);
         }
 
-
         public static void RegisterAll<T>() where T : class
         {
             var type = typeof(T);
@@ -61,8 +62,10 @@ namespace Test.Framework
                 var instance = (T)Activator.CreateInstance(t);
                 RegisterInstance<T>(type.Name, instance);
             });
-        }
+        } 
+        #endregion
 
+        #region RegisterInstance Methods
         public static void RegisterInstance<T>(T existing) where T : class
         {
             Ensure.Argument.IsNotNull(existing, "existing");
@@ -86,13 +89,42 @@ namespace Test.Framework
             resolver.RegisterInstance<T>(name, existing, lifeSpan);
         }
 
+        public static void RegisterInstance<I, T>(T instance)
+            where I : class
+            where T : class, I
+        {
+            Ensure.Argument.IsNotNull(instance, "instance");
+            resolver.RegisterInstance<I, T>(instance);
+        }
+
+        public static void RegisterInstance<I, T>(string name, T instance)
+            where I : class
+            where T : class, I
+        {
+            Ensure.Argument.IsNotEmpty(name, "name");
+            Ensure.Argument.IsNotNull(instance, "instance");
+            resolver.RegisterInstance<I, T>(name, instance);
+        }
+
+        public static void RegisterInstance<I, T>(T instance, ObjectLifeSpans lifeSpan)
+            where I : class
+            where T : class, I
+        {
+            Ensure.Argument.IsNotNull(instance, "instance");
+            resolver.RegisterInstance<I, T>(instance, lifeSpan);
+        }
+
         public static void RegisterInstance<I, T>(string name, T instance, ObjectLifeSpans lifeSpan)
             where I : class
             where T : class, I
         {
+            Ensure.Argument.IsNotEmpty(name, "name");
+            Ensure.Argument.IsNotNull(instance, "instance");
             resolver.RegisterInstance<I, T>(name, instance, lifeSpan);
-        }
+        } 
+        #endregion
 
+        #region Resolve Methods
         public static object Resolve(Type type)
         {
             Ensure.Argument.IsNotNull(type, "type");
@@ -135,20 +167,111 @@ namespace Test.Framework
         public static IEnumerable<T> ResolveAll<T>(Type type) where T : class
         {
             return resolver.ResolveAll<T>(type);
+        } 
+        #endregion
+
+        #region ResolveOrRegister
+        public static I ResolveOrRegister<I, T>(T instance)
+            where I : class
+            where T : class, I
+        {
+            try
+            {
+                return Resolve<I>();
+            }
+            catch (Exception)
+            {
+                if (instance == null)
+                    instance = Activator.CreateInstance(typeof(T)) as T;
+
+                RegisterInstance<I, T>(
+                    instance,
+                    ObjectLifeSpans.Singleton);
+
+                return Resolve<I>();
+            }
         }
 
+        public static I ResolveOrRegister<I, T>(params object[] args)
+            where I : class
+            where T : class, I
+        {
+            try
+            {
+                return Resolve<I>();
+            }
+            catch (Exception)
+            {
+                var instance = Activator.CreateInstance(typeof(T), args) as T;
+
+                RegisterInstance<I, T>(
+                    instance,
+                    ObjectLifeSpans.Singleton);
+
+                return Resolve<I>();
+            }
+        }
+
+        public static I ResolveOrRegister<I, T>(string name, T instance)
+            where I : class
+            where T : class, I
+        {
+            try
+            {
+                return Resolve<I>(name);
+            }
+            catch (Exception)
+            {
+                if (instance == null)
+                    instance = Activator.CreateInstance(typeof(T)) as T;
+
+                RegisterInstance<I, T>(
+                    name,
+                    instance,
+                    ObjectLifeSpans.Singleton);
+
+                return Resolve<I>(name);
+            }
+        }
+
+        public static I ResolveOrRegister<I, T>(string name, params object[] args)
+            where I : class
+            where T : class, I
+        {
+            try
+            {
+                return Resolve<I>(name);
+            }
+            catch (Exception)
+            {
+                var instance = Activator.CreateInstance(typeof(T), args) as T;
+
+                RegisterInstance<I, T>(
+                    name,
+                    instance,
+                    ObjectLifeSpans.Singleton);
+
+                return Resolve<I>(name);
+            }
+        }
+        #endregion
+
+        #region Private Methods
         public static IChildContainer GetChildContainer()
         {
             Register<IChildContainer, ChildContainer>();
             return Resolve<IChildContainer>();
         }
+        #endregion
 
+        #region Dispose Methods
         public static void Reset()
         {
             if (resolver != null)
             {
                 resolver.Dispose();
             }
-        }
+        } 
+        #endregion
     }
 }

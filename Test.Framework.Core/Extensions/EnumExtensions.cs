@@ -149,5 +149,10 @@ namespace Test.Framework.Extensions
             else
                 return value.ToString();
         }
+
+        public static object GetValue(this Enum enumValue)
+        {
+            return Convert.ChangeType((object)enumValue, enumValue.GetTypeCode());
+        }
     }
 }

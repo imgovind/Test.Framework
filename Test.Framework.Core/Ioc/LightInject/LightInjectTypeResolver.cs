@@ -153,6 +153,38 @@ namespace Test.Framework
             }
         }
 
+        public void RegisterInstance<I, T>(T instance)
+            where I : class
+            where T : class, I
+        {
+            container.RegisterInstance(typeof(I), instance);
+        }
+
+        public void RegisterInstance<I, T>(string name, T instance)
+            where I : class
+            where T : class, I
+        {
+            container.RegisterInstance(typeof(I), instance, name);
+        }
+
+        public void RegisterInstance<I, T>(T instance, ObjectLifeSpans lifeSpan)
+            where I : class
+            where T : class, I
+        {
+            switch (lifeSpan)
+            {
+                case ObjectLifeSpans.Singleton:
+                case ObjectLifeSpans.Transient:
+                case ObjectLifeSpans.WebRequest:
+                case ObjectLifeSpans.Thread:
+                case ObjectLifeSpans.Session:
+                case ObjectLifeSpans.Cached:
+                default:
+                    RegisterInstance<I, T>(instance);
+                    break;
+            }
+        }
+
         public void RegisterInstance<I, T>(string name, T instance, ObjectLifeSpans lifeSpan)
             where I : class
             where T : class, I
@@ -166,7 +198,7 @@ namespace Test.Framework
                 case ObjectLifeSpans.Session:
                 case ObjectLifeSpans.Cached:
                 default:
-                    container.RegisterInstance(typeof(T), instance, name);
+                    RegisterInstance<I, T>(name, instance);
                     break;
             }
         }
