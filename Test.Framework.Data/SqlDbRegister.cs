@@ -5,28 +5,27 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Test.Framework.DataAccess;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
-    public static class DbRegister
+    public static class SqlDbRegister
     {
-        public static void Register(IList<string> connectionNames, SqlDbmsType dbmsType)
+        public static void Register(IEnumerable<string> connectionNames, SqlDbType dbmsType)
         {
             switch (dbmsType)
             {
-                case SqlDbmsType.SqlServer:
-                case SqlDbmsType.MySql:
-                case SqlDbmsType.Oracle:
-                case SqlDbmsType.SqlLite:
-                case SqlDbmsType.PostGreSql:
+                case SqlDbType.SqlServer:
+                case SqlDbType.MySql:
+                case SqlDbType.Oracle:
+                case SqlDbType.SqlLite:
+                case SqlDbType.PostGreSql:
                 default:
                     DbRegisterLightInject(connectionNames);
                     break;
             }
         }
 
-        private static void DbRegisterIoc(IList<string> connectionNames)
+        private static void DbRegisterIoc(IEnumerable<string> connectionNames)
         {
             connectionNames.ToList().ForEach(connectionName =>
             {
@@ -39,7 +38,7 @@ namespace Test.Framework.DataAccess
             });
         }
 
-        private static void DbRegisterLightInject(IList<string> connectionNames)
+        private static void DbRegisterLightInject(IEnumerable<string> connectionNames)
         {
             connectionNames.ToList().ForEach(connectionName =>
             {

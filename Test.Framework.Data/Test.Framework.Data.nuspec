@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Data</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Data/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Data/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Data/Test.Framework.Data.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+		Release Notes for Data 
+		Initial Release -- 10-28-2014 02:35:04 AM
+	</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Data</tags>
+  </metadata>
+  <files>
+  </files>
+</package>

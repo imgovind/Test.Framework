@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public static class PropertyCache
     {

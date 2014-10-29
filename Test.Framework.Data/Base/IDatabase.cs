@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public interface IDatabase
     {

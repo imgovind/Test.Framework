@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public class SqlCommand
     {

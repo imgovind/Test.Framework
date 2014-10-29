@@ -19,6 +19,7 @@ namespace Test.Framework
         T GetSection<T>(string sectionName);
 
         IEnumerable<string> GetConnectionStringNames();
+        IEnumerable<string> GetConnectionStringNames(string dbType);
         IEnumerable<string> GetCacheStringNames();
     }
 }

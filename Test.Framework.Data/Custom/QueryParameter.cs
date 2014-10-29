@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     internal class QueryParameter
     {

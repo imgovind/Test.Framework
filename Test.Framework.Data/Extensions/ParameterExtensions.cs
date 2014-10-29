@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
-using Test.Framework.DataAccess;
+using Test.Framework.Data;
 
 namespace Test.Framework.Extensions
 {

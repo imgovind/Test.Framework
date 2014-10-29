@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public interface IOrm : IDisposable
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public interface IAutoIncrement<T> : IConvertable<T>
     {

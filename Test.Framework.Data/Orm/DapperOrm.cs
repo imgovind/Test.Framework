@@ -8,23 +8,23 @@ using Dapper;
 using Test.Framework.Extensions;
 using System.Data.SqlClient;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public class DapperOrm : Disposable, IOrm
     {
         #region Private Members
 
         private string connectionName;
-        private SqlDbmsType dbmsType;
+        private SqlDbType sqlDbType;
 
         #endregion
 
         #region Constructor
 
-        public DapperOrm(string connectionName, SqlDbmsType dbmsType)
+        public DapperOrm(string connectionName, SqlDbType sqlDbType)
         {
             this.connectionName = connectionName;
-            this.dbmsType = dbmsType;
+            this.sqlDbType = sqlDbType;
         }
 
         public IDbConnection GetConnection()
@@ -136,23 +136,23 @@ namespace Test.Framework.DataAccess
             IEnumerable<T> result = null;
             using (IDbConnection dbConnection = new Connection(this.connectionName).Get())
             {
-                switch (this.dbmsType)
+                switch (this.sqlDbType)
                 {
-                    case SqlDbmsType.MySql:
+                    case SqlDbType.MySql:
                         if (traits == null)
                             result = dbConnection.Query<T>(dbConnection.CreateDapperCommand(query));
                         else
                             result = SelectWithTraits<T>(query, traits);
                         break;
-                    case SqlDbmsType.SqlServer:
+                    case SqlDbType.SqlServer:
                         if(traits == null)
                             result = dbConnection.Query<T>(dbConnection.CreateDapperCommand(query)).ToList();
                         else 
                             result = SelectWithTraits<T>(query, traits);
                         break;
-                    case SqlDbmsType.Oracle:
-                    case SqlDbmsType.SqlLite:
-                    case SqlDbmsType.PostGreSql:
+                    case SqlDbType.Oracle:
+                    case SqlDbType.SqlLite:
+                    case SqlDbType.PostGreSql:
                     default:
                         break;
                 }
@@ -166,15 +166,15 @@ namespace Test.Framework.DataAccess
             IEnumerable<T> result = null;
             using (IDbConnection dbConnection = new Connection(this.connectionName).Get())
             {
-                switch (this.dbmsType)
+                switch (this.sqlDbType)
                 {
-                    case SqlDbmsType.MySql:
+                    case SqlDbType.MySql:
                         if (traits == null)
                             result = await dbConnection.QueryAsync<T>(dbConnection.CreateDapperCommandAsync(query));
                         else
                             result = await SelectWithTraitsAsync<T>(query, traits);
                         break;
-                    case SqlDbmsType.SqlServer:
+                    case SqlDbType.SqlServer:
                         if (traits == null)
                         {
                             var tempResult = await dbConnection.QueryAsync<T>(dbConnection.CreateDapperCommandAsync(query));
@@ -186,9 +186,9 @@ namespace Test.Framework.DataAccess
                             result = tempResult.ToList();
                         }
                         break;
-                    case SqlDbmsType.Oracle:
-                    case SqlDbmsType.SqlLite:
-                    case SqlDbmsType.PostGreSql:
+                    case SqlDbType.Oracle:
+                    case SqlDbType.SqlLite:
+                    case SqlDbType.PostGreSql:
                     default:
                         break;
                 }
@@ -204,18 +204,18 @@ namespace Test.Framework.DataAccess
             {
                 using (IDataReader dataReader = dbConnection.CreateCustomCommand(query).ExecuteReader(CommandBehavior.CloseConnection))
                 {
-                    switch (this.dbmsType)
+                    switch (this.sqlDbType)
                     {
-                        case SqlDbmsType.MySql:
+                        case SqlDbType.MySql:
                             result = dataReader.Hydrate<T>(readMapper);
                             break;
-                        case SqlDbmsType.SqlServer:
+                        case SqlDbType.SqlServer:
                             var tempResult = dataReader.Hydrate<T>(readMapper);
                             result = tempResult.ToList();
                             break;
-                        case SqlDbmsType.Oracle:
-                        case SqlDbmsType.SqlLite:
-                        case SqlDbmsType.PostGreSql:
+                        case SqlDbType.Oracle:
+                        case SqlDbType.SqlLite:
+                        case SqlDbType.PostGreSql:
                         default:
                             break;
                     }
@@ -230,18 +230,18 @@ namespace Test.Framework.DataAccess
             IEnumerable<T> result = null;
             using (IDbConnection dbConnection = new Connection(this.connectionName).Get())
             {
-                switch (this.dbmsType)
+                switch (this.sqlDbType)
                 {
-                    case SqlDbmsType.MySql:
+                    case SqlDbType.MySql:
                         result = await Task.Run<IEnumerable<T>>(() => Select<T>(query, readMapper));
                         break;
-                    case SqlDbmsType.SqlServer:
+                    case SqlDbType.SqlServer:
                         var tempResult = await Task.Run<IEnumerable<T>>(() => Select<T>(query, readMapper));
                         result = tempResult.ToList();
                         break;
-                    case SqlDbmsType.Oracle:
-                    case SqlDbmsType.SqlLite:
-                    case SqlDbmsType.PostGreSql:
+                    case SqlDbType.Oracle:
+                    case SqlDbType.SqlLite:
+                    case SqlDbType.PostGreSql:
                     default:
                         break;
                 }

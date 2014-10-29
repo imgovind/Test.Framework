@@ -7,7 +7,7 @@ using Test.Framework.Extensions;
 using MySql.Data.MySqlClient;
 using System.Threading.Tasks;
 
-namespace Test.Framework.DataAccess
+namespace Test.Framework.Data
 {
     public abstract class BaseRepository : IRepository
     {
