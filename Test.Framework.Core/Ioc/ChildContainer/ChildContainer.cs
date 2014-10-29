@@ -9,34 +9,34 @@ namespace Test.Framework
 {
     public class ChildContainer : IChildContainer
     {
-        public ITypeResolver GetIocContainer() { return Container.resolver; }
+        public ITypeResolver GetIocContainer() { return Container.IocContainer; }
 
         public void Register<I, T>()
             where I : class
             where T : class, I
         {
-            Container.resolver.Register<I, T>();
+            Container.IocContainer.Register<I, T>();
         }
 
         public void Register<I, T>(string name)
             where I : class
             where T : class, I
         {
-            Container.resolver.Register<I, T>(name);
+            Container.IocContainer.Register<I, T>(name);
         }
 
         public void Register<I, T>(ObjectLifeSpans lifeSpan)
             where I : class
             where T : class, I
         {
-            Container.resolver.Register<I, T>(lifeSpan);
+            Container.IocContainer.Register<I, T>(lifeSpan);
         }
 
         public void Register<I, T>(string name, ObjectLifeSpans lifeSpan)
             where I : class
             where T : class, I
         {
-            Container.resolver.Register<I, T>(name, lifeSpan);
+            Container.IocContainer.Register<I, T>(name, lifeSpan);
         }
 
 
@@ -56,75 +56,68 @@ namespace Test.Framework
         public void RegisterInstance<T>(T existing) where T : class
         {
             Ensure.Argument.IsNotNull(existing, "existing");
-
-            Container.resolver.RegisterInstance<T>(existing.GetType().Name, existing, ObjectLifeSpans.Transient);
+            Container.IocContainer.RegisterInstance<T>(existing.GetType().Name, existing, ObjectLifeSpans.Transient);
         }
 
         public void RegisterInstance<T>(string name, T existing) where T : class
         {
             Ensure.Argument.IsNotEmpty(name, "name");
             Ensure.Argument.IsNotNull(existing, "existing");
-
-            Container.resolver.RegisterInstance<T>(name, existing, ObjectLifeSpans.Transient);
+            Container.IocContainer.RegisterInstance<T>(name, existing, ObjectLifeSpans.Transient);
         }
 
         public void RegisterInstance<T>(string name, T existing, ObjectLifeSpans lifeSpan) where T : class
         {
             Ensure.Argument.IsNotEmpty(name, "name");
             Ensure.Argument.IsNotNull(existing, "existing");
-
-            Container.resolver.RegisterInstance<T>(name, existing, lifeSpan);
+            Container.IocContainer.RegisterInstance<T>(name, existing, lifeSpan);
         }
 
         public void RegisterInstance<I, T>(string name, T instance, ObjectLifeSpans lifeSpan)
             where I : class
             where T : class, I
         {
-            Container.resolver.RegisterInstance<I, T>(name, instance, lifeSpan);
+            Container.IocContainer.RegisterInstance<I, T>(name, instance, lifeSpan);
         }
 
         public object Resolve(Type type)
         {
             Ensure.Argument.IsNotNull(type, "type");
-
-            return Container.resolver.Resolve(type);
+            return Container.IocContainer.Resolve(type);
         }
 
         public T Resolve<T>(Type type) where T : class
         {
             Ensure.Argument.IsNotNull(type, "type");
-
-            return Container.resolver.Resolve<T>(type);
+            return Container.IocContainer.Resolve<T>(type);
         }
 
         public T Resolve<T>(Type type, string name) where T : class
         {
             Ensure.Argument.IsNotNull(type, "type");
             Ensure.Argument.IsNotEmpty(name, "name");
-
-            return Container.resolver.Resolve<T>(type, name);
+            return Container.IocContainer.Resolve<T>(type, name);
         }
 
         public T Resolve<T>() where T : class
         {
-            return Container.resolver.Resolve<T>();
+            return Container.IocContainer.Resolve<T>();
         }
 
         public T Resolve<T>(string name) where T : class
         {
             Ensure.Argument.IsNotEmpty(name, "name");
-
-            return Container.resolver.Resolve<T>(name);
+            return Container.IocContainer.Resolve<T>(name);
         }
 
         public IEnumerable<T> ResolveAll<T>() where T : class
         {
-            return Container.resolver.ResolveAll<T>();
+            return Container.IocContainer.ResolveAll<T>();
         }
 
         public IEnumerable<T> ResolveAll<T>(Type type) where T : class
         {
-            return Container.resolver.ResolveAll<T>(type);
+            return Container.IocContainer.ResolveAll<T>(type);
         }
 
     }

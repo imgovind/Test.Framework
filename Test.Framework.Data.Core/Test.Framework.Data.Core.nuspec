@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Data.Core</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Data.Core/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Data.Core/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Data.Core/Test.Framework.Data.Core.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+		Release Notes for Data 
+		Initial Release -- 10-29-2014 12:50:56 AM
+	</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Data Core</tags>
+  </metadata>
+  <files>
+	<file src="Content\*.*" target="Content" />
+	<file src="Content\Data\*.*" target="Content\Data" />
+  </files>
+</package>

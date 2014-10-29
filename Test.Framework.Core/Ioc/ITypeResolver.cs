@@ -39,13 +39,19 @@ namespace Test.Framework
 
         void RegisterInstance<T>(T instance)
             where T : class;
-
         void RegisterInstance<T>(string name, T instance)
             where T : class;
-
         void RegisterInstance<T>(string name, T instance, ObjectLifeSpans lifeSpan)
             where T : class;
-
+        void RegisterInstance<I, T>(T instance)
+            where I : class
+            where T : class, I;
+        void RegisterInstance<I, T>(string name, T instance)
+            where I : class
+            where T : class, I;
+        void RegisterInstance<I, T>(T instance, ObjectLifeSpans lifeSpan)
+            where I : class
+            where T : class, I;
         void RegisterInstance<I, T>(string name, T instance, ObjectLifeSpans lifeSpan)
             where I : class
             where T : class, I;

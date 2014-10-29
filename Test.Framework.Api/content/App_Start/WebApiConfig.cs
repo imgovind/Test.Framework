@@ -51,7 +51,7 @@ namespace Test.Framework.Api
 
         private static void ConfigureIoc(HttpConfiguration config)
         {
-            var container = (ServiceContainer)Container.resolver.GetUnderlyingContainer();
+            var container = (ServiceContainer)Container.IocContainer.GetUnderlyingContainer();
             container.RegisterApiControllers();
             container.EnableWebApi(config);
         }

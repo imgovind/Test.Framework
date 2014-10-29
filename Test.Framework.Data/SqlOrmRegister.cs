@@ -52,7 +52,7 @@ namespace Test.Framework.Data
         {
             connectionNames.ToList().ForEach(connectionName =>
             {
-                var container = (ServiceContainer)Container.resolver.GetUnderlyingContainer();
+                var container = (ServiceContainer)Container.IocContainer.GetUnderlyingContainer();
                 container.Register<IOrm>(factory => 
                     new DapperOrm(connectionName, sqlDbType), 
                     connectionName, 
