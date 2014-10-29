@@ -56,12 +56,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Core.cs" />
+    <None Include="Content\Data\CustomMapperRegister.cs.pp" />
+    <None Include="Content\Models\DataModelRegister.cs.pp" />
     <Compile Include="Base\RepositoryFactory.cs" />
     <None Include="Content\Data\ConnectionConstants.cs.pp" />
     <None Include="Content\Data\ITestRepository.cs.pp" />
     <None Include="Content\Data\TestRepository.cs.pp" />
+    <None Include="Content\Data\TestModel.cs.pp" />
+    <None Include="Content\Data\TestModelMapper.cs.pp" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Content\Data\IDataProvider.cs.pp" />
+    <None Include="Content\Models\IDataModel.cs.pp" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
