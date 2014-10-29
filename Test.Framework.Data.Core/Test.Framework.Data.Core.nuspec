@@ -13,13 +13,14 @@
     <description>$description$</description>
     <releaseNotes>
 		Release Notes for Data 
-		Initial Release -- 10-29-2014 12:50:56 AM
+		Initial Release -- 10-29-2014 01:21:21 AM
 	</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Test Framework Data Core</tags>
   </metadata>
   <files>
 	<file src="Content\*.*" target="Content" />
+	<file src="Content\Models\*.*" target="Content\Models" />
 	<file src="Content\Data\*.*" target="Content\Data" />
   </files>
 </package>
