@@ -30,7 +30,7 @@ namespace Test.Framework.Data
         {
             using (IOrm orm = this.orm)
             {
-                return orm.Execute(new SqlCommand(sql, parameters, timeout));
+                return orm.Execute(new SqlDbCommand(sql, parameters, timeout));
             }
         }
 
@@ -39,7 +39,7 @@ namespace Test.Framework.Data
             var result = false;
             using (IOrm orm = this.orm)
             {
-                result = await orm.ExecuteAsync(new SqlCommand(sql, parameters, timeout));
+                result = await orm.ExecuteAsync(new SqlDbCommand(sql, parameters, timeout));
             }
             return result;
         }
@@ -48,7 +48,7 @@ namespace Test.Framework.Data
 
         #region Transaction
 
-        public bool Execute(IList<SqlCommand> unitOfWorks)
+        public bool Execute(IList<SqlDbCommand> unitOfWorks)
         {
             using (IOrm connection = this.orm)
             {
@@ -56,7 +56,7 @@ namespace Test.Framework.Data
             }
         }
 
-        public async Task<bool> ExecuteAsync(IList<SqlCommand> unitOfWorks)
+        public async Task<bool> ExecuteAsync(IList<SqlDbCommand> unitOfWorks)
         {
             var result = false;
             using (IOrm orm = this.orm)
@@ -74,10 +74,10 @@ namespace Test.Framework.Data
         {
             if (entity != null)
             {
-                SqlCommand queryResult = DynamicQuery.GetInsertQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
+                SqlDbCommand queryResult = DynamicQuery.GetInsertQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
                 using (IOrm orm = this.orm)
                 {
-                    return orm.Execute(new SqlCommand(queryResult.Statement, queryResult.Parameters, timeout));
+                    return orm.Execute(new SqlDbCommand(queryResult.Statement, queryResult.Parameters, timeout));
                 }
             }
             return false;
@@ -87,10 +87,10 @@ namespace Test.Framework.Data
             var result = false;
             if (entity != null)
             {
-                SqlCommand queryResult = DynamicQuery.GetInsertQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
+                SqlDbCommand queryResult = DynamicQuery.GetInsertQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
                 using (IOrm orm = this.orm)
                 {
-                    result = await orm.ExecuteAsync(new SqlCommand(queryResult.Statement, queryResult.Parameters, timeout));
+                    result = await orm.ExecuteAsync(new SqlDbCommand(queryResult.Statement, queryResult.Parameters, timeout));
                 }
             }
             return result;
@@ -119,7 +119,7 @@ namespace Test.Framework.Data
         {
             using (IOrm orm = this.orm)
             {
-                return orm.Select<T>(new SqlCommand(sql, parameters, timeout), CustomMapper.Resolve<T>()).ToList();
+                return orm.Select<T>(new SqlDbCommand(sql, parameters, timeout), CustomMapper.Resolve<T>()).ToList();
             }
         }
 
@@ -128,7 +128,7 @@ namespace Test.Framework.Data
             IEnumerable<T> result = null;
             using (IOrm orm = this.orm)
             {
-                result = await orm.SelectAsync<T>(new SqlCommand(sql, parameters, timeout), CustomMapper.Resolve<T>());
+                result = await orm.SelectAsync<T>(new SqlDbCommand(sql, parameters, timeout), CustomMapper.Resolve<T>());
             }
 
             if (result == null)
@@ -156,8 +156,8 @@ namespace Test.Framework.Data
         {
             using (IOrm orm = this.orm)
             {
-                SqlCommand result = DynamicQuery.GetDynamicQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), expression);
-                return orm.Select<T>(new SqlCommand(result.Statement, result.Parameters, timeout)).ToList();
+                SqlDbCommand result = DynamicQuery.GetDynamicQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), expression);
+                return orm.Select<T>(new SqlDbCommand(result.Statement, result.Parameters, timeout)).ToList();
             }
         }
 
@@ -166,8 +166,8 @@ namespace Test.Framework.Data
             IEnumerable<T> result = null;
             using (IOrm orm = this.orm)
             {
-                SqlCommand query = DynamicQuery.GetDynamicQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), expression);
-                result = await orm.SelectAsync<T>(new SqlCommand(query.Statement, query.Parameters, timeout));
+                SqlDbCommand query = DynamicQuery.GetDynamicQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), expression);
+                result = await orm.SelectAsync<T>(new SqlDbCommand(query.Statement, query.Parameters, timeout));
             }
 
             if (result == null)
@@ -183,10 +183,10 @@ namespace Test.Framework.Data
         public bool Update<T>(T entity, int timeout = 15) where T : class, new()
         {
             if (entity == null) return false;
-            SqlCommand queryResult = DynamicQuery.GetUpdateQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
+            SqlDbCommand queryResult = DynamicQuery.GetUpdateQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
             using (IOrm orm = this.orm)
             {
-                return orm.Execute(new SqlCommand(queryResult.Statement, queryResult.Parameters, timeout));
+                return orm.Execute(new SqlDbCommand(queryResult.Statement, queryResult.Parameters, timeout));
             }
         }
         public async Task<bool> UpdateAsync<T>(T entity, int timeout = 15) where T : class, new()
@@ -196,11 +196,11 @@ namespace Test.Framework.Data
             if (entity == null)
                 return result;
 
-            SqlCommand query = DynamicQuery.GetUpdateQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
+            SqlDbCommand query = DynamicQuery.GetUpdateQuery(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
 
             using (IOrm orm = this.orm)
             {
-                result = await orm.ExecuteAsync(new SqlCommand(query.Statement, query.Parameters, timeout));
+                result = await orm.ExecuteAsync(new SqlDbCommand(query.Statement, query.Parameters, timeout));
             }
 
             return result;
@@ -241,10 +241,10 @@ namespace Test.Framework.Data
         public bool Delete<T>(T entity, int timeout = 15) where T : class, new()
         {
             if (entity == null) return false;
-            SqlCommand queryResult = DynamicQuery.GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
+            SqlDbCommand queryResult = DynamicQuery.GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
             using (IOrm orm = this.orm)
             {
-                return orm.Execute(new SqlCommand(queryResult.Statement, queryResult.Parameters, timeout));
+                return orm.Execute(new SqlDbCommand(queryResult.Statement, queryResult.Parameters, timeout));
             }
         }
         public async Task<bool> DeleteAsync<T>(T entity, int timeout = 15) where T : class, new()
@@ -254,11 +254,11 @@ namespace Test.Framework.Data
             if (entity == null)
                 return false;
 
-            SqlCommand queryResult = DynamicQuery.GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
+            SqlDbCommand queryResult = DynamicQuery.GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), entity);
 
             using (IOrm orm = this.orm)
             {
-                result = await orm.ExecuteAsync(new SqlCommand(queryResult.Statement, queryResult.Parameters, timeout));
+                result = await orm.ExecuteAsync(new SqlDbCommand(queryResult.Statement, queryResult.Parameters, timeout));
             }
 
             return result;

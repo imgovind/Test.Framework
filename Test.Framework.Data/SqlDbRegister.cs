@@ -10,15 +10,15 @@ namespace Test.Framework.Data
 {
     public static class SqlDbRegister
     {
-        public static void Register(IEnumerable<string> connectionNames, SqlDbType dbmsType)
+        public static void Register(IEnumerable<string> connectionNames, SqlDbmsType dbmsType)
         {
             switch (dbmsType)
             {
-                case SqlDbType.SqlServer:
-                case SqlDbType.MySql:
-                case SqlDbType.Oracle:
-                case SqlDbType.SqlLite:
-                case SqlDbType.PostGreSql:
+                case SqlDbmsType.SqlServer:
+                case SqlDbmsType.MySql:
+                case SqlDbmsType.Oracle:
+                case SqlDbmsType.SqlLite:
+                case SqlDbmsType.PostGreSql:
                 default:
                     DbRegisterLightInject(connectionNames);
                     break;

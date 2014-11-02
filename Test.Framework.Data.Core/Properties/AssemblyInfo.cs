@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Test.Framework.Data.Core")]
-[assembly: AssemblyDescription("Components to get started with an Data Access Layer using Ado.Net using Dapper")]
+[assembly: AssemblyDescription("Components to get started with a Data Access Layer using Ado.Net using Dapper")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Govindarajan Panneerselvam")]
 [assembly: AssemblyProduct("Test.Framework.Data.Core")]

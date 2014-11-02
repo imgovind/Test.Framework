@@ -13,8 +13,8 @@ namespace Test.Framework.Data
 
         bool Execute<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new();
         Task<bool> ExecuteAsync<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new();
-        bool Execute(IList<SqlCommand> unitOfWorks);
-        Task<bool> ExecuteAsync(IList<SqlCommand> unitOfWorks);
+        bool Execute(IList<SqlDbCommand> unitOfWorks);
+        Task<bool> ExecuteAsync(IList<SqlDbCommand> unitOfWorks);
 
         bool Insert<T>(T entity, int timeout = 15) where T : class, new();
         Task<bool> InsertAsync<T>(T entity, int timeout = 15) where T : class, new();

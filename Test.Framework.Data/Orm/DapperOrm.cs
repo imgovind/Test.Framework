@@ -15,13 +15,13 @@ namespace Test.Framework.Data
         #region Private Members
 
         private string connectionName;
-        private SqlDbType sqlDbType;
+        private SqlDbmsType sqlDbType;
 
         #endregion
 
         #region Constructor
 
-        public DapperOrm(string connectionName, SqlDbType sqlDbType)
+        public DapperOrm(string connectionName, SqlDbmsType sqlDbType)
         {
             this.connectionName = connectionName;
             this.sqlDbType = sqlDbType;
@@ -36,7 +36,7 @@ namespace Test.Framework.Data
 
         #region IDataAccessConnection Members
 
-        public bool Execute(SqlCommand query)
+        public bool Execute(SqlDbCommand query)
         {
             using (IDbConnection dbConnection = new Connection(this.connectionName).Get())
             {
@@ -45,7 +45,7 @@ namespace Test.Framework.Data
             }
         }
 
-        public async Task<bool> ExecuteAsync(SqlCommand query)
+        public async Task<bool> ExecuteAsync(SqlDbCommand query)
         {
             using (IDbConnection dbConnection = new Connection(this.connectionName).Get())
             {
@@ -54,7 +54,7 @@ namespace Test.Framework.Data
             }
         }
 
-        public bool Execute(IList<SqlCommand> queries)
+        public bool Execute(IList<SqlDbCommand> queries)
         {
             using (IDbConnection dbConnection = new Connection(this.connectionName).Get())
             {
@@ -87,7 +87,7 @@ namespace Test.Framework.Data
             }
         }
 
-        public async Task<bool> ExecuteAsync(IList<SqlCommand> queries)
+        public async Task<bool> ExecuteAsync(IList<SqlDbCommand> queries)
         {
             using (IDbConnection dbConnection = new Connection(this.connectionName).Get())
             {
@@ -130,7 +130,7 @@ namespace Test.Framework.Data
             }
         }
 
-        public IEnumerable<T> Select<T>(SqlCommand query, ISelectable<T> traits = null)
+        public IEnumerable<T> Select<T>(SqlDbCommand query, ISelectable<T> traits = null)
             where T : class, new()
         {
             IEnumerable<T> result = null;
@@ -138,21 +138,21 @@ namespace Test.Framework.Data
             {
                 switch (this.sqlDbType)
                 {
-                    case SqlDbType.MySql:
+                    case SqlDbmsType.MySql:
                         if (traits == null)
                             result = dbConnection.Query<T>(dbConnection.CreateDapperCommand(query));
                         else
                             result = SelectWithTraits<T>(query, traits);
                         break;
-                    case SqlDbType.SqlServer:
+                    case SqlDbmsType.SqlServer:
                         if(traits == null)
                             result = dbConnection.Query<T>(dbConnection.CreateDapperCommand(query)).ToList();
                         else 
                             result = SelectWithTraits<T>(query, traits);
                         break;
-                    case SqlDbType.Oracle:
-                    case SqlDbType.SqlLite:
-                    case SqlDbType.PostGreSql:
+                    case SqlDbmsType.Oracle:
+                    case SqlDbmsType.SqlLite:
+                    case SqlDbmsType.PostGreSql:
                     default:
                         break;
                 }
@@ -160,7 +160,7 @@ namespace Test.Framework.Data
             return result;
         }
 
-        public async Task<IEnumerable<T>> SelectAsync<T>(SqlCommand query, ISelectable<T> traits = null)
+        public async Task<IEnumerable<T>> SelectAsync<T>(SqlDbCommand query, ISelectable<T> traits = null)
             where T : class, new()
         {
             IEnumerable<T> result = null;
@@ -168,13 +168,13 @@ namespace Test.Framework.Data
             {
                 switch (this.sqlDbType)
                 {
-                    case SqlDbType.MySql:
+                    case SqlDbmsType.MySql:
                         if (traits == null)
                             result = await dbConnection.QueryAsync<T>(dbConnection.CreateDapperCommandAsync(query));
                         else
                             result = await SelectWithTraitsAsync<T>(query, traits);
                         break;
-                    case SqlDbType.SqlServer:
+                    case SqlDbmsType.SqlServer:
                         if (traits == null)
                         {
                             var tempResult = await dbConnection.QueryAsync<T>(dbConnection.CreateDapperCommandAsync(query));
@@ -186,9 +186,9 @@ namespace Test.Framework.Data
                             result = tempResult.ToList();
                         }
                         break;
-                    case SqlDbType.Oracle:
-                    case SqlDbType.SqlLite:
-                    case SqlDbType.PostGreSql:
+                    case SqlDbmsType.Oracle:
+                    case SqlDbmsType.SqlLite:
+                    case SqlDbmsType.PostGreSql:
                     default:
                         break;
                 }
@@ -196,7 +196,7 @@ namespace Test.Framework.Data
             return result;
         }
 
-        public IEnumerable<T> Select<T>(SqlCommand query, Func<DataReader, T> readMapper)
+        public IEnumerable<T> Select<T>(SqlDbCommand query, Func<DataReader, T> readMapper)
             where T : class, new()
         {
             IEnumerable<T> result = null;
@@ -206,16 +206,16 @@ namespace Test.Framework.Data
                 {
                     switch (this.sqlDbType)
                     {
-                        case SqlDbType.MySql:
+                        case SqlDbmsType.MySql:
                             result = dataReader.Hydrate<T>(readMapper);
                             break;
-                        case SqlDbType.SqlServer:
+                        case SqlDbmsType.SqlServer:
                             var tempResult = dataReader.Hydrate<T>(readMapper);
                             result = tempResult.ToList();
                             break;
-                        case SqlDbType.Oracle:
-                        case SqlDbType.SqlLite:
-                        case SqlDbType.PostGreSql:
+                        case SqlDbmsType.Oracle:
+                        case SqlDbmsType.SqlLite:
+                        case SqlDbmsType.PostGreSql:
                         default:
                             break;
                     }
@@ -224,7 +224,7 @@ namespace Test.Framework.Data
             return result;
         }
 
-        public async Task<IEnumerable<T>> SelectAsync<T>(SqlCommand query, Func<DataReader, T> readMapper)
+        public async Task<IEnumerable<T>> SelectAsync<T>(SqlDbCommand query, Func<DataReader, T> readMapper)
             where T : class, new()
         {
             IEnumerable<T> result = null;
@@ -232,16 +232,16 @@ namespace Test.Framework.Data
             {
                 switch (this.sqlDbType)
                 {
-                    case SqlDbType.MySql:
+                    case SqlDbmsType.MySql:
                         result = await Task.Run<IEnumerable<T>>(() => Select<T>(query, readMapper));
                         break;
-                    case SqlDbType.SqlServer:
+                    case SqlDbmsType.SqlServer:
                         var tempResult = await Task.Run<IEnumerable<T>>(() => Select<T>(query, readMapper));
                         result = tempResult.ToList();
                         break;
-                    case SqlDbType.Oracle:
-                    case SqlDbType.SqlLite:
-                    case SqlDbType.PostGreSql:
+                    case SqlDbmsType.Oracle:
+                    case SqlDbmsType.SqlLite:
+                    case SqlDbmsType.PostGreSql:
                     default:
                         break;
                 }
@@ -253,7 +253,7 @@ namespace Test.Framework.Data
 
         #region Private Methods
 
-        private IEnumerable<T> SelectWithTraits<T>(SqlCommand query, ISelectable<T> traits)
+        private IEnumerable<T> SelectWithTraits<T>(SqlDbCommand query, ISelectable<T> traits)
             where T : class, new()
         {
             using (IDbConnection dbConnection = new Connection(this.connectionName).Get())
@@ -266,7 +266,7 @@ namespace Test.Framework.Data
             }
         }
 
-        private async Task<IEnumerable<T>> SelectWithTraitsAsync<T>(SqlCommand query, ISelectable<T> traits)
+        private async Task<IEnumerable<T>> SelectWithTraitsAsync<T>(SqlDbCommand query, ISelectable<T> traits)
             where T : class, new()
         {
             var result = await Task.Run<IEnumerable<T>>(() => SelectWithTraits<T>(query, traits));

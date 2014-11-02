@@ -54,9 +54,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Test.Framework.Cache.Core.1.0.5412.29641\lib\net45\Test.Framework.Cache.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Test.Framework.Core, Version=1.0.5412.31202, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Test.Framework.Core, Version=1.0.5418.40438, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Test.Framework.Core.1.0.5412.31202\lib\net45\Test.Framework.Core.dll</HintPath>
+      <HintPath>..\packages\Test.Framework.Core.1.0.5418.40438\lib\net45\Test.Framework.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

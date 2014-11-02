@@ -57,6 +57,7 @@
     <Compile Include="Base\DataReader.cs" />
     <Compile Include="Base\IDatabase.cs" />
     <Compile Include="Base\IRepository.cs" />
+    <Compile Include="Base\RepositoryFactory.cs" />
     <Compile Include="Common\Connection.cs" />
     <Compile Include="Common\CustomMapper.cs" />
     <Compile Include="Common\DbTypes.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="Common\SqlCommand.cs" />
     <Compile Include="SqlDbConnectionRegister.cs" />
     <Compile Include="SqlDbRegister.cs" />
-    <Compile Include="Common\SqlDbType.cs" />
+    <Compile Include="Common\SqlDbmsType.cs" />
     <Compile Include="Custom\DataReaderEnumerator.cs" />
     <Compile Include="Custom\IAutoIncrement.cs" />
     <Compile Include="Custom\IConvertible.cs" />

@@ -38,19 +38,19 @@ namespace Test.Framework.Data
 
         #region IDataAccessConnection Members
 
-        public bool Execute(SqlCommand query)
+        public bool Execute(SqlDbCommand query)
         {
             OpenConnection();
             return _dbConnection.CreateCustomCommand(query).ExecuteNonQuery() > 0 ? true : false;
         }
-        public async Task<bool> ExecuteAsync(SqlCommand query)
+        public async Task<bool> ExecuteAsync(SqlDbCommand query)
         {
             OpenConnection();
             var result = await Task.Run<bool>(() => Execute(query));
             return result;
         }
 
-        public bool Execute(IList<SqlCommand> queries)
+        public bool Execute(IList<SqlDbCommand> queries)
         {
             if (queries == null || !queries.Any()) return false;
             OpenConnection();
@@ -77,13 +77,13 @@ namespace Test.Framework.Data
             }
         }
 
-        public async Task<bool> ExecuteAsync(IList<SqlCommand> queries)
+        public async Task<bool> ExecuteAsync(IList<SqlDbCommand> queries)
         {
             var result = await Task.Run(() => Execute(queries));
             return result;
         }
 
-        public IEnumerable<T> Select<T>(SqlCommand query, ISelectable<T> traits = null) 
+        public IEnumerable<T> Select<T>(SqlDbCommand query, ISelectable<T> traits = null) 
             where T : class, new()
         {
             OpenConnection();
@@ -93,14 +93,14 @@ namespace Test.Framework.Data
             }
         }
 
-        public async Task<IEnumerable<T>> SelectAsync<T>(SqlCommand query, ISelectable<T> traits = null)
+        public async Task<IEnumerable<T>> SelectAsync<T>(SqlDbCommand query, ISelectable<T> traits = null)
             where T : class, new()
         {
             var result = await Task.Run<IEnumerable<T>>(() => Select<T>(query, traits));
             return result;
         }
 
-        public IEnumerable<T> Select<T>(SqlCommand query, Func<DataReader, T> readMapper) 
+        public IEnumerable<T> Select<T>(SqlDbCommand query, Func<DataReader, T> readMapper) 
             where T : class, new()
         {
             OpenConnection();
@@ -110,7 +110,7 @@ namespace Test.Framework.Data
             }
         }
 
-        public async Task<IEnumerable<T>> SelectAsync<T>(SqlCommand query, Func<DataReader, T> readMapper)
+        public async Task<IEnumerable<T>> SelectAsync<T>(SqlDbCommand query, Func<DataReader, T> readMapper)
             where T : class, new()
         {
             var result = await Task.Run<IEnumerable<T>>(() => Select<T>(query, readMapper));

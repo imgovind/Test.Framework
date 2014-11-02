@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Session.Memcache</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Session.Memcache/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Session.Memcache/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Session.Memcache/Test.Framework.Session.Memcache.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+		Release Notes for Session 
+		Initial Release -- 11-02-2014 07:14:07 AM
+	</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Session Memcache</tags>
+  </metadata>
+  <files>
+	<file src="Content\*.*" target="Content" />
+	<file src="Content\App_Start\*.*" target="Content\App_Start" />
+  </files>
+</package>

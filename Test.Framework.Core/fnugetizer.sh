@@ -9,6 +9,9 @@ APPSTARTDIRECTORY="Content\\App_Start";
 MODELSDIRECTORY="Content\\Models";
 CONTROLLERSDIRECTORY="Content\\Controllers";
 DATADIRECTORY="Content\\Data";
+COREDATADIRECTORY="Content\\Data\\Core"
+EFDATADIRECTORY="Content\\Data\\EF";
+PETAPOCODATADIRECTORY="Content\\Data\\PetaPoco";
 
 ARR=(${PROJECT//./ })
 COMPANY=${ARR[0]};
@@ -81,6 +84,18 @@ else
 	if [ -d "$DATADIRECTORY" ]; 
 	then
 	sed -i '/<\/package>/i \\t<file src=\"Content\\Data\\*.*\" target=\"Content\\Data\" \/>' *.nuspec
+	fi
+	if [ -d "$COREDATADIRECTORY" ]; 
+	then
+	sed -i '/<\/package>/i \\t<file src=\"Content\\Data\\Core\\*.*\" target=\"Content\\Data\\Core\" \/>' *.nuspec
+	fi
+	if [ -d "$EFDATADIRECTORY" ]; 
+	then
+	sed -i '/<\/package>/i \\t<file src=\"Content\\Data\\EF\\*.*\" target=\"Content\\Data\\EF\" \/>' *.nuspec
+	fi
+	if [ -d "$PETAPOCODATADIRECTORY" ]; 
+	then
+	sed -i '/<\/package>/i \\t<file src=\"Content\\Data\\PetaPoco\\*.*\" target=\"Content\\Data\\PetaPoco\" \/>' *.nuspec
 	fi
 	sed -i '/<\/package>/i \  <\/files>' *.nuspec
 

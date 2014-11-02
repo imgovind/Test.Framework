@@ -28,7 +28,7 @@ namespace Test.Framework.Extensions
             return command;
         }
 
-        public static IDbCommand CreateCustomCommand(this IDbConnection connection, SqlCommand query)
+        public static IDbCommand CreateCustomCommand(this IDbConnection connection, SqlDbCommand query)
         {
             IDbCommand command = connection.CreateCommand();
             command.CommandText = query.Statement;
@@ -60,7 +60,7 @@ namespace Test.Framework.Extensions
             return command;
         }
 
-        public static CommandDefinition CreateDapperCommand(this IDbConnection connection, SqlCommand query, IDbTransaction transaction = null)
+        public static CommandDefinition CreateDapperCommand(this IDbConnection connection, SqlDbCommand query, IDbTransaction transaction = null)
         {
             string commandText = query.Statement;
             object commandParameters = null;
@@ -74,7 +74,7 @@ namespace Test.Framework.Extensions
             return command;
         }
 
-        public static CommandDefinition CreateDapperCommandAsync(this IDbConnection connection, SqlCommand query, IDbTransaction transaction = null)
+        public static CommandDefinition CreateDapperCommandAsync(this IDbConnection connection, SqlDbCommand query, IDbTransaction transaction = null)
         {
             string commandText = query.Statement;
             object commandParameters = null;
