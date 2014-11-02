@@ -13,12 +13,12 @@ namespace Test.Framework.Data
     {
         #region Public Methods
 
-        public static SqlCommand GetInsertQuery<T>(T item)
+        public static SqlDbCommand GetInsertQuery<T>(T item)
         {
             return GetInsertQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item);
         }
 
-        public static SqlCommand GetInsertQuery<T>(string tableName, T item)
+        public static SqlDbCommand GetInsertQuery<T>(string tableName, T item)
         {
             PropertyInfo[] props = PropertyCache.Get<T>();
             string[] columns = props.Select(p => p.Name).ToArray();
@@ -40,15 +40,15 @@ namespace Test.Framework.Data
                 });
             });
 
-            return new SqlCommand(statement, parameters);
+            return new SqlDbCommand(statement, parameters);
         }
 
-        public static SqlCommand GetUpdateQuery<T>(T item)
+        public static SqlDbCommand GetUpdateQuery<T>(T item)
         {
             return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item);
         }
 
-        public static SqlCommand GetUpdateQuery<T>(string tableName, T item)
+        public static SqlDbCommand GetUpdateQuery<T>(string tableName, T item)
         {
             PropertyInfo[] props = PropertyCache.Get<T>();
             string[] columns = props.Select(p => p.Name).ToArray();
@@ -67,15 +67,15 @@ namespace Test.Framework.Data
                 });
             });
 
-            return new SqlCommand(statement, parameters);
+            return new SqlDbCommand(statement, parameters);
         }
 
-        public static SqlCommand GetDeleteQuery<T>(T item)
+        public static SqlDbCommand GetDeleteQuery<T>(T item)
         {
             return GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item);
         }
 
-        public static SqlCommand GetDeleteQuery<T>(string tableName, T item)
+        public static SqlDbCommand GetDeleteQuery<T>(string tableName, T item)
         {
             PropertyInfo[] props = PropertyCache.Get<T>();
             string[] columns = props.Select(p => p.Name).ToArray();
@@ -93,10 +93,10 @@ namespace Test.Framework.Data
                 });
             });
 
-            return new SqlCommand(statement, parameters);
+            return new SqlDbCommand(statement, parameters);
         }
 
-        public static SqlCommand GetDynamicQuery<T>(string tableName, Expression<Func<T, bool>> expression)
+        public static SqlDbCommand GetDynamicQuery<T>(string tableName, Expression<Func<T, bool>> expression)
         {
             var builder = new StringBuilder();
             var queryProperties = new List<QueryParameter>();
@@ -125,7 +125,7 @@ namespace Test.Framework.Data
                 parameters.Add(new Parameter { Name = item.PropertyName, Value = item.PropertyValue, Type = item.DatabaseType });
             }
 
-            return new SqlCommand(builder.ToString().TrimEnd(), parameters);
+            return new SqlDbCommand(builder.ToString().TrimEnd(), parameters);
         }
 
         #endregion

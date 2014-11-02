@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Data.EF</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Data.EF/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Data.EF/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Data.EF/Test.Framework.Data.EF.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+		Release Notes for Data 
+		Initial Release -- 11-01-2014 11:35:34 PM
+	</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Data EF</tags>
+  </metadata>
+  <files>
+	<file src="Content\*.*" target="Content" />
+	<file src="Content\Models\*.*" target="Content\Models" />
+	<file src="Content\Data\*.*" target="Content\Data" />
+	<file src="Content\Data\EF\*.*" target="Content\Data\EF" />
+  </files>
+</package>

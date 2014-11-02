@@ -21,6 +21,18 @@ namespace Test.Framework
             }
         }
 
+        public Dictionary<string, string> AppSettingsSection(string section)
+        {
+            return AppSettings.Cast<string>()
+                            .Where(key =>
+                                key.Contains(":") &&
+                                key.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries).Length > 1 &&
+                                key.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries)[0].ToLowerInvariant().Equals(section)
+                            )
+                            .Select(x => new { Key = x, Value = AppSettings[x] })
+                            .ToDictionary(x => x.Key, x => x.Value);
+        }
+
         public string ConnectionStrings(string name)
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;

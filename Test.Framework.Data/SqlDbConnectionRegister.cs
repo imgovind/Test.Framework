@@ -10,21 +10,21 @@ namespace Test.Framework.Data
 {
     public static class SqlDbConnectionRegister
     {
-        public static void Register(IEnumerable<string> connectionNames, SqlDbType dbmsType)
+        public static void Register(IEnumerable<string> connectionNames, SqlDbmsType dbmsType)
         {
             switch (dbmsType)
             {
-                case SqlDbType.MySql:
+                case SqlDbmsType.MySql:
                     MySqlRegisterLightInject(connectionNames);
                     break;
-                case SqlDbType.SqlServer:
+                case SqlDbmsType.SqlServer:
                     SqlServerRegisterLightInject(connectionNames);
                     break;
-                case SqlDbType.Oracle:
+                case SqlDbmsType.Oracle:
                     throw new NotImplementedException("Oracle Database Implementation Not Present");
-                case SqlDbType.SqlLite:
+                case SqlDbmsType.SqlLite:
                     throw new NotImplementedException("SqlLite Database Implementation Not Present");
-                case SqlDbType.PostGreSql:
+                case SqlDbmsType.PostGreSql:
                     throw new NotImplementedException("PostGreSql Database Implementation Not Present");
                 default:
                     MySqlRegisterLightInject(connectionNames);

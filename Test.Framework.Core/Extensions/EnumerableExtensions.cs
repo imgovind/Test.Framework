@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -102,6 +103,24 @@ namespace Test.Framework.Extensions
                 yield return partition;
                 partition = source.Skip(index++ * size).Take(size).AsEnumerable();
             }
+        }
+
+        /// <summary>
+        /// Converts the given enumerable <paramref name="source"/> into a HashSet
+        /// </summary>
+        /// <typeparam name="T">The type of the content stored in the enumerable</typeparam>
+        /// <param name="source">The enumerable which is to be converted into HashSet</param>
+        /// <returns>A HashSet of the given items of type <typeparamref name="T"/></returns>
+        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source)
+        {
+            return new HashSet<T>(source);
+        }
+
+        public static IDictionary<string, string> ToDictionary(this NameValueCollection source)
+        {
+            return source.Cast<string>()
+                         .Select(s => new { Key = s, Value = source[s] })
+                         .ToDictionary(p => p.Key, p => p.Value);
         }
     }
 }

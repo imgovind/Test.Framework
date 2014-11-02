@@ -2,9 +2,9 @@
 
 namespace Test.Framework.Data
 {
-    public class SqlCommand
+    public class SqlDbCommand
     {
-        public SqlCommand(string statement, IList<Parameter> parameters, int timeout = 15, string errorMessage = null)
+        public SqlDbCommand(string statement, IList<Parameter> parameters, int timeout = 15, string errorMessage = null)
         {
             Statement = statement;
             Parameters = parameters;

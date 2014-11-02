@@ -14,6 +14,8 @@ namespace Test.Framework
             get;
         }
 
+        Dictionary<string, string> AppSettingsSection(string Section);
+
         string ConnectionStrings(string name);
         object GetSection(string sectionName);
         T GetSection<T>(string sectionName);

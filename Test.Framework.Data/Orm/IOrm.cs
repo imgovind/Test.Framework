@@ -11,24 +11,24 @@ namespace Test.Framework.Data
     {
         IDbConnection GetConnection();
 
-        bool Execute(SqlCommand query);
+        bool Execute(SqlDbCommand query);
 
-        Task<bool> ExecuteAsync(SqlCommand query);
+        Task<bool> ExecuteAsync(SqlDbCommand query);
 
-        bool Execute(IList<SqlCommand> queries);
+        bool Execute(IList<SqlDbCommand> queries);
 
-        Task<bool> ExecuteAsync(IList<SqlCommand> queries);
+        Task<bool> ExecuteAsync(IList<SqlDbCommand> queries);
 
-        IEnumerable<T> Select<T>(SqlCommand query, ISelectable<T> traits = null)
+        IEnumerable<T> Select<T>(SqlDbCommand query, ISelectable<T> traits = null)
             where T : class, new();
 
-        Task<IEnumerable<T>> SelectAsync<T>(SqlCommand query, ISelectable<T> traits = null)
+        Task<IEnumerable<T>> SelectAsync<T>(SqlDbCommand query, ISelectable<T> traits = null)
             where T : class, new();
 
-        IEnumerable<T> Select<T>(SqlCommand query, Func<DataReader, T> readMapper)
+        IEnumerable<T> Select<T>(SqlDbCommand query, Func<DataReader, T> readMapper)
             where T : class, new();
 
-        Task<IEnumerable<T>> SelectAsync<T>(SqlCommand query, Func<DataReader, T> readMapper)
+        Task<IEnumerable<T>> SelectAsync<T>(SqlDbCommand query, Func<DataReader, T> readMapper)
             where T : class, new();
     }
 }

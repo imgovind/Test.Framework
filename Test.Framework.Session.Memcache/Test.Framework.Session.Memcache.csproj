@@ -63,6 +63,7 @@
     <Compile Include="Content\App_Start\SessionBuckerActivator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Content\app.config.transform" />
     <None Include="packages.config" />
   </ItemGroup>

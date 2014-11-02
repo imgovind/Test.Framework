@@ -9,7 +9,7 @@ namespace Test.Framework.Data
 {
     public static class SqlOrmRegister
     {
-        public static void Register(IEnumerable<string> connectionNames, SqlDbType sqlDbType, OrmType ormType = OrmType.Dapper)
+        public static void Register(IEnumerable<string> connectionNames, SqlDbmsType sqlDbType, OrmType ormType = OrmType.Dapper)
         {
             switch (ormType)
             {
@@ -25,7 +25,7 @@ namespace Test.Framework.Data
             }
         }
 
-        private static void CustomRegister(IEnumerable<string> connectionNames, SqlDbType sqlDbType)
+        private static void CustomRegister(IEnumerable<string> connectionNames, SqlDbmsType sqlDbType)
         {
             var configuration = Container.Resolve<IWebConfiguration>();
             connectionNames.ToList().ForEach(connectionName =>
@@ -37,7 +37,7 @@ namespace Test.Framework.Data
             });
         }
 
-        private static void DapperRegister(IEnumerable<string> connectionNames, SqlDbType sqlDbType)
+        private static void DapperRegister(IEnumerable<string> connectionNames, SqlDbmsType sqlDbType)
         {
             connectionNames.ToList().ForEach(connectionName =>
             {
@@ -48,7 +48,7 @@ namespace Test.Framework.Data
             });
         }
 
-        private static void DapperRegisterLightInject(IEnumerable<string> connectionNames, SqlDbType sqlDbType)
+        private static void DapperRegisterLightInject(IEnumerable<string> connectionNames, SqlDbmsType sqlDbType)
         {
             connectionNames.ToList().ForEach(connectionName =>
             {
