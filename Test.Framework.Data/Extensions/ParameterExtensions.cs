@@ -28,5 +28,26 @@ namespace Test.Framework.Extensions
             }
             return param;
         }
+
+        public static object[] ToObjectArray(this IList<Parameter> parameters, bool ForValueOnly = false)
+        {
+            if(!ForValueOnly)
+                return parameters.Cast<object>().ToArray();
+            return parameters.Select(x => x.Value).Cast<object>().ToArray();
+        }
+
+        public static string ToPetaPocoValues(this IList<string> columns, bool includeColumnName = false, int parameterOffset = 0)
+        {
+            List<string> result = new List<string>();
+            for (int i = 0; i < columns.Count; i++)
+            {
+                parameterOffset += i;
+                if (!includeColumnName)
+                    result.Add("@" + parameterOffset.ToString());
+                else
+                    result.Add(columns[i] + " = @" + parameterOffset.ToString());
+            }
+            return string.Join(", ", result);
+        }
     }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Data.Petapoco</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Data.Petapoco/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Data.Petapoco/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Data.Petapoco/Test.Framework.Data.Petapoco.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+		Release Notes for Data 
+		Initial Release -- 11-04-2014 01:56:40 AM
+	</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Data Petapoco</tags>
+  </metadata>
+  <files>
+	<file src="Content\*.*" target="Content" />
+	<file src="Content\Models\*.*" target="Content\Models" />
+	<file src="Content\Data\*.*" target="Content\Data" />
+	<file src="Content\Data\PetaPoco\*.*" target="Content\Data\PetaPoco" />
+  </files>
+</package>

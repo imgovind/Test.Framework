@@ -21,12 +21,13 @@ namespace Test.Framework.Data
 
         T Get<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new();
         Task<T> GetAsync<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new();
-        IList<T> Select<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new();
-        Task<IList<T>> SelectAsync<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new();
         T Get<T>(Expression<Func<T, bool>> expression, int timeout = 15) where T : class, new();
         Task<T> GetAsync<T>(Expression<Func<T, bool>> expression, int timeout = 15) where T : class, new();
-        IList<T> Select<T>(Expression<Func<T, bool>> expression, int timeout = 15) where T : class, new();
-        Task<IList<T>> SelectAsync<T>(Expression<Func<T, bool>> expression, int timeout = 15) where T : class, new();
+
+        IEnumerable<T> Select<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new();
+        Task<IEnumerable<T>> SelectAsync<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new();
+        IEnumerable<T> Select<T>(Expression<Func<T, bool>> expression, int timeout = 15) where T : class, new();
+        Task<IEnumerable<T>> SelectAsync<T>(Expression<Func<T, bool>> expression, int timeout = 15) where T : class, new();
 
         bool Update<T>(T entity, int timeout = 15) where T : class, new();
         Task<bool> UpdateAsync<T>(T entity, int timeout = 15) where T : class, new();
