@@ -62,7 +62,7 @@ namespace Test.Framework.Extensions
         {
             Type objectType = typeof(T);
             PropertyInfo currentProperty;
-            PropertyInfo[] properties = PropertyCache.Get<T>();
+            PropertyInfo[] properties = PropertyCache.Resolve<T>();
 
             for (int i = 0; i < reader.FieldCount; i++)
             {
@@ -152,7 +152,7 @@ namespace Test.Framework.Extensions
         public static IEnumerable<T> MapToEntities<T>(this IDataReader reader)
         {
             T instance = default(T);
-            PropertyInfo[] properties = PropertyCache.Get<T>();
+            PropertyInfo[] properties = PropertyCache.Resolve<T>();
             while (reader.Read())
             {
                 instance = Activator.CreateInstance<T>();

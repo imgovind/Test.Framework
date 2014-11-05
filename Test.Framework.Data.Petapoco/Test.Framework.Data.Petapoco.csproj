@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5FE4208B-988B-4F7E-8BEF-8A2C15292550}</ProjectGuid>
+    <ProjectGuid>{14016ADF-9FDA-41A5-8DE6-7CB8FC1B76FA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test.Framework.Data.Core</RootNamespace>
-    <AssemblyName>Test.Framework.Data.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Test.Framework.Data.Petapoco</RootNamespace>
+    <AssemblyName>Test.Framework.Data.Petapoco</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,36 +30,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=1.37.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Dapper">
       <HintPath>..\packages\Dapper.1.37\lib\net45\Dapper.dll</HintPath>
     </Reference>
-    <Reference Include="LightInject, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="LightInject">
       <HintPath>..\packages\LightInject.3.0.2.0\lib\net45\LightInject.dll</HintPath>
     </Reference>
-    <Reference Include="Munq.IocContainer, Version=3.0.4501.20364, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Munq.IocContainer">
       <HintPath>..\packages\Munq.IocContainer.3.1.6\Lib\Munq.IocContainer.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.9.3\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Test.Framework.Core, Version=1.0.5418.40438, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Test.Framework.Core.1.0.5418.40438\lib\net45\Test.Framework.Core.dll</HintPath>
+    <Reference Include="Test.Framework.Core">
+      <HintPath>..\packages\Test.Framework.Core.1.0.5418.40884\lib\net45\Test.Framework.Core.dll</HintPath>
     </Reference>
     <Reference Include="Test.Framework.Data, Version=1.0.5421.101, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,22 +62,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Content\Data\Core\CustomMapperRegister.cs.pp" />
-    <None Include="Content\Models\DataModelRegister.cs.pp" />
-    <None Include="Content\Data\Core\ConnectionConstants.cs.pp" />
-    <None Include="Content\Data\Core\ITestRepository.cs.pp" />
-    <None Include="Content\Data\Core\TestRepository.cs.pp" />
-    <None Include="Content\Data\Core\TestModel.cs.pp" />
-    <None Include="Content\Data\Core\TestModelMapper.cs.pp" />
     <Compile Include="App_Start\Core.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Content\Data\Core\IDataProvider.cs.pp" />
+    <None Include="Content\Data\PetaPoco\PetaPocoDatabase.cs.pp" />
+    <None Include="Content\Models\DataModelRegister.cs.pp" />
     <None Include="Content\Models\IDataModel.cs.pp" />
+    <None Include="Content\Data\PetaPoco\IUserRepository.cs.pp" />
+    <None Include="Content\Data\PetaPoco\PetaPocoRegister.cs.pp" />
+    <Compile Include="Models\PetaPoco.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Content\Models\Role.cs.pp" />
+    <None Include="Content\Models\User.cs.pp" />
+    <None Include="Content\Models\UserClaim.cs.pp" />
+    <None Include="Content\Models\UserLogin.cs.pp" />
+    <None Include="Content\Data\PetaPoco\UserRepository.cs.pp" />
+    <None Include="Content\Models\UserRole.cs.pp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\Data\Core\DataProvider.cs.pp" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

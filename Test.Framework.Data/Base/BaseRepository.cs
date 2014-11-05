@@ -123,35 +123,50 @@ namespace Test.Framework.Data
 
         public virtual IList<T> Find<T>(string sql) where T : class, new()
         {
-            return this.Database.Select<T>(sql);
+            var result = this.Database.Select<T>(sql);
+            if(result.IsNullOrEmpty())
+                return null;
+            return result.ToList();
         }
 
         public async virtual Task<IList<T>> FindAsync<T>(string sql) where T : class, new()
         {
             var result = await this.Database.SelectAsync<T>(sql);
-            return result;
+            if (result.IsNullOrEmpty())
+                return null;
+            return result.ToList();
         }
 
         public virtual IList<T> Find<T>(string sql, IList<Parameter> parameters) where T : class, new()
         {
-            return this.Database.Select<T>(sql, parameters);
+            var result = this.Database.Select<T>(sql, parameters);
+            if (result.IsNullOrEmpty())
+                return null;
+            return result.ToList();
         }
 
         public async virtual Task<IList<T>> FindAsync<T>(string sql, IList<Parameter> parameters) where T : class, new()
         {
             var result = await this.Database.SelectAsync<T>(sql, parameters);
-            return result;
+            if (result.IsNullOrEmpty())
+                return null;
+            return result.ToList();
         }
 
         public virtual IList<T> Find<T>(Expression<Func<T, bool>> expression) where T : class, new()
         {
-            return this.Database.Select<T>(expression);
+            var result = this.Database.Select<T>(expression);
+            if (result.IsNullOrEmpty())
+                return null;
+            return result.ToList();
         }
 
         public async virtual Task<IList<T>> FindAsync<T>(Expression<Func<T, bool>> expression) where T : class, new()
         {
             var result = await this.Database.SelectAsync<T>(expression);
-            return result;
+            if (result.IsNullOrEmpty())
+                return null;
+            return result.ToList();
         }
 
         #endregion

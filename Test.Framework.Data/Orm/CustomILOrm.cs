@@ -25,7 +25,7 @@ namespace Test.Framework.Data
         public static void CreateMapEntity<T>(T instance, ISet<string> columns)
         {
             Type[] methodArgs = { typeof(IDataReader) };
-            PropertyInfo[] properties = PropertyCache.Get<T>();
+            PropertyInfo[] properties = PropertyCache.Resolve<T>();
             var module = AppDomain.CurrentDomain.GetAssemblies()[15].GetType().Module;
             DynamicMethod dynamicMethod = new DynamicMethod("MapDR", typeof(T), methodArgs, module, true);
             ILGenerator iL = dynamicMethod.GetILGenerator();

@@ -115,28 +115,6 @@ namespace Test.Framework.Data
             return result.FirstOrDefault();
         }
 
-        public IList<T> Select<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new()
-        {
-            using (IOrm orm = this.orm)
-            {
-                return orm.Select<T>(new SqlDbCommand(sql, parameters, timeout), CustomMapper.Resolve<T>()).ToList();
-            }
-        }
-
-        public async Task<IList<T>> SelectAsync<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new()
-        {
-            IEnumerable<T> result = null;
-            using (IOrm orm = this.orm)
-            {
-                result = await orm.SelectAsync<T>(new SqlDbCommand(sql, parameters, timeout), CustomMapper.Resolve<T>());
-            }
-
-            if (result == null)
-                return null;
-
-            return result.ToList();
-        }
-
         public T Get<T>(Expression<Func<T, bool>> expression, int timeout = 15) where T : class, new()
         {
             return Select<T>(expression, timeout).FirstOrDefault();
@@ -152,7 +130,29 @@ namespace Test.Framework.Data
             return result.FirstOrDefault();
         }
 
-        public IList<T> Select<T>(Expression<Func<T, bool>> expression, int timeout = 15) where T : class, new()
+        public IEnumerable<T> Select<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new()
+        {
+            using (IOrm orm = this.orm)
+            {
+                return orm.Select<T>(new SqlDbCommand(sql, parameters, timeout), CustomMapper.Resolve<T>()).ToList();
+            }
+        }
+
+        public async Task<IEnumerable<T>> SelectAsync<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new()
+        {
+            IEnumerable<T> result = null;
+            using (IOrm orm = this.orm)
+            {
+                result = await orm.SelectAsync<T>(new SqlDbCommand(sql, parameters, timeout), CustomMapper.Resolve<T>());
+            }
+
+            if (result == null)
+                return null;
+
+            return result.ToList();
+        }
+
+        public IEnumerable<T> Select<T>(Expression<Func<T, bool>> expression, int timeout = 15) where T : class, new()
         {
             using (IOrm orm = this.orm)
             {
@@ -161,7 +161,7 @@ namespace Test.Framework.Data
             }
         }
 
-        public async Task<IList<T>> SelectAsync<T>(Expression<Func<T, bool>> expression, int timeout = 15) where T : class, new()
+        public async Task<IEnumerable<T>> SelectAsync<T>(Expression<Func<T, bool>> expression, int timeout = 15) where T : class, new()
         {
             IEnumerable<T> result = null;
             using (IOrm orm = this.orm)
