@@ -10,9 +10,9 @@ namespace Test.Framework.Data
 {
     public static class SqlDbConnectionRegister
     {
-        public static void Register(IEnumerable<string> connectionNames, SqlDbmsType dbmsType)
+        public static void Register(IEnumerable<string> connectionNames, SqlDbmsType sqlDbmsType = SqlDbmsType.MySql)
         {
-            switch (dbmsType)
+            switch (sqlDbmsType)
             {
                 case SqlDbmsType.MySql:
                     MySqlRegisterLightInject(connectionNames);

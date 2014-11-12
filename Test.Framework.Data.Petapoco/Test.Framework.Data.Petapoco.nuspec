@@ -12,16 +12,16 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-		Release Notes for Data 
-		Initial Release -- 11-04-2014 01:56:40 AM
-	</releaseNotes>
+			Release Notes for Data 
+			Initial Release -- 11-11-2014 02:27:09 AM
+		</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Test Framework Data Petapoco</tags>
   </metadata>
   <files>
-	<file src="Content\*.*" target="Content" />
-	<file src="Content\Models\*.*" target="Content\Models" />
-	<file src="Content\Data\*.*" target="Content\Data" />
-	<file src="Content\Data\PetaPoco\*.*" target="Content\Data\PetaPoco" />
+		<file src="Content\*.*" target="Content" />
+		<file src="Content\Models\*.*" target="Content\Models" />
+		<file src="Content\Data\*.*" target="Content\Data" />
+		<file src="Content\Data\PetaPoco\*.*" target="Content\Data\PetaPoco" />
   </files>
 </package>

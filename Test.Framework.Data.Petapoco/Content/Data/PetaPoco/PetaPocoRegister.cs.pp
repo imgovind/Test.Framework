@@ -9,7 +9,7 @@ namespace $rootnamespace$.Data.Petapoco
 {
     public partial class PetaPocoRegister
     {
-        public static void RegisterContext(IEnumerable<string> connectionStringNames)
+        public static void Register(IEnumerable<string> connectionStringNames)
         {
             foreach (var connectionStringName in connectionStringNames)
             {

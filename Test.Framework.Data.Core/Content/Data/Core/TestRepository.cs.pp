@@ -18,5 +18,30 @@ namespace $rootnamespace$.Data
             : base(connectionName)
         {
         }
+
+		public TestModel GetTestModel(int Id)
+        {
+            return this.Database.Select<TestModel>(x => x.TestIntProperty == Id).FirstOrDefault();
+        }
+
+        public bool AddTestModel(TestModel testModel)
+        {
+            return this.Database.Insert<TestModel>(testModel, false, "TestIntProperty");
+        }
+
+        public bool DeleteTestModel(TestModel testModel)
+        {
+            return this.Database.Delete<TestModel>(testModel, "TestIntProperty");
+        }
+
+        public bool UpdateTestModel(TestModel testModel)
+        {
+            return this.Database.Update<TestModel>(testModel, "TestIntProperty");
+        }
+
+        public bool DeprecateTestModel(TestModel testModel)
+        {
+            return this.Database.Deprecate<TestModel>(testModel, "TestIntProperty");
+        }
     }
 }

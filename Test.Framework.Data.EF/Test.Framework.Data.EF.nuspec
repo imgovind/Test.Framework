@@ -12,16 +12,16 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-		Release Notes for Data 
-		Initial Release -- 11-01-2014 11:35:34 PM
-	</releaseNotes>
+			Release Notes for Data 
+			Initial Release -- 11-11-2014 02:27:00 AM
+		</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Test Framework Data EF</tags>
   </metadata>
   <files>
-	<file src="Content\*.*" target="Content" />
-	<file src="Content\Models\*.*" target="Content\Models" />
-	<file src="Content\Data\*.*" target="Content\Data" />
-	<file src="Content\Data\EF\*.*" target="Content\Data\EF" />
+		<file src="Content\*.*" target="Content" />
+		<file src="Content\Models\*.*" target="Content\Models" />
+		<file src="Content\Data\*.*" target="Content\Data" />
+		<file src="Content\Data\EF\*.*" target="Content\Data\EF" />
   </files>
 </package>

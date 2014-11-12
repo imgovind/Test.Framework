@@ -175,21 +175,19 @@ namespace Test.Framework
         #endregion
 
         #region ResolveOrRegister
+        public static HashSet<string> SafeRegister = new HashSet<string>();
 
         public static I ResolveOrRegister<I, T>(T instance)
             where I : class
             where T : class, I
         {
-            I result = null;
-            try
+            var name = typeof(T).Name + "_ResolveOrRegister_Instance_" + typeof(I).Name;
+            if (SafeRegister.Contains(name))
             {
-                result = Resolve<I>();
+                return Resolve<I>(name);
             }
-            catch (Exception)
+            else
             {
-            }
-            if (result == null)
-            { 
                 if (instance == null)
                     instance = Activator.CreateInstance(typeof(T)) as T;
 
@@ -197,87 +195,98 @@ namespace Test.Framework
                     instance,
                     ObjectLifeSpans.Singleton);
 
-                return Resolve<I>();
+                SafeRegister.Add(name);
+
+                return ResolveOrRegister<I, T>(instance); ;
             }
-            return result;
         }
 
         public static I ResolveOrRegister<I, T>(params object[] args)
             where I : class
             where T : class, I
         {
-            I result = null;
-            try
+            var name = typeof(T).Name + "_ResolveOrRegister_args_" + typeof(I).Name;
+            if (SafeRegister.Contains(name))
             {
-                result = Resolve<I>();
+                return Resolve<I>(name);
             }
-            catch (Exception)
+            else
             {
-            }
-            if (result == null)
-            { 
-                var instance = Activator.CreateInstance(typeof(T), args) as T;
+                T instance = null;
+
+                try
+                {
+                    instance = Activator.CreateInstance(typeof(T), args) as T;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
 
                 RegisterInstance<I, T>(
                     instance,
                     ObjectLifeSpans.Singleton);
 
-                result = Resolve<I>();
+                SafeRegister.Add(name);
+
+                return ResolveOrRegister<I, T>(args);
             }
-            return result;
         }
 
         public static I ResolveOrRegister<I, T>(string name, T instance)
             where I : class
             where T : class, I
         {
-            I result = null;
-            try
+            if (SafeRegister.Contains(name))
             {
-                result = Container.Resolve<I>(name);
+                return Resolve<I>(name);
             }
-            catch (Exception)
-            {
-            }
-            if (result == null)
+            else
             {
                 if (instance == null)
                     instance = Activator.CreateInstance(typeof(T)) as T;
-
-                Container.RegisterInstance<I, T>(
-                    name,
-                    instance,
-                    ObjectLifeSpans.Singleton);
-
-                result = Container.Resolve<I>(name);
-            }
-            return result;
-        }
-
-        public static I ResolveOrRegister<I, T>(string name, params object[] args)
-            where I : class
-            where T : class, I
-        {
-            I result = null;
-            try
-            {
-                result = Resolve<I>(name);
-            }
-            catch (Exception)
-            {
-            }
-            if(result == null)
-            {
-                var instance = Activator.CreateInstance(typeof(T), args) as T;
 
                 RegisterInstance<I, T>(
                     name,
                     instance,
                     ObjectLifeSpans.Singleton);
 
+                SafeRegister.Add(name);
+
+                return ResolveOrRegister<I, T>(name, instance);
+            }
+        }
+
+        public static I ResolveOrRegister<I, T>(string name, params object[] args)
+            where I : class
+            where T : class, I
+        {
+            if (SafeRegister.Contains(name))
+            {
                 return Resolve<I>(name);
             }
-            return result;
+            else
+            {
+                T instance = null;
+
+                try
+                {
+                    instance = Activator.CreateInstance(typeof(T), args) as T;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+
+                RegisterInstance<I, T>(
+                    name,
+                    instance,
+                    ObjectLifeSpans.Singleton);
+
+                SafeRegister.Add(name);
+
+                return ResolveOrRegister<I, T>(name, args);
+            }
         }
 
         #endregion

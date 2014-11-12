@@ -10,5 +10,7 @@ namespace $rootnamespace$.Data.EF
     {
         IFooRepository FooRepository(int clusterId);
         IBarRepository BarRepository();
+		IUserRepository UserRepository(int clusterId);
+        IUserRepository UserRepository();
     }
 }

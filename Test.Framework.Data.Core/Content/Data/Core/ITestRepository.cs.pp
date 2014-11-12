@@ -8,5 +8,10 @@ namespace $rootnamespace$.Data
 {
     public interface ITestRepository
     {
+		TestModel GetTestModel(int Id);
+        bool AddTestModel(TestModel testModel);
+        bool DeleteTestModel(TestModel testModel);
+        bool UpdateTestModel(TestModel testModel);
+        bool DeprecateTestModel(TestModel testModel);
     }
 }

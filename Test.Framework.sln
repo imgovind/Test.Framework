@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.WebApi", "Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Data.Petapoco", "Test.Framework.Data.Petapoco\Test.Framework.Data.Petapoco.csproj", "{14016ADF-9FDA-41A5-8DE6-7CB8FC1B76FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Data.Subsonic", "Test.Framework.Data.Subsonic\Test.Framework.Data.Subsonic.csproj", "{463E5890-FDA8-4D1F-AD2D-2D433311DF29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{14016ADF-9FDA-41A5-8DE6-7CB8FC1B76FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14016ADF-9FDA-41A5-8DE6-7CB8FC1B76FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14016ADF-9FDA-41A5-8DE6-7CB8FC1B76FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{463E5890-FDA8-4D1F-AD2D-2D433311DF29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{463E5890-FDA8-4D1F-AD2D-2D433311DF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{463E5890-FDA8-4D1F-AD2D-2D433311DF29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{463E5890-FDA8-4D1F-AD2D-2D433311DF29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

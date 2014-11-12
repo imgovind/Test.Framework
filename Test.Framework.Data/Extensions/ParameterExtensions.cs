@@ -38,14 +38,30 @@ namespace Test.Framework.Extensions
 
         public static string ToPetaPocoValues(this IList<string> columns, bool includeColumnName = false, int parameterOffset = 0)
         {
+            var counter = 0;
             List<string> result = new List<string>();
             for (int i = 0; i < columns.Count; i++)
             {
-                parameterOffset += i;
+                counter = parameterOffset + i;
                 if (!includeColumnName)
-                    result.Add("@" + parameterOffset.ToString());
+                    result.Add("@" + counter.ToString());
                 else
-                    result.Add(columns[i] + " = @" + parameterOffset.ToString());
+                    result.Add(columns[i] + " = @" + counter.ToString());
+            }
+            return string.Join(", ", result);
+        }
+
+        public static string ToSubSonicValues(this IList<string> columns, bool includeColumnName = false, int parameterOffset = 0)
+        {
+            var counter = 0;
+            List<string> result = new List<string>();
+            for (int i = 0; i < columns.Count; i++)
+            {
+                counter = parameterOffset + i;
+                if (!includeColumnName)
+                    result.Add("@" + counter.ToString());
+                else
+                    result.Add(columns[i] + " = @" + counter.ToString());
             }
             return string.Join(", ", result);
         }

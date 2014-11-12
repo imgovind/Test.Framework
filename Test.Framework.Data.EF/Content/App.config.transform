@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="DbContext:FooBarEntities" value="mysql:FooBarEntitiesConnectionString"/>
+    <add key="DbContext:FooBarEntities" value="sqlserver:FooBarEntitiesConnectionString"/>
+  </appSettings>
+  <connectionStrings>
+    <add name="mysql:FooBarEntitiesConnectionString" connectionString="server=testdb.us-west-2.rds.amazonaws.com;uid=root;pwd=password;database=testauthentication3;Max Pool Size=1000" providerName="MySql.Data.MySqlClient" />
+    <add name="sqlserver:FooBarEntitiesConnectionString" connectionString="Server=tcp:testdb.us-west-2.rds.amazonaws.com,1433;Database=testdb;User ID=sa;Password=password;" providerName="System.Data.SqlClient" />
+    <add name="mysql:AuthenticationConnectionString" connectionString="server=testdb.c6l1lzvjoqkm.us-west-2.rds.amazonaws.com;uid=root;pwd=mac8Co1i;database=testauthentication3;Max Pool Size=1000" providerName="MySql.Data.MySqlClient" />
+    <add name="mysql:AuthenticationConnectionString1" connectionString="server=testdb.c6l1lzvjoqkm.us-west-2.rds.amazonaws.com;uid=root;pwd=mac8Co1i;database=testauthentication3;Max Pool Size=1000" providerName="MySql.Data.MySqlClient" />
+    <add name="mysql:AuthenticationConnectionString2" connectionString="server=testdb.c6l1lzvjoqkm.us-west-2.rds.amazonaws.com;uid=root;pwd=mac8Co1i;database=testauthentication3;Max Pool Size=1000" providerName="MySql.Data.MySqlClient" />
+    <add name="sqlserver:SongsConnectionString" connectionString="Server=tcp:testdb.cutgeo9nzcvj.us-west-2.rds.amazonaws.com,1433;Database=testdb;User ID=sa;Password=ojjuhCvFaG$123;" providerName="System.Data.SqlClient" />
+    <add name="sqlserver:SongsConnectionString1" connectionString="Server=tcp:testdb.cutgeo9nzcvj.us-west-2.rds.amazonaws.com,1433;Database=testdb;User ID=sa;Password=ojjuhCvFaG$123;" providerName="System.Data.SqlClient" />
+    <add name="sqlserver:SongsConnectionString2" connectionString="Server=tcp:testdb.cutgeo9nzcvj.us-west-2.rds.amazonaws.com,1433;Database=testdb;User ID=sa;Password=ojjuhCvFaG$123;" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+</configuration>

@@ -12,14 +12,14 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-		Release Notes for Cache 
-		Initial Release -- 10-26-2014 06:37:46 PM
-	</releaseNotes>
+			Release Notes for Cache 
+			Initial Release -- 11-11-2014 02:26:02 AM
+		</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Test Framework Cache InProc</tags>
   </metadata>
   <files>
-	<file src="Content\*.*" target="Content" />
-	<file src="Content\App_Start\*.*" target="Content\App_Start" />
+		<file src="Content\*.*" target="Content" />
+		<file src="Content\App_Start\*.*" target="Content\App_Start" />
   </files>
 </package>

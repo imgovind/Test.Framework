@@ -18,16 +18,12 @@ namespace Test.Framework.Data
         public BaseRepository(string connectionName)
         {
             Ensure.Argument.IsNotEmpty(connectionName, "connectionName");
-
-            var dbConnection = Container.Resolve<IDbConnection>(connectionName);
-            var dataAccessConnection = Container.Resolve<IOrm>(connectionName);
-            this.Database = new Database(dbConnection, dataAccessConnection);
+            this.Database = Container.Resolve<IDatabase>(connectionName);
         }
 
         public BaseRepository(IDatabase Database)
         {
             Ensure.Argument.IsNotNull(Database, "database");
-
             this.Database = Database;
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Test.Framework.Data;
 
 namespace $rootnamespace$.Data
 {

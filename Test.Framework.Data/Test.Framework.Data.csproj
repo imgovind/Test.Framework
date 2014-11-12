@@ -61,10 +61,11 @@
     <Compile Include="Common\Connection.cs" />
     <Compile Include="Common\CustomMapper.cs" />
     <Compile Include="Common\DbTypes.cs" />
+    <Compile Include="Common\DQuery.cs" />
     <Compile Include="Common\DynamicQuery.cs" />
     <Compile Include="Common\Parameter.cs" />
     <Compile Include="Common\PropertyCache.cs" />
-    <Compile Include="Common\SqlCommand.cs" />
+    <Compile Include="Common\SqlDbCommand.cs" />
     <Compile Include="SqlDbConnectionRegister.cs" />
     <Compile Include="SqlDbRegister.cs" />
     <Compile Include="Common\SqlDbmsType.cs" />
