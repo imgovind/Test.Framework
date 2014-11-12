@@ -9,6 +9,9 @@ namespace Test.Framework.Data
     public enum OrmType
     {
         Custom = 1,
-        Dapper = 2
+        Dapper = 2,
+        PetaPoco = 3,
+        EntityFramework = 4,
+        SubSonic = 5
     }
 }

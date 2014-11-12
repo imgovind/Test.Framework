@@ -10,5 +10,7 @@ namespace $rootnamespace$.Data
     {
         ITestRepository TestRepository(int clusterId);
         ITestRepository TestRepository();
+		IUserRepository UserRepository(int clusterId);
+        IUserRepository UserRepository();
     }
 }

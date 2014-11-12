@@ -29,5 +29,26 @@ namespace $rootnamespace$.Data.EF
                 new object[] { }
                 ));
         }
+
+		
+        public IUserRepository UserRepository(int clusterId)
+        {
+            return Container.ResolveOrRegister<IUserRepository, UserRepository>(
+                ConnectionConstants.User + clusterId.ToString(),
+                RepositoryFactory.Instance.Get<IUserRepository, UserRepository, UserAuthContext>(
+                ConnectionConstants.User + clusterId.ToString(),
+                new object[] { ConnectionConstants.User + clusterId.ToString() }
+                ));
+        }
+
+        public IUserRepository UserRepository()
+        {
+            return Container.ResolveOrRegister<IUserRepository, UserRepository>(
+                ConnectionConstants.User,
+                RepositoryFactory.Instance.Get<IUserRepository, UserRepository, UserAuthContext>(
+                ConnectionConstants.User,
+                new object[] { ConnectionConstants.User }
+                ));
+        }
     }
 }

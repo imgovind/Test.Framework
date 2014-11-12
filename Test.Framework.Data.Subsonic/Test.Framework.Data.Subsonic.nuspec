@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Data.Subsonic</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Data.Subsonic/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Data.Subsonic/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Data.Subsonic/Test.Framework.Data.Subsonic.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+			Release Notes for Data 
+			Initial Release -- 11-11-2014 02:27:26 AM
+		</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Data Subsonic</tags>
+	  <frameworkAssemblies>
+			<frameworkAssembly assemblyName="System.Transactions" />
+	  </frameworkAssemblies>
+  </metadata>
+  <files>
+		<file src="Content\*.*" target="Content" />
+		<file src="Content\Models\*.*" target="Content\Models" />
+		<file src="Content\Data\*.*" target="Content\Data" />
+		<file src="Content\Data\SubSonic\*.*" target="Content\Data\SubSonic" />
+  </files>
+</package>

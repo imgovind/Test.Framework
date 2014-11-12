@@ -53,21 +53,24 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Test.Framework.Core">
-      <HintPath>..\packages\Test.Framework.Core.1.0.5418.40884\lib\net45\Test.Framework.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Test.Framework.Data, Version=1.0.5421.101, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Test.Framework.Core, Version=1.0.5428.41495, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Test.Framework.Data.1.0.5421.101\lib\net45\Test.Framework.Data.dll</HintPath>
+      <HintPath>..\packages\Test.Framework.Core.1.0.5428.41495\lib\net45\Test.Framework.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Test.Framework.Data, Version=1.0.5428.4524, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Test.Framework.Data.1.0.5428.4524\lib\net45\Test.Framework.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\Core.cs" />
+    <None Include="Content\App.config.transform" />
     <None Include="Content\Data\PetaPoco\PetaPocoDatabase.cs.pp" />
     <None Include="Content\Models\DataModelRegister.cs.pp" />
     <None Include="Content\Models\IDataModel.cs.pp" />
     <None Include="Content\Data\PetaPoco\IUserRepository.cs.pp" />
     <None Include="Content\Data\PetaPoco\PetaPocoRegister.cs.pp" />
+    <None Include="Content\TestPetaPoco.cs.pp" />
+    <Compile Include="App_Start\Core.cs" />
     <Compile Include="Models\PetaPoco.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Content\Models\Role.cs.pp" />

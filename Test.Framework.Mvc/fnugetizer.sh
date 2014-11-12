@@ -12,6 +12,7 @@ DATADIRECTORY="Content\\Data";
 COREDATADIRECTORY="Content\\Data\\Core"
 EFDATADIRECTORY="Content\\Data\\EF";
 PETAPOCODATADIRECTORY="Content\\Data\\PetaPoco";
+SUBSONICDATADIRECTORY="Content\\Data\\SubSonic";
 
 ARR=(${PROJECT//./ })
 COMPANY=${ARR[0]};
@@ -19,6 +20,12 @@ ASSEMBLY=${ARR[1]};
 PROJECTNAME=${ARR[2]};
 TECH=${ARR[3]};
 
+if [ -n $1 ] && [ $1 = "--overwrite" ]
+then
+	echo "";
+	echo "Overwriting nuspec";
+	rm *.nuspec;
+fi
 
 echo ""
 echo "----- Nuget Package Creation Process Started-----"
@@ -48,7 +55,7 @@ else
 	if [ -n "$PROJECTNAME" ]; 
 	then
 		sed -i "s|RdescriptionR|Nuget Package for $PROJECTNAME purposes|g" *.nuspec
-		sed -i "s|Summary of changes made in this release of the package.|\n\t\tRelease Notes for $PROJECTNAME \n\t\tInitial Release -- $NOW\n\t|g" *.nuspec
+		sed -i "s|Summary of changes made in this release of the package.|\n\t\t\tRelease Notes for $PROJECTNAME \n\t\t\tInitial Release -- $NOW\n\t\t|g" *.nuspec
 		if [ -n "$TECH" ]; 
 		then
 			sed -i "s|Tag1 Tag2|$COMPANY $ASSEMBLY $PROJECTNAME $TECH|g" *.nuspec
@@ -57,12 +64,22 @@ else
 		fi
 	else
 		sed -i "s|RdescriptionR|Nuget Package for $COMPANY purposes|g" *.nuspec
-		sed -i "s|Summary of changes made in this release of the package.|\n\t\tRelease Notes for $COMPANY\n\t\tInitial Release -- $NOW\n\t|g" *.nuspec
+		sed -i "s|Summary of changes made in this release of the package.|\n\t\t\tRelease Notes for $COMPANY\n\t\t\tInitial Release -- $NOW\n\t\t|g" *.nuspec
 		sed -i "s|Tag1 Tag2|$COMPANY|g" *.nuspec
 	fi	
 
 	echo ""
 	echo "Transformed '$NUSPEC' successfully"
+	
+	if [ -n "$TECH" ] && [ "$TECH" = "Subsonic" ]
+	then
+		sed -i '/<\/metadata>/i \\t  <frameworkAssemblies>' *.nuspec
+		sed -i '/<\/metadata>/i \\t\t\t<frameworkAssembly assemblyName=\"System.Transactions\" \/>' *.nuspec
+		sed -i '/<\/metadata>/i \\t  <\/frameworkAssemblies>' *.nuspec
+	
+		echo ""
+		echo "Added Framework GAC assemblies successfully"
+	fi
 
 	sed -i '/<\/package>/i \  <files>' *.nuspec
 	if [ -d "$CONTENTDIRECTORY" ]; 
@@ -97,6 +114,10 @@ else
 	then
 	sed -i '/<\/package>/i \\t<file src=\"Content\\Data\\PetaPoco\\*.*\" target=\"Content\\Data\\PetaPoco\" \/>' *.nuspec
 	fi
+	if [ -d "$SUBSONICDATADIRECTORY" ]; 
+	then
+	sed -i '/<\/package>/i \\t<file src=\"Content\\Data\\SubSonic\\*.*\" target=\"Content\\Data\\SubSonic\" \/>' *.nuspec
+	fi	
 	sed -i '/<\/package>/i \  <\/files>' *.nuspec
 
 	echo ""

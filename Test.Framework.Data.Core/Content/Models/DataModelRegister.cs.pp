@@ -20,7 +20,6 @@ namespace $rootnamespace$.Models
             Ensure.Argument.IsNotNull(type, "type");
 
             var currentAssemblyTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .ToList()
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p) && p.IsClass && !p.IsAbstract).ToList();
 

@@ -9,7 +9,10 @@ namespace Test.Framework.Data
             Statement = statement;
             Parameters = parameters;
             ErrorMessage = errorMessage;
-            Timeout = timeout;
+            if (timeout == 0)
+                Timeout = 15;
+            else
+                Timeout = timeout;
         }
 
         public string Statement { get; private set; }

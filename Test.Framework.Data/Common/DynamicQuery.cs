@@ -15,28 +15,40 @@ namespace Test.Framework.Data
 
         #region Insert Query
 
-        public static SqlDbCommand GetInsertQuery<T>(T item)
+        public static DQueryBase<T> Insert<T>(T item)
         {
-            return GetInsertQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, false, null, false);
+            return new DQueryInsert<T>(item);
         }
 
-        public static SqlDbCommand GetInsertQuery<T>(T item, bool IsQueryForPetaPoco)
+        public static SqlDbCommand GetInsertQuery<T>(T item, OrmType ormType = OrmType.Dapper)
         {
-            return GetInsertQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, false, null, IsQueryForPetaPoco);
+            return GetInsertQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, false, null, 15, ormType);
         }
 
-        public static SqlDbCommand GetInsertQuery<T>(T item, bool IsAutoIncrement = false, string primaryKeyColumn = "Id",  bool IsQueryForPetaPoco = false)
+        public static SqlDbCommand GetInsertQuery<T>(T item, int timeout, OrmType ormType = OrmType.Dapper)
         {
-            return GetInsertQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, false, primaryKeyColumn, IsQueryForPetaPoco);
+            return GetInsertQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, false, null, timeout, ormType);
         }
 
-        public static SqlDbCommand GetInsertQuery<T>(string tableName, T item, bool IsAutoIncrement = false, string primaryKeyColumn = "Id", bool IsQueryForPetaPoco = false)
+        public static SqlDbCommand GetInsertQuery<T>(T item, bool IsAutoIncrement, int timeout = 15, OrmType ormType = OrmType.Dapper)
+        {
+            return GetInsertQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, IsAutoIncrement, null, timeout, ormType);
+        }
+
+        public static SqlDbCommand GetInsertQuery<T>(T item, bool IsAutoIncrement, string primaryKeyColumn = "Id", int timeout = 15, OrmType ormType = OrmType.Dapper)
+        {
+            return GetInsertQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, IsAutoIncrement, primaryKeyColumn, timeout, ormType);
+        }
+
+        public static SqlDbCommand GetInsertQuery<T>(string tableName, T item, bool IsAutoIncrement = false, string primaryKeyColumn = "Id", int timeout = 15, OrmType ormType = OrmType.Dapper, string defaultPrimaryColumn = "Id")
         {
             List<string> builder = new List<string>();
             PropertyInfo[] props = PropertyCache.Resolve<T>();
 
-            if (primaryKeyColumn.IsNotNullOrEmpty() && IsAutoIncrement)
-                props = props.Where(x => !x.Name.Equals(primaryKeyColumn.ToLowerInvariant())).ToArray<PropertyInfo>();
+            if ((primaryKeyColumn.IsNotNullOrEmpty()) && IsAutoIncrement)
+                props = props.Where(x => !x.Name.Equals(primaryKeyColumn)).ToArray<PropertyInfo>();
+            else if(IsAutoIncrement)
+                props = props.Where(x => !x.Name.Equals(defaultPrimaryColumn)).ToArray<PropertyInfo>();
 
             string[] columns = props.Select(p => p.Name).ToArray();
 
@@ -48,17 +60,24 @@ namespace Test.Framework.Data
             builder.Add("(");
             builder.Add(string.Join(", ", columns));
             builder.Add(")");
-            builder.Add("VALUES (@");
-            if (!IsQueryForPetaPoco)
-                builder.Add(string.Join(", @", columns));
-            else
-                builder.Add(columns.ToPetaPocoValues());
+            builder.Add("VALUES (");
+            switch (ormType)
+            {
+                case OrmType.Custom:
+                case OrmType.Dapper:
+                    builder.Add("@"+string.Join(", @", columns));
+                    break;
+                case OrmType.PetaPoco:
+                    builder.Add(columns.ToPetaPocoValues());
+                    break;
+                case OrmType.SubSonic:
+                    builder.Add(columns.ToSubSonicValues());
+                    break;
+                case OrmType.EntityFramework:
+                default:
+                    return null;
+            }
             builder.Add(")");
-
-            //var statement = string.Format("INSERT INTO {0} ({1}) VALUES (@{2})",
-                                 //tableName,
-                                 //string.Join(", ", columns),
-                                 //string.Join(", @", columns));
 
             IList<Parameter> parameters = new List<Parameter>();
 
@@ -73,29 +92,127 @@ namespace Test.Framework.Data
                 });
             });
 
-            return new SqlDbCommand(string.Join(" ", builder), parameters);
+            return new SqlDbCommand(string.Join(" ", builder), parameters, timeout);
         }
         
         #endregion
 
+        #region Select Query
+
+        public static DQueryBase<T> Select<T>()
+        {
+            return new DQuerySelect<T>(default(T));
+        }
+
+        public static SqlDbCommand GetSelectQuery<T>(Expression<Func<T, bool>> expression = null, OrmType ormType = OrmType.Dapper)
+        {
+            return GetSelectQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), expression, 15, ormType);
+        }
+
+        public static SqlDbCommand GetSelectQuery<T>(int timeout, Expression<Func<T, bool>> expression = null, OrmType ormType = OrmType.Dapper)
+        {
+            return GetSelectQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), expression, timeout, ormType);
+        }
+        
+        public static SqlDbCommand GetSelectQuery<T>(string tableName, Expression<Func<T, bool>> expression = null, int timeout = 15, OrmType ormType = OrmType.Dapper)
+        {
+            var builder = new List<string>();
+            IList<Parameter> parameters = new List<Parameter>();
+
+            if (tableName.IsNullOrEmpty())
+                tableName = typeof(T).Name.ToLowerInvariant().Pluralize();
+
+            builder.Add("SELECT * FROM");
+            builder.Add(tableName);
+
+            if (expression == null)
+                return new SqlDbCommand(string.Join(" ", builder).TrimEnd(), parameters, timeout);
+
+            return ExpressionTreeWalker<T>(expression, builder, parameters, ormType, timeout);
+        }
+
+        public static SqlDbCommand GetPageQuery<T>(int take = 50, int skip = 0, int timeout = 15, OrmType ormType = OrmType.Dapper)
+        {
+            return GetPageQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), null, take, skip, timeout, ormType);
+        }
+
+        public static SqlDbCommand GetPageQuery<T>(Expression<Func<T, bool>> expression = null, int take = 50, int skip = 0, int timeout = 15, OrmType ormType = OrmType.Dapper)
+        {
+            return GetPageQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), expression, take, skip, timeout, ormType);
+        }
+
+        public static SqlDbCommand GetPageQuery<T>(string tableName, Expression<Func<T, bool>> expression = null, int take = 50, int skip = 0, int timeout = 15, OrmType ormType = OrmType.Dapper)
+        {
+            var builder = new List<string>();
+            IList<Parameter> parameters = new List<Parameter>();
+
+            if (tableName.IsNullOrEmpty())
+                tableName = typeof(T).Name.ToLowerInvariant().Pluralize();
+
+            builder.Add("SELECT * FROM");
+            builder.Add(tableName);
+
+            if (expression == null)
+            {
+                builder.Add("LIMIT " + take.ToString());
+                if (skip != 0)
+                    builder.Add("OFFSET " + skip.ToString());
+                return new SqlDbCommand(string.Join(" ", builder).TrimEnd(), parameters, timeout);
+            }
+
+            return ExpressionTreeWalker<T>(expression, builder, parameters, ormType, timeout, take, skip);
+        }
+
+        #endregion
+
         #region Update Query
 
-        public static SqlDbCommand GetUpdateQuery<T>(T item, bool IsQueryForPetaPoco = false)
+        public static DQueryBase<T> Update<T>(T item)
         {
-            return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, IsQueryForPetaPoco);
+            return new DQueryUpdate<T>(item);
         }
 
-        public static SqlDbCommand GetUpdateQuery<T>(T item, string primaryKeyColumn = null,  bool IsQueryForPetaPoco = false)
+        public static SqlDbCommand GetUpdateQuery<T>(T item, HashSet<string> excludedColumns = null, OrmType ormType = OrmType.Dapper)
         {
-            return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, IsQueryForPetaPoco, primaryKeyColumn);
+            return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, null, null, 15, excludedColumns);
         }
 
-        public static SqlDbCommand GetUpdateQuery<T>(T item, Expression<Func<T, bool>> expression, string primaryKeyColumn = null, bool IsQueryForPetaPoco = false)
+        public static SqlDbCommand GetUpdateQuery<T>(T item, int timeout, HashSet<string> excludedColumns = null, OrmType ormType = OrmType.Dapper)
         {
-            return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, IsQueryForPetaPoco, primaryKeyColumn, expression);
+            return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, null, null, timeout, excludedColumns);
         }
 
-        public static SqlDbCommand GetUpdateQuery<T>(string tableName, T item, bool IsQueryForPetaPoco = false, string primaryKeyColumn = "Id", Expression<Func<T, bool>> expression = null, string defaultPrimaryColumn = "Id")
+        public static SqlDbCommand GetUpdateQuery<T>(T item, string primaryKeyColumn, HashSet<string> excludedColumns = null, OrmType ormType = OrmType.Dapper)
+        {
+            return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, primaryKeyColumn, null, 15, excludedColumns);
+        }
+
+        public static SqlDbCommand GetUpdateQuery<T>(T item, string primaryKeyColumn, int timeout, HashSet<string> excludedColumns = null, OrmType ormType = OrmType.Dapper)
+        {
+            return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, primaryKeyColumn, null, timeout, excludedColumns);
+        }
+
+        public static SqlDbCommand GetUpdateQuery<T>(T item, Expression<Func<T, bool>> expression, HashSet<string> excludedColumns = null, OrmType ormType = OrmType.Dapper)
+        {
+            return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, null, expression, 15, excludedColumns);
+        }
+
+        public static SqlDbCommand GetUpdateQuery<T>(T item, Expression<Func<T, bool>> expression, int timeout, HashSet<string> excludedColumns = null, OrmType ormType = OrmType.Dapper)
+        {
+            return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, null, expression, timeout, excludedColumns);
+        }
+
+        public static SqlDbCommand GetUpdateQuery<T>(T item, Expression<Func<T, bool>> expression, string primaryKeyColumn, HashSet<string> excludedColumns = null, OrmType ormType = OrmType.Dapper)
+        {
+            return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, primaryKeyColumn, expression, 15, excludedColumns);
+        }
+
+        public static SqlDbCommand GetUpdateQuery<T>(T item, Expression<Func<T, bool>> expression, string primaryKeyColumn, int timeout, HashSet<string> excludedColumns = null, OrmType ormType = OrmType.Dapper)
+        {
+            return GetUpdateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, primaryKeyColumn, expression, timeout, excludedColumns);
+        }
+
+        public static SqlDbCommand GetUpdateQuery<T>(string tableName, T item, OrmType ormType = OrmType.Dapper, string primaryKeyColumn = "Id", Expression<Func<T, bool>> expression = null, int timeout = 15, HashSet<string> excludedColumns = null, string defaultPrimaryColumn = "Id")
         {
             List<string> builder = new List<string>();
             PropertyInfo[] props = PropertyCache.Resolve<T>();
@@ -103,12 +220,17 @@ namespace Test.Framework.Data
             PropertyInfo primaryProp = null;
 
             if (primaryKeyColumn.IsNotNullOrEmpty())
-                primaryProp = props.Where(x => x.Name.ToLowerInvariant().Equals(primaryKeyColumn.ToLowerInvariant())).FirstOrDefault();
+                primaryProp = props.Where(x => x.Name.Equals(primaryKeyColumn)).FirstOrDefault();
             else
-                primaryProp = props.Where(x => x.Name.ToLowerInvariant().Equals(defaultPrimaryColumn.ToLowerInvariant())).FirstOrDefault();
+                primaryProp = props.Where(x => x.Name.Equals(defaultPrimaryColumn)).FirstOrDefault();
 
-            string[] columns = props.Where(x => !x.Name.Equals(primaryProp.Name)).Select(p => p.Name).ToArray();
-            var parameterNames = columns.Select(name => name + "=@" + name.ToLower()).ToList();
+            props = props.Where(x => !x.Name.Equals(primaryProp.Name)).ToArray();
+
+            if (excludedColumns.IsNotNullOrEmpty())
+                props = props.Where(x => !excludedColumns.Contains(x.Name)).ToArray();
+
+            string[] columns = props.Select(p => p.Name).ToArray();
+            var parameterNames = columns.Select(name => name + "=@" + name.ToLowerInvariant()).ToList();
 
             if (tableName.IsNullOrEmpty())
                 tableName = typeof(T).Name.ToLowerInvariant().Pluralize();
@@ -116,10 +238,22 @@ namespace Test.Framework.Data
             builder.Add("UPDATE");
             builder.Add(tableName);
             builder.Add("SET");
-            if (IsQueryForPetaPoco)
-                builder.Add(columns.ToPetaPocoValues(true));
-            else
-                builder.Add(string.Join(", ",parameterNames));
+            switch (ormType)
+            {
+                case OrmType.Custom:
+                case OrmType.Dapper:
+                    builder.Add(string.Join(", ",parameterNames));
+                    break;
+                case OrmType.PetaPoco:
+                    builder.Add(columns.ToPetaPocoValues(true));
+                    break;
+                case OrmType.SubSonic:
+                    builder.Add(columns.ToSubSonicValues(true));
+                    break;
+                case OrmType.EntityFramework:
+                default:
+                    return null;
+            }
 
             IList<Parameter> parameters = new List<Parameter>();
             columns.ForEach(column =>
@@ -134,12 +268,27 @@ namespace Test.Framework.Data
             });
 
             if (expression != null)
-                return ExpressionTreeWalker<T>(expression, builder, parameters, IsQueryForPetaPoco);
+                return ExpressionTreeWalker<T>(expression, builder, parameters, ormType, timeout);
 
             builder.Add("WHERE");
-            builder.Add(new List<string> { primaryKeyColumn }.ToPetaPocoValues(true, parameters.Count));
-            parameters.Add(new Parameter { Name = primaryKeyColumn.ToLower(), Value = primaryProp.GetValue(item), Type = DbTypes.TypeMap[primaryProp.PropertyType]});
-            return new SqlDbCommand(string.Join(" ", builder), parameters);
+            switch (ormType)
+            {
+                case OrmType.Custom: 
+                case OrmType.Dapper:
+                    builder.Add(primaryProp.Name + "=@" + primaryProp.Name);
+                    break;
+                case OrmType.PetaPoco:
+                    builder.Add(new List<string> { primaryProp.Name }.ToPetaPocoValues(true, parameters.Count));
+                    break;
+                case OrmType.SubSonic:
+                    builder.Add(new List<string> { primaryProp.Name }.ToSubSonicValues(true, parameters.Count));
+                    break;
+                case OrmType.EntityFramework:
+                default:
+                    return null;
+            }
+            parameters.Add(new Parameter { Name = primaryProp.Name, Value = primaryProp.GetValue(item), Type = DbTypes.TypeMap[primaryProp.PropertyType]});
+            return new SqlDbCommand(string.Join(" ", builder), parameters, timeout);
         }
 
         //public static SqlDbCommand GetUpdateQuery<T>(string tableName, T item, int a, string primaryKeyColumn = null)
@@ -172,71 +321,178 @@ namespace Test.Framework.Data
 
         #region Delete Query
 
-        public static SqlDbCommand GetDeleteQuery<T>(T item)
+        public static DQueryBase<T> Delete<T>()
         {
-            return GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item);
+            return new DQueryDelete<T>(default(T));
         }
 
-        public static SqlDbCommand GetDeleteQuery<T>(string tableName, T item)
+        public static SqlDbCommand GetDeleteQuery<T>(T item, OrmType ormType = OrmType.Dapper)
         {
+            return GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType);
+        }
+
+        public static SqlDbCommand GetDeleteQuery<T>(T item, int timeout, OrmType ormType = OrmType.Dapper)
+        {
+            return GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, null, null, timeout);
+        }
+
+        public static SqlDbCommand GetDeleteQuery<T>(T item, string primaryKeyColumn, OrmType ormType = OrmType.Dapper)
+        {
+            return GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, primaryKeyColumn);
+        }
+
+        public static SqlDbCommand GetDeleteQuery<T>(T item, string primaryKeyColumn, int timeout, OrmType ormType = OrmType.Dapper)
+        {
+            return GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, primaryKeyColumn, null, timeout);
+        }
+
+        public static SqlDbCommand GetDeleteQuery<T>(Expression<Func<T, bool>> expression, OrmType ormType = OrmType.Dapper)
+        {
+            return GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), default(T), ormType, null, expression);
+        }
+
+        public static SqlDbCommand GetDeleteQuery<T>(Expression<Func<T, bool>> expression, int timeout, OrmType ormType = OrmType.Dapper)
+        {
+            return GetDeleteQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), default(T), ormType, null, expression, timeout);
+        }
+
+        public static SqlDbCommand GetDeleteQuery<T>(string tableName, T item, OrmType ormType = OrmType.Dapper, string primaryKeyColumn = "Id", Expression<Func<T, bool>> expression = null, int timeout = 15, string defaultPrimaryColumn = "Id")
+        {
+            List<string> builder = new List<string>();
             PropertyInfo[] props = PropertyCache.Resolve<T>();
 
-            if (props == null)
-                PropertyCache.Register<T>();
+            PropertyInfo primaryProp = null;
 
-            props = PropertyCache.Resolve<T>();
+            if (primaryKeyColumn.IsNotNullOrEmpty())
+                primaryProp = props.Where(x => x.Name.Equals(primaryKeyColumn)).FirstOrDefault();
+            else
+                primaryProp = props.Where(x => x.Name.Equals(defaultPrimaryColumn)).FirstOrDefault();
 
-            string[] columns = props.Select(p => p.Name).ToArray();
-
-            if (tableName.IsNullOrEmpty())
-                tableName = typeof(T).Name.ToLowerInvariant().Pluralize();
-
-            var parameterNames = columns.Select(name => name + "=@" + name.ToLower()).ToList();
-            var statement = string.Format("DELETE FROM {0} WHERE {1}", tableName, string.Join(" AND ", parameterNames));
-
-            IList<Parameter> parameters = new List<Parameter>();
-            columns.ForEach(column =>
-            {
-                var prop = props.FirstOrDefault(p => p.Name.IsEqual(column));
-                parameters.Add(new Parameter
-                {
-                    Name = column.ToLower(),
-                    Value = prop.GetValue(item),
-                    Type = DbTypes.TypeMap[prop.PropertyType]
-                });
-            });
-
-            return new SqlDbCommand(statement, parameters);
-        }
-        
-        #endregion
-
-        #region Select Query
-
-        public static SqlDbCommand GetDynamicQuery<T>(Expression<Func<T, bool>> expression = null, bool IsQueryForPetaPoco = false)
-        {
-            var tableName = typeof(T).Name.ToLowerInvariant().Pluralize();
-            return GetDynamicQuery<T>(tableName, expression, IsQueryForPetaPoco);
-        }
-
-        public static SqlDbCommand GetDynamicQuery<T>(string tableName, Expression<Func<T, bool>> expression = null, bool IsQueryForPetaPoco = false)
-        {
-            var builder = new List<string>();
-            IList<Parameter> parameters = new List<Parameter>();
 
             if (tableName.IsNullOrEmpty())
                 tableName = typeof(T).Name.ToLowerInvariant().Pluralize();
 
-            builder.Add("SELECT * FROM");
+            builder.Add("DELETE FROM");
             builder.Add(tableName);
 
-            if (expression == null)
-                return new SqlDbCommand(string.Join(" ", builder).TrimEnd(), parameters);
+            IList<Parameter> parameters = new List<Parameter>();
 
-            return ExpressionTreeWalker<T>(expression, builder, parameters, IsQueryForPetaPoco);
+            if (expression != null)
+                return ExpressionTreeWalker<T>(expression, builder, parameters, ormType, timeout);
+
+            builder.Add("WHERE");
+            switch (ormType)
+            {
+                case OrmType.Custom:
+                case OrmType.Dapper:
+                    builder.Add(primaryProp.Name + "=@" + primaryProp.Name);
+                    break;
+                case OrmType.PetaPoco:
+                    builder.Add(new List<string> { primaryProp.Name }.ToPetaPocoValues(true, parameters.Count));
+                    break;
+                case OrmType.SubSonic:
+                    builder.Add(new List<string> { primaryProp.Name }.ToPetaPocoValues(true, parameters.Count));
+                    break;
+                case OrmType.EntityFramework:
+                default:
+                    return null;
+            }
+            parameters.Add(new Parameter { Name = primaryProp.Name, Value = primaryProp.GetValue(item), Type = DbTypes.TypeMap[primaryProp.PropertyType] });
+            return new SqlDbCommand(string.Join(" ", builder), parameters, timeout);
         }
 
-        private static SqlDbCommand ExpressionTreeWalker<T>(Expression<Func<T, bool>> expression, List<string> builder, IList<Parameter> parameters, bool IsQueryForPetaPoco = false)
+        #endregion
+
+        #region Deprecate Query
+
+        public static DQueryBase<T> Deprecate<T>()
+        {
+            return new DQueryDeprecate<T>(default(T));
+        }
+
+        public static SqlDbCommand GetDeprecateQuery<T>(T item, OrmType ormType = OrmType.Dapper)
+        {
+            return GetDeprecateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType);
+        }
+
+        public static SqlDbCommand GetDeprecateQuery<T>(T item, int timeout, OrmType ormType = OrmType.Dapper)
+        {
+            return GetDeprecateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, null, null, timeout);
+        }
+
+        public static SqlDbCommand GetDeprecateQuery<T>(T item, string primaryKeyColumn, OrmType ormType = OrmType.Dapper)
+        {
+            return GetDeprecateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, primaryKeyColumn);
+        }
+
+        public static SqlDbCommand GetDeprecateQuery<T>(T item, string primaryKeyColumn, int timeout, OrmType ormType = OrmType.Dapper)
+        {
+            return GetDeprecateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), item, ormType, primaryKeyColumn, null, timeout);
+        }
+
+        public static SqlDbCommand GetDeprecateQuery<T>(Expression<Func<T, bool>> expression, OrmType ormType = OrmType.Dapper)
+        {
+            return GetDeprecateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), default(T), ormType, null, expression);
+        }
+
+        public static SqlDbCommand GetDeprecateQuery<T>(Expression<Func<T, bool>> expression, int timeout, OrmType ormType = OrmType.Dapper)
+        {
+            return GetDeprecateQuery<T>(typeof(T).Name.ToLowerInvariant().Pluralize(), default(T), ormType, null, expression, timeout);
+        }
+
+        public static SqlDbCommand GetDeprecateQuery<T>(string tableName, T item, OrmType ormType = OrmType.Dapper, string primaryKeyColumn = "Id", Expression<Func<T, bool>> expression = null, int timeout = 15, string defaultPrimaryColumn = "Id")
+        {
+            List<string> builder = new List<string>();
+            PropertyInfo[] props = PropertyCache.Resolve<T>();
+
+            PropertyInfo primaryProp = null;
+
+            if (primaryKeyColumn.IsNotNullOrEmpty())
+                primaryProp = props.Where(x => x.Name.Equals(primaryKeyColumn)).FirstOrDefault();
+            else
+                primaryProp = props.Where(x => x.Name.Equals(defaultPrimaryColumn)).FirstOrDefault();
+
+
+            if (tableName.IsNullOrEmpty())
+                tableName = typeof(T).Name.ToLowerInvariant().Pluralize();
+
+            builder.Add("UPDATE");
+            builder.Add(tableName);
+            builder.Add("SET IsDeprecated=1");
+
+            IList<Parameter> parameters = new List<Parameter>();
+
+            if (expression != null)
+                return ExpressionTreeWalker<T>(expression, builder, parameters, ormType, timeout);
+
+            builder.Add("WHERE");
+            switch (ormType)
+            {
+                case OrmType.Custom:
+                case OrmType.Dapper:
+                    builder.Add(primaryProp.Name + "=@" + primaryProp.Name);
+                    break;
+                case OrmType.PetaPoco:
+                    builder.Add(new List<string> { primaryProp.Name }.ToPetaPocoValues(true, parameters.Count));
+                    break;
+                case OrmType.SubSonic:
+                    builder.Add(new List<string> { primaryProp.Name }.ToSubSonicValues(true, parameters.Count));
+                    break;
+                case OrmType.EntityFramework:
+                default:
+                    return null;
+            }
+            parameters.Add(new Parameter { Name = primaryProp.Name, Value = primaryProp.GetValue(item), Type = DbTypes.TypeMap[primaryProp.PropertyType] });
+            return new SqlDbCommand(string.Join(" ", builder), parameters, timeout);
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Private Methods
+
+        private static SqlDbCommand ExpressionTreeWalker<T>(Expression<Func<T, bool>> expression, List<string> builder, IList<Parameter> parameters, OrmType ormType = OrmType.Dapper, int timeout = 15, int take = 0, int skip = 0)
         {
             builder.Add("WHERE");
 
@@ -252,34 +508,53 @@ namespace Test.Framework.Data
 
                 if (item.LinkingOperator.IsNotNullOrEmpty() && i > 0)
                 {
-                    if (!IsQueryForPetaPoco)
-                        builder.Add(item.LinkingOperator + " " + item.PropertyName + " " + item.QueryOperator + " @" + item.PropertyName);
-                        //builder.Add(string.Format("{0} {1} {2} @{1}", item.LinkingOperator, item.PropertyName, item.QueryOperator, item.PropertyValue));
-                    else
-                        builder.Add(item.LinkingOperator + " " + item.PropertyName + " " + item.QueryOperator + " @" + parameterOffset.ToString());
-                        //builder.Add(string.Format("{0} {1} {2} @{4}", item.LinkingOperator, item.PropertyName, item.QueryOperator, item.PropertyValue, i));
+                    switch (ormType)
+                    {
+                        case OrmType.Custom:
+                        case OrmType.Dapper:
+                            builder.Add(item.LinkingOperator + " " + item.PropertyName + " " + item.QueryOperator + " @" + item.PropertyName);
+                            break;
+                        case OrmType.SubSonic:
+                        case OrmType.PetaPoco:
+                            builder.Add(item.LinkingOperator + " " + item.PropertyName + " " + item.QueryOperator + " @" + parameterOffset.ToString());
+                            break;
+                        case OrmType.EntityFramework:
+                        default:
+                            break;
+                    }
                 }
                 else
                 {
-                    if (!IsQueryForPetaPoco)
-                        builder.Add(item.PropertyName + " " + item.QueryOperator + " @" + item.PropertyName);
-                        //builder.Add(string.Format("{0} {1} @{0}", item.PropertyName, item.QueryOperator));
-                    else
-                        builder.Add(item.PropertyName + " " + item.QueryOperator + " @" + parameterOffset.ToString());
-                        //builder.Add(string.Format("{0} {1} @{2}", item.PropertyName, item.QueryOperator, i));
+                    switch (ormType)
+                    {
+                        case OrmType.Custom:
+                        case OrmType.Dapper:
+                            builder.Add(item.PropertyName + " " + item.QueryOperator + " @" + item.PropertyName);
+                            break;
+                        case OrmType.SubSonic:
+                        case OrmType.PetaPoco:
+                            builder.Add(item.PropertyName + " " + item.QueryOperator + " @" + parameterOffset.ToString());
+                            break;
+                        case OrmType.EntityFramework:
+                        default:
+                            break;
+                    }
                 }
 
                 parameters.Add(new Parameter { Name = item.PropertyName, Value = item.PropertyValue, Type = item.DatabaseType });
             }
 
-            return new SqlDbCommand(string.Join(" ", builder).TrimEnd(), parameters);
+            if (take != 0)
+            {
+                builder.Add("LIMIT " + take.ToString());
+                if(skip != 0)
+                {
+                    builder.Add("OFFSET " + skip.ToString());
+                }
+            }
+
+            return new SqlDbCommand(string.Join(" ", builder).TrimEnd(), parameters, timeout);
         }
-
-        #endregion
-
-        #endregion
-
-        #region Private Methods
 
         private static void WalkTree(BinaryExpression body, ExpressionType linkingType, ref List<QueryParameter> queryProperties)
         {

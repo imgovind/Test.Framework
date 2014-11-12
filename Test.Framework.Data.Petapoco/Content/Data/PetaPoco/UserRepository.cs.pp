@@ -22,13 +22,13 @@ namespace $rootnamespace$.Data.Petapoco
 
         public IEnumerable<User> GetAllUsers()
         {
-            var query = DynamicQuery.GetDynamicQuery<User>();
-            return database.Query<User>(query.Statement, query.Parameters.ToObjectArray());
+            var command = DQuery<User>.Select().ToCommand();
+            return database.Query<User>(command.Statement, command.Parameters.ToObjectArray());
         }
 
         public User GetUser(string emailAddress)
         {
-            throw new NotImplementedException();
+			return database.Select<User>(x => x.Email == emailAddress).FirstOrDefault();
         }
     }
 }

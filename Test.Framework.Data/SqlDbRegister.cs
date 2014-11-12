@@ -10,9 +10,9 @@ namespace Test.Framework.Data
 {
     public static class SqlDbRegister
     {
-        public static void Register(IEnumerable<string> connectionNames, SqlDbmsType dbmsType)
+        public static void Register(IEnumerable<string> connectionNames, SqlDbmsType sqlDbmsType = SqlDbmsType.MySql)
         {
-            switch (dbmsType)
+            switch (sqlDbmsType)
             {
                 case SqlDbmsType.SqlServer:
                 case SqlDbmsType.MySql:
@@ -31,9 +31,7 @@ namespace Test.Framework.Data
             {
                 Container.RegisterInstance<IDatabase, Database>(
                     connectionName,
-                    new Database(
-                        Container.Resolve<IDbConnection>(connectionName), 
-                        Container.Resolve<IOrm>(connectionName)),
+                    new Database(Container.Resolve<IOrm>(connectionName)),
                     ObjectLifeSpans.Singleton);
             });
         }
@@ -44,9 +42,7 @@ namespace Test.Framework.Data
             {
                 var container = (ServiceContainer)Container.IocContainer.GetUnderlyingContainer();
                 container.Register<IDatabase>(factory => 
-                    new Database(
-                        Container.Resolve<IDbConnection>(connectionName), 
-                        Container.Resolve<IOrm>(connectionName)), 
+                    new Database(Container.Resolve<IOrm>(connectionName)), 
                     connectionName, 
                     new PerContainerLifetime());
             });
