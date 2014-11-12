@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Session.Redis</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Session.Redis/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Session.Redis/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Session.Redis/Test.Framework.Session.Redis.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+			Release Notes for Session 
+			Initial Release -- 11-12-2014 12:52:56 AM
+		</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Session Redis</tags>
+  </metadata>
+  <files>
+		<file src="Content\*.*" target="Content" />
+		<file src="Content\App_Start\*.*" target="Content\App_Start" />
+  </files>
+</package>
