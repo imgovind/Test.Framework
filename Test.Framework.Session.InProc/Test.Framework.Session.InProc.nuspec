@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Session.InProc</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Session.InProc/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Session.InProc/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Session.InProc/Test.Framework.Session.InProc.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+			Release Notes for Session 
+			Initial Release -- 11-12-2014 12:48:37 AM
+		</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Session InProc</tags>
+  </metadata>
+  <files>
+  </files>
+</package>
