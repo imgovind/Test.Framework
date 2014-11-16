@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Test.Framework;
 
-namespace Test.Framework.Data.EF
+namespace Test.Framework.Log.NLog
 {
     public partial class AppInitalizer
     {

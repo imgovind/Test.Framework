@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Test.Framework;
 
-namespace Test.Framework.Data.Subsonic
+namespace Test.Framework.Log.Elmah
 {
     public partial class AppInitalizer
     {

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!--internalLogToConsole="true" internalLogLevel="Debug" throwExceptions="true">-->
+  <extensions>
+    <add assembly="NLog.MongoDB"/>
+  </extensions>
+  <targets>
+    <target name="Mongo"
+            type="MongoDB"
+            database="NLog"
+            host="ec2-54-148-74-148.us-west-2.compute.amazonaws.com"
+            port="27017"
+            />
+    <target type="Database"
+            name="MySql"
+            keepConnection="true"
+            useTransactions="false"
+            dbProvider="MySql.Data.MySqlClient"
+            connectionString="Server=ec2-54-148-74-148.us-west-2.compute.amazonaws.com;Database=NLog;User ID=admin;Password=TiPikun22a;Connect Timeout=5;">
+      <commandText>
+        INSERT INTO ErrorsLog(LogDate, Application, Level, Logger, Message, MachineName, UserName, CallSite, Thread, Exception, Stacktrace) VALUES (@logdate, @application, @level, @logger, @message,@machinename, @user_name, @call_site, @threadid, @log_exception, @stacktrace);
+      </commandText>
+      <parameter name="@logdate" layout="${longdate}"/>
+      <parameter name="@application" layout="ConsoleApp"/>
+      <parameter name="@level" layout="${level}"/>
+      <parameter name="@logger" layout="${logger}"/>
+      <parameter name="@message" layout="${message}"/>
+      <parameter name="@machinename" layout="${machinename}"/>
+      <parameter name="@user_name" layout="${windows-identity:domain=true}"/>
+      <parameter name="@call_site" layout="${callsite:filename=true}"/>
+      <parameter name="@threadid" layout="${threadid}"/>
+      <parameter name="@log_exception" layout="${exception}"/>
+      <parameter name="@stacktrace" layout="${stacktrace}"/>
+    </target>
+    <target name="Console"
+            xsi:type="Console"
+            layout="${longdate}|${level}|${message}" />
+  </targets>
+
+  <rules>
+    <logger name="*" minLevel="Trace" writeTo="Mongo,Console"/>
+    <logger name="*" minLevel="Error" writeTo="MySql"/>
+  </rules>
+</nlog>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Log.Elmah</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Log.Elmah/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Log.Elmah/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Log.Elmah/Test.Framework.Log.Elmah.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+			Release Notes for Log 
+			Initial Release -- 11-15-2014 11:25:12 PM
+		</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Log Elmah</tags>
+  </metadata>
+  <files>
+		<file src="Content\*.*" target="Content" />
+		<file src="Content\App_Readme\*.*" target="Content\App_Readme" />
+  </files>
+</package>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Log.NLog</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Log.NLog/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Log.NLog/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Log.NLog/Test.Framework.Log.NLog.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+			Release Notes for Log 
+			Initial Release -- 11-13-2014 01:47:13 PM
+		</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Log NLog</tags>
+  </metadata>
+  <files>
+		<file src="Content\*.*" target="Content" />
+  </files>
+</package>
