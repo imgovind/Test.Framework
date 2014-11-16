@@ -40,10 +40,6 @@
     <Reference Include="MongoDB.Driver">
       <HintPath>..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
-    <Reference Include="Munq.IocContainer, Version=3.0.4501.20364, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Munq.IocContainer.3.1.6\Lib\Munq.IocContainer.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.9.5\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
@@ -65,9 +61,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Test.Framework.Core, Version=1.0.5430.24086, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Test.Framework.Core, Version=1.0.5432.42967, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Test.Framework.Core.1.0.5430.24086\lib\net45\Test.Framework.Core.dll</HintPath>
+      <HintPath>..\packages\Test.Framework.Core.1.0.5432.42967\lib\net45\Test.Framework.Core.dll</HintPath>
     </Reference>
     <Reference Include="Test.Framework.Log.Core, Version=1.0.5430.24863, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

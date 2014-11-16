@@ -48,9 +48,6 @@
     <Reference Include="MongoDB.Driver">
       <HintPath>..\packages\mongocsharpdriver.1.7\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
-    <Reference Include="Munq.IocContainer">
-      <HintPath>..\packages\Munq.IocContainer.3.1.6\Lib\Munq.IocContainer.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -71,8 +68,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Test.Framework.Core">
-      <HintPath>..\packages\Test.Framework.Core.1.0.5430.24086\lib\net45\Test.Framework.Core.dll</HintPath>
+    <Reference Include="Test.Framework.Core, Version=1.0.5432.42967, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Test.Framework.Core.1.0.5432.42967\lib\net45\Test.Framework.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Data.Subsoni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Log.Elmah", "Test.Framework.Log.Elmah\Test.Framework.Log.Elmah.csproj", "{1DA1280D-FEB7-4F84-BD1A-5CC34B36FE10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Core.Munq", "Test.Framework.Core.Munq\Test.Framework.Core.Munq.csproj", "{0BC0A2B9-9311-4EC1-9D1C-1381BBE38068}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{1DA1280D-FEB7-4F84-BD1A-5CC34B36FE10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DA1280D-FEB7-4F84-BD1A-5CC34B36FE10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DA1280D-FEB7-4F84-BD1A-5CC34B36FE10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BC0A2B9-9311-4EC1-9D1C-1381BBE38068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC0A2B9-9311-4EC1-9D1C-1381BBE38068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC0A2B9-9311-4EC1-9D1C-1381BBE38068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC0A2B9-9311-4EC1-9D1C-1381BBE38068}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
