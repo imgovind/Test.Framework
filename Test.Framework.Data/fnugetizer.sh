@@ -13,6 +13,7 @@ COREDATADIRECTORY="Content\\Data\\Core"
 EFDATADIRECTORY="Content\\Data\\EF";
 PETAPOCODATADIRECTORY="Content\\Data\\PetaPoco";
 SUBSONICDATADIRECTORY="Content\\Data\\SubSonic";
+APPREADMEDIRECTORY="Content\\App_Readme";
 
 ARR=(${PROJECT//./ })
 COMPANY=${ARR[0]};
@@ -117,7 +118,11 @@ else
 	if [ -d "$SUBSONICDATADIRECTORY" ]; 
 	then
 	sed -i '/<\/package>/i \\t<file src=\"Content\\Data\\SubSonic\\*.*\" target=\"Content\\Data\\SubSonic\" \/>' *.nuspec
-	fi	
+	fi
+	if [ -d "$APPREADMEDIRECTORY" ]; 
+	then
+	sed -i '/<\/package>/i \\t\t<file src=\"Content\\App_Readme\\*.*\" target=\"Content\\App_Readme\" \/>' *.nuspec
+	fi
 	sed -i '/<\/package>/i \  <\/files>' *.nuspec
 
 	echo ""

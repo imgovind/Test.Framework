@@ -1,6 +1,7 @@
 ﻿using NLog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,24 @@ namespace Test.Framework.Log.NLog
         public NLogLogger()
         {
             logger = LogManager.GetCurrentClassLogger();
+        }
+
+        public NLogLogger(bool typeNameGiven, string memberName = "")
+        {
+            if (memberName.IsNullOrEmpty())
+            {
+                StackFrame frame = new StackFrame(1);
+                if (frame != null)
+                {
+                    var method = frame.GetMethod();
+                    if (method != null)
+                    {
+                        var type = method.DeclaringType;
+                        memberName = type.FullName;
+                    }
+                }
+            }
+            logger = LogManager.GetLogger(memberName);
         }
 
         //public NLogLogger(Type loggerType)

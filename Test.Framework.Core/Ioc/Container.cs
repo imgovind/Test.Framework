@@ -192,6 +192,7 @@ namespace Test.Framework
                     instance = Activator.CreateInstance(typeof(T)) as T;
 
                 RegisterInstance<I, T>(
+                    name,
                     instance,
                     ObjectLifeSpans.Singleton);
 
@@ -224,6 +225,7 @@ namespace Test.Framework
                 }
 
                 RegisterInstance<I, T>(
+                    name,
                     instance,
                     ObjectLifeSpans.Singleton);
 

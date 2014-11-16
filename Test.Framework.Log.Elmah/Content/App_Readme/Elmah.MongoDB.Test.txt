@@ -1,0 +1,2 @@
+1) Testing Connection String for Elmah
+    <add name="elmah-mongodb" connectionString="mongodb://ec2-54-148-74-148.us-west-2.compute.amazonaws.com:27017/Elmah" />
