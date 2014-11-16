@@ -33,9 +33,6 @@
     <Reference Include="LightInject">
       <HintPath>..\packages\LightInject.3.0.2.0\lib\net45\LightInject.dll</HintPath>
     </Reference>
-    <Reference Include="Munq.IocContainer">
-      <HintPath>..\packages\Munq.IocContainer.3.1.6\Lib\Munq.IocContainer.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -90,7 +87,6 @@
     <Compile Include="Ioc\LightInject\Lifetime\PerSessionLifetime.cs" />
     <Compile Include="Ioc\LightInject\Lifetime\PerThreadLifetime.cs" />
     <Compile Include="Ioc\LightInject\LightInjectTypeResolver.cs" />
-    <Compile Include="Ioc\Munq\MunqTypeResolver.cs" />
     <Compile Include="Ioc\ObjectLifeSpans.cs" />
     <Compile Include="Configuration\Redis\RedisConfigSection.cs" />
     <Compile Include="Serializer\JSerializer.cs" />

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Core.Munq</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Core.Munq/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Core.Munq/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Core.Munq/Test.Framework.Core.Munq.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+			Release Notes for Core 
+			Initial Release -- 11-16-2014 12:09:40 AM
+		</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Core Munq</tags>
+  </metadata>
+  <files>
+		<file src="Content\*.*" target="Content" />
+		<file src="Content\App_Start\*.*" target="Content\App_Start" />
+  </files>
+</package>
