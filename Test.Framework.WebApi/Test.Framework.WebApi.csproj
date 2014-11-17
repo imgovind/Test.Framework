@@ -30,12 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Elmah">
-      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
-    </Reference>
-    <Reference Include="LightInject, Version=3.0.1.7, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\LightInject.3.0.1.7\lib\net45\LightInject.dll</HintPath>
+    <Reference Include="LightInject">
+      <HintPath>..\packages\LightInject.3.0.2.0\lib\net45\LightInject.dll</HintPath>
     </Reference>
     <Reference Include="LightInject.WebApi">
       <HintPath>..\packages\LightInject.WebApi.1.0.0.3\lib\net45\LightInject.WebApi.dll</HintPath>
@@ -57,13 +53,13 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="StackExchange.Redis">
-      <HintPath>..\packages\StackExchange.Redis.1.0.333\lib\net45\StackExchange.Redis.dll</HintPath>
+      <HintPath>..\packages\StackExchange.Redis.1.0.371\lib\net45\StackExchange.Redis.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -93,9 +89,16 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Test.Framework.Core, Version=1.0.5433.2571, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Test.Framework.Core.1.0.5433.2571\lib\net45\Test.Framework.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Content\App_Start\AppInitializer.cs" />
+    <None Include="Content\App_Start\WebApi.cs.pp" />
+    <None Include="Content\WebApiConstants.cs.pp" />
+    <Compile Include="App_Start\Core.cs" />
+    <None Include="Content\App_Start\WebApiRouteConfig.cs.pp" />
     <Compile Include="Extensibility\CustomHttpControllerSelector.cs" />
     <Compile Include="Handler\Caching\Common\CacheKey.cs" />
     <Compile Include="Handler\Caching\Common\Helpers\BasicExtensions.cs" />
@@ -159,26 +162,18 @@
     <Compile Include="Handler\Resource\ObjectContentResponseEnricher.cs" />
     <Compile Include="Handler\Resource\Resource.cs" />
     <Compile Include="Handler\Resource\ResponseEnricherExtensions.cs" />
-    <Compile Include="Content\Startup.cs" />
-    <Compile Include="Content\App_Start\WebApiConfig.cs" />
+    <None Include="Content\Startup.cs.pp" />
+    <None Include="Content\App_Start\WebApiConfig.cs.pp" />
     <Compile Include="CustomDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Content\Web.config.transform" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Readme\Elmah.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Handler\Caching\Common\Internal\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Test.Framework.Core\Test.Framework.Core.csproj">
-      <Project>{79372128-4c5d-41f8-bb08-1feb564e21ed}</Project>
-      <Name>Test.Framework.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

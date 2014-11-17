@@ -7,7 +7,7 @@ using Test.Framework;
 
 namespace Test.Framework.Cache.InProc
 {
-    public partial class AppInitalizer
+    public partial class AppInitializer
     {
         public partial class Core
         {

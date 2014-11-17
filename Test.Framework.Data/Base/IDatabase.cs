@@ -12,8 +12,8 @@ namespace Test.Framework.Data
         IDbConnection Connection { get; }
         OrmType DbOrmType { get; }
 
-        bool Execute<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new();
-        Task<bool> ExecuteAsync<T>(string sql, IList<Parameter> parameters = null, int timeout = 15) where T : class, new();
+        bool Execute(string sql, IList<Parameter> parameters = null, int timeout = 15);
+        Task<bool> ExecuteAsync(string sql, IList<Parameter> parameters = null, int timeout = 15);
         bool Execute(IList<SqlDbCommand> unitOfWorks);
         Task<bool> ExecuteAsync(IList<SqlDbCommand> unitOfWorks);
 

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{39EE2869-4FE7-4A22-8860-FF4C2258C964}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test.Framework.Identity</RootNamespace>
+    <AssemblyName>Test.Framework.Identity</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.38\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="LightInject">
+      <HintPath>..\packages\LightInject.3.0.2.0\lib\net45\LightInject.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.9.5\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Test.Framework.Core">
+      <HintPath>..\packages\Test.Framework.Core.1.0.5433.2571\lib\net45\Test.Framework.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Test.Framework.Data">
+      <HintPath>..\packages\Test.Framework.Data.1.0.5433.25741\lib\net45\Test.Framework.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Test.Framework.Identity.Data">
+      <HintPath>..\packages\Test.Framework.Identity.Data.1.0.5434.3244\lib\net451\Test.Framework.Identity.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Test.Framework.Identity.Entity">
+      <HintPath>..\packages\Test.Framework.Identity.Entity.1.0.5433.25645\lib\net451\Test.Framework.Identity.Entity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\Core.cs" />
+    <Compile Include="App_Start\IdentityData.cs" />
+    <Compile Include="Base\IdentityConstants.cs" />
+    <Compile Include="Base\IdentityServiceRegister.cs" />
+    <Compile Include="Data\EntityMapperRegister.cs" />
+    <Compile Include="Data\IdentityConnectionConstants.cs" />
+    <Compile Include="Data\IdentityDataProvider.cs" />
+    <Compile Include="Data\IIdentityDataProvider.cs" />
+    <Compile Include="Data\TestModel.cs" />
+    <Compile Include="Data\TestModelMapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Implementation\RoleService.cs" />
+    <Compile Include="Services\Implementation\UserClaimsService.cs" />
+    <Compile Include="Services\Implementation\UserLoginsService.cs" />
+    <Compile Include="Services\Implementation\UserRolesService.cs" />
+    <Compile Include="Services\Implementation\UserService.cs" />
+    <Compile Include="Services\Interface\IRoleService.cs" />
+    <Compile Include="Services\Interface\IUserClaimsService.cs" />
+    <Compile Include="Services\Interface\IUserLoginsService.cs" />
+    <Compile Include="Services\Interface\IUserRolesService.cs" />
+    <Compile Include="Services\Interface\IUserService.cs" />
+    <Compile Include="Stores\UserStore.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Configuration\LoginShard.config" />
+    <None Include="Configuration\LoginShard.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

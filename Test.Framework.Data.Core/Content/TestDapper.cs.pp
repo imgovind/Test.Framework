@@ -14,10 +14,10 @@ namespace $rootnamespace$
     {
         public static void Start()
         {
-            AppInitalizer.Core.Initialize();
+            AppInitializer.Core.Initialize();
             var config = Container.Resolve<IWebConfiguration>();
             var mysql = config.GetConnectionStringNames("mysql");
-            CustomMapperRegister.Initialize();
+            EntityMapperRegister.Initialize();
             SqlDbConnectionRegister.Register(mysql, SqlDbmsType.MySql);
             SqlOrmRegister.Register(mysql, SqlDbmsType.MySql, OrmType.Dapper);
             SqlDbRegister.Register(mysql, SqlDbmsType.MySql);

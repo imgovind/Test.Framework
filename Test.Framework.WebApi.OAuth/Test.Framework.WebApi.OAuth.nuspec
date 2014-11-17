@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.WebApi.OAuth</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.WebApi.OAuth/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.WebApi.OAuth/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.WebApi.OAuth/Test.Framework.WebApi.OAuth.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+			Release Notes for WebApi 
+			Initial Release -- 11-16-2014 01:59:14 AM
+		</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework WebApi OAuth</tags>
+  </metadata>
+  <files>
+		<file src="Content\*.*" target="Content" />
+		<file src="Content\App_Start\*.*" target="Content\App_Start" />
+  </files>
+</package>

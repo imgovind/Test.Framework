@@ -45,6 +45,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Log.Elmah", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Core.Munq", "Test.Framework.Core.Munq\Test.Framework.Core.Munq.csproj", "{0BC0A2B9-9311-4EC1-9D1C-1381BBE38068}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.WebApi.OAuth", "Test.Framework.WebApi.OAuth\Test.Framework.WebApi.OAuth.csproj", "{C3AD70C0-DC21-429B-B2DF-171223B9E9BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.WebApi.OAuthServer", "Test.Framework.WebApi.OAuthServer\Test.Framework.WebApi.OAuthServer.csproj", "{43CFD11D-1454-4F86-97FD-2E3561ED5320}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Identity", "Test.Framework.Identity\Test.Framework.Identity.csproj", "{39EE2869-4FE7-4A22-8860-FF4C2258C964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Identity.Entity", "Test.Framework.Identity.Entity\Test.Framework.Identity.Entity.csproj", "{FA951E9B-E27E-4E1B-9691-E9A73D51378D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Framework.Identity.Data", "Test.Framework.Identity.Data\Test.Framework.Identity.Data.csproj", "{26450840-9BF0-42A5-AD3D-133A7A5216CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +145,26 @@ Global
 		{0BC0A2B9-9311-4EC1-9D1C-1381BBE38068}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BC0A2B9-9311-4EC1-9D1C-1381BBE38068}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BC0A2B9-9311-4EC1-9D1C-1381BBE38068}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3AD70C0-DC21-429B-B2DF-171223B9E9BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3AD70C0-DC21-429B-B2DF-171223B9E9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3AD70C0-DC21-429B-B2DF-171223B9E9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3AD70C0-DC21-429B-B2DF-171223B9E9BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43CFD11D-1454-4F86-97FD-2E3561ED5320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43CFD11D-1454-4F86-97FD-2E3561ED5320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43CFD11D-1454-4F86-97FD-2E3561ED5320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43CFD11D-1454-4F86-97FD-2E3561ED5320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39EE2869-4FE7-4A22-8860-FF4C2258C964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39EE2869-4FE7-4A22-8860-FF4C2258C964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39EE2869-4FE7-4A22-8860-FF4C2258C964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39EE2869-4FE7-4A22-8860-FF4C2258C964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA951E9B-E27E-4E1B-9691-E9A73D51378D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA951E9B-E27E-4E1B-9691-E9A73D51378D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA951E9B-E27E-4E1B-9691-E9A73D51378D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA951E9B-E27E-4E1B-9691-E9A73D51378D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26450840-9BF0-42A5-AD3D-133A7A5216CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26450840-9BF0-42A5-AD3D-133A7A5216CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26450840-9BF0-42A5-AD3D-133A7A5216CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26450840-9BF0-42A5-AD3D-133A7A5216CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

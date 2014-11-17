@@ -7,7 +7,7 @@ using Test.Framework;
 
 namespace $rootnamespace$
 {
-    public partial class AppInitalizer
+    public partial class AppInitializer
     {
         public partial class Core
         {

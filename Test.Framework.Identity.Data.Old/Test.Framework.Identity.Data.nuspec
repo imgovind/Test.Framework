@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Test.Framework.Identity.Data</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://govind.io/opensource/Test.Framework.Identity.Data/license.md</licenseUrl>
+    <projectUrl>http://govind.io/opensource/Test.Framework.Identity.Data/</projectUrl>
+    <iconUrl>http://govind.io/opensource/Test.Framework.Identity.Data/Test.Framework.Identity.Data.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+			Release Notes for Identity 
+			Initial Release -- 11-16-2014 09:58:00 AM
+		</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test Framework Identity Data</tags>
+  </metadata>
+  <files>
+  </files>
+</package>

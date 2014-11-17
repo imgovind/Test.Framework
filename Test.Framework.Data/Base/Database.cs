@@ -29,8 +29,7 @@ namespace Test.Framework.Data
 
         #region Execute
 
-        public bool Execute<T>(string sql, IList<Parameter> parameters = null, int timeout = 15)
-            where T : class, new()
+        public bool Execute(string sql, IList<Parameter> parameters = null, int timeout = 15)
         {
             using (IOrm orm = this.orm)
             {
@@ -38,8 +37,7 @@ namespace Test.Framework.Data
             }
         }
 
-        public async Task<bool> ExecuteAsync<T>(string sql, IList<Parameter> parameters = null, int timeout = 15)
-            where T : class, new()
+        public async Task<bool> ExecuteAsync(string sql, IList<Parameter> parameters = null, int timeout = 15)
         {
             var result = false;
             using (IOrm orm = this.orm)
@@ -211,7 +209,7 @@ namespace Test.Framework.Data
         {
             using (IOrm orm = this.orm)
             {
-                return orm.Select<T>(new SqlDbCommand(sql, parameters, timeout), CustomMapper.Resolve<T>()).ToList();
+                return orm.Select<T>(new SqlDbCommand(sql, parameters, timeout), EntityMapper.Resolve<T>()).ToList();
             }
         }
 
@@ -221,7 +219,7 @@ namespace Test.Framework.Data
             IEnumerable<T> result = null;
             using (IOrm orm = this.orm)
             {
-                result = await orm.SelectAsync<T>(new SqlDbCommand(sql, parameters, timeout), CustomMapper.Resolve<T>());
+                result = await orm.SelectAsync<T>(new SqlDbCommand(sql, parameters, timeout), EntityMapper.Resolve<T>());
                 if (result == null) return null;
                 return result.ToList();
             }

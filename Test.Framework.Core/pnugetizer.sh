@@ -6,6 +6,8 @@ NOW=$(date +"%m-%d-%Y %r");
 NUSPEC="$PROJECT.nuspec";
 CONTENTDIRECTORY="Content";
 APPSTARTDIRECTORY="Content\\App_Start";
+CONFIGURATIONDIRECTORY="Content\\Configuration";
+APPREADMEDIRECTORY="Content\\App_Readme";
 MODELSDIRECTORY="Content\\Models";
 CONTROLLERSDIRECTORY="Content\\Controllers";
 DATADIRECTORY="Content\\Data";
@@ -13,7 +15,6 @@ COREDATADIRECTORY="Content\\Data\\Core"
 EFDATADIRECTORY="Content\\Data\\EF";
 PETAPOCODATADIRECTORY="Content\\Data\\PetaPoco";
 SUBSONICDATADIRECTORY="Content\\Data\\SubSonic";
-APPREADMEDIRECTORY="Content\\App_Readme";
 
 ARR=(${PROJECT//./ })
 COMPANY=${ARR[0]};
@@ -74,6 +75,15 @@ else
 		echo ""
 		echo "Added Framework GAC assemblies successfully"
 	fi
+	if [ -n "$TECH" ] && [ -n "$PROJECTNAME" ] && [ "$PROJECTNAME" = "Identity" ] && [ "$TECH" = "Data" ]
+	then
+		sed -i '/<\/metadata>/i \\t  <frameworkAssemblies>' *.nuspec
+		sed -i '/<\/metadata>/i \\t\t\t<frameworkAssembly assemblyName=\"System.Configuration\" \/>' *.nuspec
+		sed -i '/<\/metadata>/i \\t  <\/frameworkAssemblies>' *.nuspec
+	
+		echo ""
+		echo "Added Framework GAC assemblies successfully"
+	fi
 
 	sed -i '/<\/package>/i \  <files>' *.nuspec
 	if [ -d "$CONTENTDIRECTORY" ]; 
@@ -115,6 +125,10 @@ else
 	if [ -d "$APPREADMEDIRECTORY" ]; 
 	then
 	sed -i '/<\/package>/i \\t\t<file src=\"Content\\App_Readme\\*.*\" target=\"Content\\App_Readme\" \/>' *.nuspec
+	fi
+	if [ -d "$CONFIGURATIONDIRECTORY" ]; 
+	then
+	sed -i '/<\/package>/i \\t\t<file src=\"Content\\Configuration\\*.*\" target=\"Content\\Configuration\" \/>' *.nuspec
 	fi
 	sed -i '/<\/package>/i \  <\/files>' *.nuspec
 

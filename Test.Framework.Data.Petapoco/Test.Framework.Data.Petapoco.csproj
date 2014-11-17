@@ -41,6 +41,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MySql.Data.6.9.5\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -49,9 +53,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Test.Framework.Data, Version=1.0.5430.24448, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Test.Framework.Core">
+      <HintPath>..\packages\Test.Framework.Core.1.0.5433.2571\lib\net45\Test.Framework.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Test.Framework.Data, Version=1.0.5433.25741, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Test.Framework.Data.1.0.5430.24448\lib\net45\Test.Framework.Data.dll</HintPath>
+      <HintPath>..\packages\Test.Framework.Data.1.0.5433.25741\lib\net45\Test.Framework.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +69,7 @@
     <None Include="Content\Data\PetaPoco\IUserRepository.cs.pp" />
     <None Include="Content\Data\PetaPoco\PetaPocoRegister.cs.pp" />
     <None Include="Content\TestPetaPoco.cs.pp" />
+    <Compile Include="App_Start\Core.cs" />
     <Compile Include="Models\PetaPoco.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Content\Models\Role.cs.pp" />

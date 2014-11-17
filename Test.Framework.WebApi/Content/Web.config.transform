@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="webapi:RequireHttps" value="false" />
+    <add key="webapi:CompressResponse" value="false" />
+    <add key="webapi:DecompressRequest" value="false" />
+    <add key="webapi:EnrichResponse" value="false" />
+    <add key="webapi:EnableVersioning" value="false" />
+    <add key="webapi:EnableXmlFormatting" value="false" />
+    <add key="webapi:EnableJsonFormatting" value="true" />
+    <add key="webapi:EnableOutProcCaching" value="false" />
+    <add key="webapi:EnableInProcCaching" value="true" />
+    <add key="AuthenticationConnectionStringName" value="AuthenticationConnectionString" />
+  </appSettings>
+</configuration>
