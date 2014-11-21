@@ -15,5 +15,12 @@ namespace Test.Framework.Identity.Data
             get { return (LoginShardElementCollection)this["loginShards"]; }
             set { this["loginShards"] = value; }
         }
+
+        [ConfigurationProperty("dbShards", IsDefaultCollection = true)]
+        public LoginDbShardElementCollection DbShards
+        {
+            get { return (LoginDbShardElementCollection)this["dbShards"]; }
+            set { this["dbShards"] = value; }
+        }
     }
 }

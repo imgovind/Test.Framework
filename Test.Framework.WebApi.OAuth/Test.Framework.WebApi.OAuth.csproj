@@ -100,9 +100,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Test.Framework.Core, Version=1.0.5433.2571, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Test.Framework.Core, Version=1.0.5436.30, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Test.Framework.Core.1.0.5433.2571\lib\net45\Test.Framework.Core.dll</HintPath>
+      <HintPath>..\packages\Test.Framework.Core.1.0.5436.30\lib\net45\Test.Framework.Core.dll</HintPath>
     </Reference>
     <Reference Include="Test.Framework.WebApi">
       <HintPath>..\packages\Test.Framework.WebApi.1.0.5433.2958\lib\net45\Test.Framework.WebApi.dll</HintPath>
@@ -114,6 +114,7 @@
   <ItemGroup>
     <None Include="Content\App_Start\OAuthConfig.cs.pp" />
     <None Include="app.config" />
+    <Compile Include="App_Start\Core.cs" />
     <Compile Include="Middleware\JwtWebApiConstants.cs" />
     <Compile Include="Middleware\Authorization\TestAuthorizationFilterAttribute.cs" />
     <Compile Include="Middleware\JwtAuthentication\JwtAuthenticationHandler.cs" />

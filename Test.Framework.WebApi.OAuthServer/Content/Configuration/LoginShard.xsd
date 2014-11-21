@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="loginShardLookup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="dbShards">
+          <xs:annotation>
+            <xs:documentation>
+              Defines the connection string for each defined cluster Id in the loginShards section.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="add">
+                <xs:complexType>
+                  <xs:attribute name="clusterId" type="xs:unsignedByte" use="required">
+                    <xs:annotation>
+                      <xs:documentation>
+                        The Id of the Db Shard that holds a particular subset of the login credentials.
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="connectionName" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation>
+                        The Name of the connection string that points to the particular db shard.
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="loginShards">
+          <xs:annotation>
+            <xs:documentation>
+              Defines the partitioning of the login credential data and their corresponding cluster Id.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="add">
+                <xs:complexType>
+                  <xs:attribute name="startsWith" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation>
+                        The first occurence alphabet of the email by which we shard the login credential data.
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="clusterId" type="xs:unsignedByte" use="required">
+                    <xs:annotation>
+                      <xs:documentation>
+                        The Id of the db shard (cluster) to which this subset belongs to.
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

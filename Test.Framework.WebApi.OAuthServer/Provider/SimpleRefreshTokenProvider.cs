@@ -2,24 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using Test.Data;
-using Test.Data.Repositories;
-using Test.Framework.Extensibility;
 using Test.Framework.Extensions;
-using Test.Framework.Identity;
+using Test.Framework.Identity.Data;
 using Test.Framework.Identity.Entity;
 
-namespace Test.WebApi.Middleware
+namespace Test.Framework.Identity.Provider
 {
     public class SimpleRefreshTokenProvider : IAuthenticationTokenProvider
     {
-        public IDataProvider DataProvider
+        public IIdentityDataProvider DataProvider
         {
             get
             {
-                return Container.Resolve<IDataProvider>();
+                return Container.Resolve<IIdentityDataProvider>();
             }
         }
 
@@ -30,7 +27,7 @@ namespace Test.WebApi.Middleware
 
             Guid userClientId = Guid.NewGuid();
 
-            var existingUserClient = await this.DataProvider.AuthenticationRepository.FindUserClient(userId, clientId);
+            var existingUserClient = await this.DataProvider.AuthenticationRepository().FindUserClient(userId, clientId);
 
             if (existingUserClient != null && existingUserClient.Id.IsNotEmpty())
                 return existingUserClient.Id;
@@ -43,7 +40,7 @@ namespace Test.WebApi.Middleware
                 IsActive = true
             };
 
-            var result = await this.DataProvider.AuthenticationRepository.AddUserClient(userClient);
+            var result = await this.DataProvider.AuthenticationRepository().AddUserClient(userClient);
 
             if (!result)
                 return Guid.Empty;
@@ -58,10 +55,10 @@ namespace Test.WebApi.Middleware
             var clientIdString = context.OwinContext.Get<string>(IdentityConstants.Client.Context.PK);
             var userIdString = context.OwinContext.Get<string>(IdentityConstants.Client.Context.UserId);
 
-            if (clientName.IsNullOrEmpty() || 
-                clientIdString.IsNullOrEmpty() || 
-                userIdString.IsNullOrEmpty() || 
-                !clientIdString.IsGuid() || 
+            if (clientName.IsNullOrEmpty() ||
+                clientIdString.IsNullOrEmpty() ||
+                userIdString.IsNullOrEmpty() ||
+                !clientIdString.IsGuid() ||
                 !userIdString.IsGuid())
                 return;
 
@@ -77,8 +74,8 @@ namespace Test.WebApi.Middleware
                 Id = CryptoHelper.GetHash(refreshTokenId),
                 ClientId = clientId,
                 ClientName = clientName,
-                Subject = context.Ticket.Identity.Name.IsNotNullOrEmpty() 
-                            ? context.Ticket.Identity.Name 
+                Subject = context.Ticket.Identity.Name.IsNotNullOrEmpty()
+                            ? context.Ticket.Identity.Name
                             : context.OwinContext.Get<string>(IdentityConstants.Client.Context.UserName),
                 IssuedUtc = DateTime.UtcNow,
                 ExpiredUtc = DateTime.UtcNow.AddMinutes(Convert.ToDouble(refreshTokenLifeTime)),
@@ -90,7 +87,7 @@ namespace Test.WebApi.Middleware
             context.Ticket.Properties.IssuedUtc = token.IssuedUtc;
             context.Ticket.Properties.ExpiresUtc = token.ExpiredUtc;
 
-            bool result = await this.DataProvider.AuthenticationRepository.AddRefreshToken(token);
+            bool result = await this.DataProvider.AuthenticationRepository().AddRefreshToken(token);
 
             if (result)
                 context.SetToken(refreshTokenId);
@@ -113,7 +110,7 @@ namespace Test.WebApi.Middleware
 
             string hashedTokenId = CryptoHelper.GetHash(context.Token);
 
-            var refreshToken = await this.DataProvider.AuthenticationRepository.FindRefreshToken(hashedTokenId);
+            var refreshToken = await this.DataProvider.AuthenticationRepository().FindRefreshToken(hashedTokenId);
 
             context.OwinContext.Set<string>(IdentityConstants.Client.Context.UserName, refreshToken.Subject);
             context.OwinContext.Set<string>(IdentityConstants.Client.Context.UserId, refreshToken.UserId.ToString());
@@ -123,7 +120,7 @@ namespace Test.WebApi.Middleware
             {
                 //Get protectedTicket from refreshToken class
                 context.DeserializeTicket(refreshToken.ProtectedTicket);
-                var result = await this.DataProvider.AuthenticationRepository.RemoveRefreshToken(hashedTokenId);
+                var result = await this.DataProvider.AuthenticationRepository().RemoveRefreshToken(hashedTokenId);
             }
         }
     }

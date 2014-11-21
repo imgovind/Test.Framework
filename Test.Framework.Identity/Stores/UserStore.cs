@@ -12,7 +12,7 @@ using Test.Framework.Identity.Services;
 using Test.Framework;
 using Test.Framework.Identity.Entity;
 
-namespace Test.Identity.Stores
+namespace Test.Framework.Identity.Stores
 {
     public class UserStore<TUser> : IUserLoginStore<TUser, Guid>,
         IUserClaimStore<TUser, Guid>,
@@ -63,7 +63,7 @@ namespace Test.Identity.Stores
             if (output3.IsNullOrEmpty())
                 return result;
 
-            ShardLookup.Login.Instance.Store.TryGetValue(output3, out result);
+            ShardLookup.Login.Instance.LoginShardStore.TryGetValue(output3, out result);
 
             return result;
         }
@@ -71,16 +71,15 @@ namespace Test.Identity.Stores
         private int GetCluster(Guid Id)
         {
             int result = 0;
+
             if (Id.IsEmpty())
                 return result;
-            var clusters = ShardLookup.Login.Instance.Store.Values.Distinct();
-            User user = null;
+
+            var clusters = ShardLookup.Login.Instance.LoginShardStore.Values.Distinct();
 
             foreach (var clusterId in clusters)
             {
-                user = this.dataProvider.UserRepository(clusterId).GetUserById(Id);
-
-                if (user == null)
+                if(!this.dataProvider.UserRepository(clusterId).CheckUserExists(Id))
                     continue;
 
                 return clusterId;
@@ -144,7 +143,7 @@ namespace Test.Identity.Stores
                 throw new ArgumentNullException("user");
             }
 
-            var result = await userService.InsertAsync(GetCluster(user.UserName), user);
+            var result = await userService.InsertAsync(user);
         }
 
         /// <summary>
@@ -157,7 +156,7 @@ namespace Test.Identity.Stores
             if(userId.IsEmpty())
                 throw new ArgumentException("Null or empty argument: userId");
 
-            var tempResult = await userService.GetUserByIdAsync(GetCluster(userId), userId);
+            var tempResult = await userService.GetUserByIdAsync(userId);
             TUser result = tempResult as TUser;
             if (result != null)
             {
@@ -179,7 +178,7 @@ namespace Test.Identity.Stores
                 throw new ArgumentException("Null or empty argument: userName");
             }
 
-            var tempResult = await userService.GetUserByNameAsync(GetCluster(userName), userName);
+            var tempResult = await userService.GetUserByNameAsync(userName);
                 
             List<TUser> result = tempResult as List<TUser>;
 
@@ -204,7 +203,7 @@ namespace Test.Identity.Stores
                 throw new ArgumentNullException("user");
             }
 
-            var result = await userService.UpdateAsync(GetCluster(user), user);
+            var result = await userService.UpdateAsync(user);
         }
 
         public void Dispose()
@@ -229,7 +228,7 @@ namespace Test.Identity.Stores
                 throw new ArgumentNullException("user");
             }
 
-            var result = await userClaimsService.InsertAsync(GetCluster(user), claim, user.Id);
+            var result = await userClaimsService.InsertAsync(claim, user.Id);
         }
 
         /// <summary>
@@ -239,7 +238,7 @@ namespace Test.Identity.Stores
         /// <returns></returns>
         public async Task<IList<Claim>> GetClaimsAsync(TUser user)
         {
-            ClaimsIdentity identity = await userClaimsService.FindByUserIdAsync(GetCluster(user), user.Id);
+            ClaimsIdentity identity = await userClaimsService.FindByUserIdAsync(user.Id);
 
             if (identity == null ||
                 identity.Claims == null ||
@@ -267,7 +266,7 @@ namespace Test.Identity.Stores
                 throw new ArgumentNullException("claim");
             }
 
-            var result = await userClaimsService.DeleteAsync(GetCluster(user), user, claim);
+            var result = await userClaimsService.DeleteAsync(user, claim);
         }
 
         /// <summary>
@@ -288,7 +287,7 @@ namespace Test.Identity.Stores
                 throw new ArgumentNullException("login");
             }
 
-            var result = await userLoginsService.InsertAsync(GetCluster(user), user, login);
+            var result = await userLoginsService.InsertAsync(user, login);
         }
 
         /// <summary>
@@ -330,7 +329,7 @@ namespace Test.Identity.Stores
                 throw new ArgumentNullException("user");
             }
 
-            List<UserLoginInfo> logins = await userLoginsService.FindByUserIdAsync(GetCluster(user), user.Id);
+            List<UserLoginInfo> logins = await userLoginsService.FindByUserIdAsync(user.Id);
             if (logins != null)
             {
                 return logins;
@@ -357,7 +356,7 @@ namespace Test.Identity.Stores
                 throw new ArgumentNullException("login");
             }
 
-            var result = await userLoginsService.DeleteAsync(GetCluster(user), user, login);
+            var result = await userLoginsService.DeleteAsync(user, login);
         }
 
         /// <summary>
@@ -381,7 +380,7 @@ namespace Test.Identity.Stores
             Guid roleId = await roleService.GetRoleIdAsync(roleName);
             if (roleId.IsNotEmpty())
             {
-                var result = await userRolesService.InsertAsync(GetCluster(user), user, roleId);
+                var result = await userRolesService.InsertAsync(user, roleId);
             }
         }
 
@@ -397,7 +396,7 @@ namespace Test.Identity.Stores
                 throw new ArgumentNullException("user");
             }
 
-            List<string> roles = await userRolesService.FindByUserIdAsync(GetCluster(user), user.Id);
+            List<string> roles = await userRolesService.FindByUserIdAsync(user.Id);
             {
                 if (roles != null)
                 {
@@ -426,7 +425,7 @@ namespace Test.Identity.Stores
                 throw new ArgumentNullException("role");
             }
 
-            List<string> roles = await userRolesService.FindByUserIdAsync(GetCluster(user), user.Id);
+            List<string> roles = await userRolesService.FindByUserIdAsync(user.Id);
             {
                 if (roles != null && roles.Contains(role))
                 {
@@ -457,7 +456,7 @@ namespace Test.Identity.Stores
         {
             if (user != null)
             {
-                var result = await userService.DeleteAsync(GetCluster(user), user);
+                var result = await userService.DeleteAsync(user);
             }
         }
 
@@ -468,7 +467,7 @@ namespace Test.Identity.Stores
         /// <returns></returns>
         public async Task<string> GetPasswordHashAsync(TUser user)
         {
-            string passwordHash = await userService.GetPasswordHashAsync(GetCluster(user), user.Id);
+            string passwordHash = await userService.GetPasswordHashAsync(user.Id);
             return passwordHash;
         }
 
@@ -479,7 +478,7 @@ namespace Test.Identity.Stores
         /// <returns></returns>
         public async Task<bool> HasPasswordAsync(TUser user)
         {
-            var result = await userService.GetPasswordHashAsync(GetCluster(user), user.Id);
+            var result = await userService.GetPasswordHashAsync(user.Id);
             var hasPassword = !string.IsNullOrEmpty(result);
 
             return hasPassword;
@@ -531,7 +530,7 @@ namespace Test.Identity.Stores
         public async Task SetEmailAsync(TUser user, string email)
         {
             user.Email = email;
-            var result = await userService.UpdateAsync(GetCluster(user), user);
+            var result = await userService.UpdateAsync(user);
         }
 
         /// <summary>
@@ -563,7 +562,7 @@ namespace Test.Identity.Stores
         public async Task SetEmailConfirmedAsync(TUser user, bool confirmed)
         {
             user.EmailConfirmed = confirmed;
-            var result = await userService.UpdateAsync(GetCluster(user), user);
+            var result = await userService.UpdateAsync(user);
         }
 
         /// <summary>
@@ -578,7 +577,7 @@ namespace Test.Identity.Stores
                 throw new ArgumentNullException("email");
             }
 
-            var tempResult = await userService.GetUserByEmailAsync(GetCluster(email), email);
+            var tempResult = await userService.GetUserByEmailAsync(email);
             TUser result = tempResult as TUser;
             if (result != null)
             {
@@ -597,7 +596,7 @@ namespace Test.Identity.Stores
         public async Task SetPhoneNumberAsync(TUser user, string phoneNumber)
         {
             user.PhoneNumber = phoneNumber;
-            var result = await userService.UpdateAsync(GetCluster(user), user);
+            var result = await userService.UpdateAsync(user);
         }
 
         /// <summary>
@@ -629,7 +628,7 @@ namespace Test.Identity.Stores
         public async Task SetPhoneNumberConfirmedAsync(TUser user, bool confirmed)
         {
             user.PhoneNumberConfirmed = confirmed;
-            var result = await userService.UpdateAsync(GetCluster(user), user);
+            var result = await userService.UpdateAsync(user);
         }
 
         /// <summary>
@@ -641,7 +640,7 @@ namespace Test.Identity.Stores
         public async Task SetTwoFactorEnabledAsync(TUser user, bool enabled)
         {
             user.TwoFactorEnabled = enabled;
-            var result = await userService.UpdateAsync(GetCluster(user), user);
+            var result = await userService.UpdateAsync(user);
         }
 
         /// <summary>
@@ -676,7 +675,7 @@ namespace Test.Identity.Stores
         public async Task SetLockoutEndDateAsync(TUser user, DateTimeOffset lockoutEnd)
         {
             user.LockoutEndDateUtc = lockoutEnd.UtcDateTime;
-            var result = await userService.UpdateAsync(GetCluster(user), user);
+            var result = await userService.UpdateAsync(user);
         }
 
         /// <summary>
@@ -687,7 +686,7 @@ namespace Test.Identity.Stores
         public async Task<int> IncrementAccessFailedCountAsync(TUser user)
         {
             user.AccessFailedCount++;
-            var result = await userService.UpdateAsync(GetCluster(user), user);
+            var result = await userService.UpdateAsync(user);
             return user.AccessFailedCount;
         }
 
@@ -699,7 +698,7 @@ namespace Test.Identity.Stores
         public async Task ResetAccessFailedCountAsync(TUser user)
         {
             user.AccessFailedCount = 0;
-            var result = await userService.UpdateAsync(GetCluster(user), user);
+            var result = await userService.UpdateAsync(user);
         }
 
         /// <summary>
@@ -731,7 +730,7 @@ namespace Test.Identity.Stores
         public async Task SetLockoutEnabledAsync(TUser user, bool enabled)
         {
             user.LockoutEnabled = enabled;
-            var result = await userService.UpdateAsync(GetCluster(user), user);
+            var result = await userService.UpdateAsync(user);
         }
     }
 }

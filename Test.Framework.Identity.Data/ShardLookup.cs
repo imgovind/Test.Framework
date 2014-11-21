@@ -33,7 +33,11 @@ namespace Test.Framework.Identity.Data
             public LoginShardConfigurationSection LoginShardConfig = ConfigurationManager.GetSection("loginShardLookup") as LoginShardConfigurationSection;
 
             #region Private Members
-            private Dictionary<string, int> _Store = new Dictionary<string, int>() { 
+            private Dictionary<int, string> _DbStore = new Dictionary<int, string>() {
+                {0, "mysql:AuthenticationConnectionString"}
+            };
+
+            private Dictionary<string, int> _LoginShardStore = new Dictionary<string, int>() { 
 
                 {"a", 0},
                 {"A", 0},
@@ -115,14 +119,25 @@ namespace Test.Framework.Identity.Data
             };
             #endregion
 
-            public Dictionary<string, int> Store 
+            public Dictionary<string, int> LoginShardStore 
             { 
                 get 
                 { 
                     if(LoginShardConfig == null)
-                        return _Store;
+                        return _LoginShardStore;
 
                     return LoginShardConfig.LoginShards.ToDictionary();
+                }
+            }
+
+            public Dictionary<int, string> DbShardStore
+            {
+                get
+                {
+                    if (LoginShardConfig == null)
+                        return _DbStore;
+
+                    return LoginShardConfig.DbShards.ToDictionary();
                 }
             }
         }

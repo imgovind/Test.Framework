@@ -30,5 +30,19 @@ namespace Test.Framework.Identity.Data.Extensions
 
             return castShards.ToDictionary(x => x.StartsWith, x => x.ClusterId);
         }
+
+        public static Dictionary<int, string> ToDictionary(this LoginDbShardElementCollection shards)
+        {
+            if (shards == null ||
+                shards.Count == 0)
+                return null;
+
+            var castShards = shards.Cast<LoginDbShardElement>();
+
+            if (castShards.IsNullOrEmpty())
+                return null;
+
+            return castShards.ToDictionary(x => x.ClusterId, x => x.ConnectionName);
+        }
     }
 }

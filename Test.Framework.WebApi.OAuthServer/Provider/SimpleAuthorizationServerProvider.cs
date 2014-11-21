@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using Test.Framework.Identity.Model;
-using Test.Framework.Identity.Stores;
-using Microsoft.AspNet.Identity;
-using Test.Framework.Identity.Entity.Enum;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using Test.Framework.Identity.Data;
 using Test.Framework.Identity.Entity;
-using Test.Data.Repositories;
-using Test.Data;
-using Test.Framework.Identity;
+using Test.Framework.Identity.Enum;
+using Test.Framework.Identity.Model;
 
-namespace Test.WebApi.Middleware
+namespace Test.Framework.Identity.Provider
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
@@ -27,11 +24,11 @@ namespace Test.WebApi.Middleware
             }
         }
 
-        public IDataProvider DataProvider 
+        public IIdentityDataProvider DataProvider
         {
             get
             {
-                return Container.Resolve<IDataProvider>();
+                return Container.Resolve<IIdentityDataProvider>();
             }
         }
 
@@ -74,12 +71,12 @@ namespace Test.WebApi.Middleware
             id.AddClaim(new Claim("email_verified", user.EmailConfirmed.ToString()));
 
             context.OwinContext.Set<string>(IdentityConstants.Client.Context.UserName, context.UserName);
-            context.OwinContext.Set<string>(IdentityConstants.Client.Context.UserId, user.Id.ToString()); 
+            context.OwinContext.Set<string>(IdentityConstants.Client.Context.UserId, user.Id.ToString());
 
             var props = new AuthenticationProperties(new Dictionary<string, string> { 
                 { IdentityConstants.Client.Context.Id, (context.ClientId == null) ? string.Empty : context.ClientId },
-                { "issuer", AppSettings.JwtIssuerName },
-                { "audience", AppSettings.JwtAllowedAudience }
+                { "issuer", IdentityConstants.JwtIssuerName },
+                { "audience", IdentityConstants.JwtAllowedAudience }
             });
 
             var ticket = new AuthenticationTicket(id, props);
@@ -137,7 +134,7 @@ namespace Test.WebApi.Middleware
                 return Task.FromResult<object>(null);
             }
 
-            client = this.DataProvider.AuthenticationRepository.FindClient(context.ClientId);
+            client = this.DataProvider.AuthenticationRepository().FindClient(context.ClientId);
 
             if (client == null)
             {

@@ -10,6 +10,8 @@ namespace Test.Framework.Identity.Data
 {
     public interface IUserRepository
     {
+        bool CheckUserExists(Guid userId);
+        Task<bool> CheckUserExistsAsync(Guid userId);
         string GetUserName(Guid userId);
         Task<string> GetUserNameAsync(Guid userId);
         string GetUserId(string userName);

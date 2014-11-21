@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="jwt:IssuerName" value="testas.testorganization.org" />
+    <add key="jwt:SigningKey" value="25Zl6UbDS9K7FIxp3z6Dz920iRp7/e/FA9NogpsKBjAVk3Q2HniYjPBZkeUqy001CYHE77iOjiZZSfcIo5oslA==" />
+    <add key="jwt:AllowedAudience" value="testngapp.testorganization.org" />
+    <add key="jwt:DefaultTimeSpan" value="0.08:00:0.0000000" />
+  </appSettings>
+</configuration>

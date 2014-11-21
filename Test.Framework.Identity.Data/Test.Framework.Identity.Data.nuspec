@@ -13,7 +13,7 @@
     <description>$description$</description>
     <releaseNotes>
 			Release Notes for Identity 
-			Initial Release -- 11-17-2014 01:48:18 AM
+			Initial Release -- 11-18-2014 10:59:24 PM
 		</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Test Framework Identity Data</tags>
@@ -22,9 +22,5 @@
 	  </frameworkAssemblies>
   </metadata>
   <files>
-		<file src="Content\*.*" target="Content" />
-		<file src="Content\App_Start\*.*" target="Content\App_Start" />
-		<file src="Content\Data\*.*" target="Content\Data" />
-		<file src="Content\Configuration\*.*" target="Content\Configuration" />
   </files>
 </package>

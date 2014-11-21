@@ -8,6 +8,12 @@ namespace Test.Framework.Identity
 {
     public static class IdentityConstants
     {
+        private static IWebConfiguration config = Container.Resolve<IWebConfiguration>();
+        public static string JwtIssuerName { get { return config.AppSettings["jwt:IssuerName"]; } }
+        public static string JwtSigningKey { get { return config.AppSettings["jwt:SigningKey"]; } }
+        public static string JwtAllowedAudience { get { return config.AppSettings["jwt:AllowedAudience"]; } }
+        public static TimeSpan JwtDefaultTimeSpan { get { return TimeSpan.Parse(config.AppSettings["jwt:DefaultTimeSpan"]); } }
+
         public static class UserClient
         {
             public static string Id { get; set; }

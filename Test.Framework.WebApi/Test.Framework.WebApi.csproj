@@ -89,16 +89,16 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Test.Framework.Core, Version=1.0.5433.2571, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Test.Framework.Core, Version=1.0.5436.30, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Test.Framework.Core.1.0.5433.2571\lib\net45\Test.Framework.Core.dll</HintPath>
+      <HintPath>..\packages\Test.Framework.Core.1.0.5436.30\lib\net45\Test.Framework.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\App_Start\WebApi.cs.pp" />
     <None Include="Content\WebApiConstants.cs.pp" />
-    <Compile Include="App_Start\Core.cs" />
     <None Include="Content\App_Start\WebApiRouteConfig.cs.pp" />
+    <Compile Include="App_Start\Core.cs" />
     <Compile Include="Extensibility\CustomHttpControllerSelector.cs" />
     <Compile Include="Handler\Caching\Common\CacheKey.cs" />
     <Compile Include="Handler\Caching\Common\Helpers\BasicExtensions.cs" />

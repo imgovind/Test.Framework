@@ -54,18 +54,18 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Test.Framework.Core">
-      <HintPath>..\packages\Test.Framework.Core.1.0.5433.2571\lib\net45\Test.Framework.Core.dll</HintPath>
+    <Reference Include="Test.Framework.Core, Version=1.0.5436.30, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Test.Framework.Core.1.0.5436.30\lib\net45\Test.Framework.Core.dll</HintPath>
     </Reference>
     <Reference Include="Test.Framework.Data">
       <HintPath>..\packages\Test.Framework.Data.1.0.5433.25741\lib\net45\Test.Framework.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Test.Framework.Identity.Entity">
-      <HintPath>..\packages\Test.Framework.Identity.Entity.1.0.5433.25645\lib\net451\Test.Framework.Identity.Entity.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Core.cs" />
+    <Compile Include="Configuration\LoginDbShardElement.cs" />
+    <Compile Include="Configuration\LoginDbShardElementCollection.cs" />
     <Compile Include="Configuration\LoginShardConfigurationSection.cs" />
     <Compile Include="Configuration\LoginShardElement.cs" />
     <Compile Include="Configuration\LoginShardElementCollection.cs" />
@@ -87,19 +87,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Content\App_Start\IdentityData.cs.pp" />
-    <None Include="Content\Configuration\LoginShard.config.transform" />
-    <None Include="Content\Configuration\LoginShard.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Content\Data\EntityMapperRegister.cs.pp" />
-    <None Include="Content\Data\IdentityConnectionConstants.cs.pp" />
-    <None Include="Content\Data\IdentityDataProvider.cs.pp" />
-    <None Include="Content\Data\IIdentityDataProvider.cs.pp" />
-    <None Include="Content\Data\TestModel.cs.pp" />
-    <None Include="Content\Data\TestModelMapper.cs.pp" />
-    <None Include="Content\Web.config.transform" />
+    <Compile Include="Data\IdentityDataProvider.cs" />
+    <Compile Include="Data\IIdentityDataProvider.cs" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Test.Framework.Identity.Entity\Test.Framework.Identity.Entity.csproj">
+      <Project>{fa951e9b-e27e-4e1b-9691-e9a73d51378d}</Project>
+      <Name>Test.Framework.Identity.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

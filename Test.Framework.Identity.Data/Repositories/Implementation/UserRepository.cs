@@ -27,7 +27,25 @@ namespace Test.Framework.Identity.Data
         }
 
         #endregion
+        public bool CheckUserExists(Guid userId)
+        {
+            bool result = false;
+            using (var connection = this.Database.Connection)
+            {
+                result = connection.ExecuteScalar<bool>(@"SELECT EXISTS(Select 1 from users where Id = @userid)", new { @userid = userId });
+            }
+            return result; 
+        }
 
+        public async Task<bool> CheckUserExistsAsync(Guid userId)
+        {
+            bool result = false;
+            using(var connection = this.Database.Connection)
+            {
+                result = await connection.ExecuteScalarAsync<bool>(@"SELECT EXISTS(Select 1 from users where Id = @userid)", new { @userid = userId });
+            }
+            return result;
+        }
         public string GetUserName(Guid userId)
         {
             string result = string.Empty;
